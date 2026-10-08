@@ -1,0 +1,4 @@
+      4 new size 0x0
+      2 new size 48x89
+      1 useCanvasSize 0x0
+      1 useCanvasSize 102.33333587646484x72.66667175292969

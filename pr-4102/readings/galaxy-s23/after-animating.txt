@@ -1,0 +1,4 @@
+foreground: com.microsoft.reacttestapp throughout
+window: 10262 ms
+SurfaceView layer: 1222 frames (1222 at 120 Hz), most presents 8ms apart
+SurfaceView vote: 120.00 Hz Default OnlySeamless

@@ -1,0 +1,4 @@
+foreground: com.microsoft.reacttestapp throughout
+window: 10304 ms
+SurfaceView layer: 612 frames (612 at 60 Hz), most presents 16ms apart
+SurfaceView vote: none
