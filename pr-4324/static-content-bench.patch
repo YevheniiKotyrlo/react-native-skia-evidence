@@ -1,0 +1,785 @@
+diff --git a/apps/example/src/Examples/ImageViews/StaticContentBench.tsx b/apps/example/src/Examples/ImageViews/StaticContentBench.tsx
+new file mode 100644
+index 000000000..98c19b456
+--- /dev/null
++++ b/apps/example/src/Examples/ImageViews/StaticContentBench.tsx
+@@ -0,0 +1,762 @@
++import React, { useEffect, useRef, useState } from "react";
++import {
++  PixelRatio,
++  StyleSheet,
++  Text,
++  View,
++  useWindowDimensions,
++} from "react-native";
++import Animated, {
++  Easing,
++  cancelAnimation,
++  useAnimatedStyle,
++  useFrameCallback,
++  useSharedValue,
++  withRepeat,
++  withTiming,
++} from "react-native-reanimated";
++import { scheduleOnRN } from "react-native-worklets";
++import type { SkImage, SkPicture } from "react-native-skia";
++import {
++  Canvas,
++  Image,
++  Skia,
++  SkiaImageView,
++  TileMode,
++  drawAsImageFromPicture,
++} from "react-native-skia";
++
++// Evidence only: steps through every design of a static view, one arm at a
++// time, and marks each measured window in logcat for the harness.
++
++type Presenter =
++  | "none"
++  | "canvas-texture"
++  | "canvas-surface"
++  | "canvas-static"
++  | "image-view";
++type Drive = "mount" | "render" | "swap" | "memory" | "cycle";
++type Content = "shared" | "distinct" | "large";
++
++interface Arm {
++  readonly drive: Drive;
++  readonly content: Content;
++  readonly presenter: Presenter;
++}
++
++// Set to run only these presenters, such as on a build of `main`, which has
++// neither SkiaImageView nor static canvases.
++const PRESENTERS = (process.env.BENCH_PRESENTERS ?? "")
++  .split(" ")
++  .filter((presenter) => presenter !== "");
++const isSelected = (arm: Arm) =>
++  PRESENTERS.length === 0 || PRESENTERS.includes(arm.presenter);
++
++const FORWARD_ARMS: readonly Arm[] = (
++  [
++    { drive: "mount", content: "shared", presenter: "none" },
++    { drive: "mount", content: "shared", presenter: "canvas-texture" },
++    { drive: "mount", content: "shared", presenter: "canvas-static" },
++    { drive: "mount", content: "shared", presenter: "image-view" },
++    { drive: "mount", content: "distinct", presenter: "canvas-texture" },
++    { drive: "mount", content: "distinct", presenter: "canvas-static" },
++    { drive: "mount", content: "distinct", presenter: "image-view" },
++    { drive: "render", content: "shared", presenter: "none" },
++    { drive: "render", content: "shared", presenter: "canvas-texture" },
++    { drive: "render", content: "shared", presenter: "canvas-static" },
++    { drive: "render", content: "shared", presenter: "image-view" },
++    { drive: "swap", content: "shared", presenter: "canvas-texture" },
++    { drive: "swap", content: "shared", presenter: "canvas-static" },
++    { drive: "swap", content: "shared", presenter: "image-view" },
++    { drive: "mount", content: "large", presenter: "none" },
++    { drive: "mount", content: "large", presenter: "canvas-texture" },
++    { drive: "mount", content: "large", presenter: "canvas-static" },
++    { drive: "mount", content: "large", presenter: "image-view" },
++    { drive: "mount", content: "shared", presenter: "none" },
++  ] satisfies readonly Arm[]
++).filter(isSelected);
++const PASS_ORDERS: readonly (readonly Arm[])[] = [
++  FORWARD_ARMS,
++  [...FORWARD_ARMS].reverse(),
++  FORWARD_ARMS,
++];
++
++const MEMORY_ARMS: readonly Arm[] = (
++  [
++    { drive: "memory", content: "shared", presenter: "none" },
++    { drive: "memory", content: "shared", presenter: "canvas-texture" },
++    { drive: "memory", content: "shared", presenter: "canvas-static" },
++    { drive: "memory", content: "shared", presenter: "image-view" },
++    { drive: "memory", content: "distinct", presenter: "canvas-texture" },
++    { drive: "memory", content: "distinct", presenter: "canvas-static" },
++    { drive: "memory", content: "distinct", presenter: "image-view" },
++  ] satisfies readonly Arm[]
++).filter(isSelected);
++const MEMORY_ORDERS: readonly (readonly Arm[])[] = [
++  MEMORY_ARMS,
++  [...MEMORY_ARMS].reverse(),
++];
++// Each memory arm holds its views mounted, then unmounted, long enough for a
++// dump taken over adb to land inside the hold.
++const MEMORY_HOLD_TICKS = 14;
++const MEMORY_MARKER_TICK = 4;
++
++const TOGGLE_INTERVAL_MS = 800;
++const WARMUP_TICKS = 2;
++const MEASURED_TICKS = 12;
++const COOLDOWN_TICKS = 2;
++const TICKS_PER_ARM = WARMUP_TICKS + MEASURED_TICKS + COOLDOWN_TICKS;
++const COUNT = 120;
++const CELL = 40;
++const SWAP_IMAGES = TICKS_PER_ARM;
++
++// Set to run a leak check instead of the passes: each arm's views are mounted
++// and unmounted this many times, with a memory dump before and after.
++const CYCLES = Number(process.env.BENCH_CYCLES ?? "0");
++const CYCLE_ARMS: readonly Arm[] = (
++  [
++    { drive: "cycle", content: "shared", presenter: "none" },
++    { drive: "cycle", content: "shared", presenter: "canvas-static" },
++    { drive: "cycle", content: "shared", presenter: "image-view" },
++    { drive: "cycle", content: "distinct", presenter: "image-view" },
++  ] satisfies readonly Arm[]
++).filter(isSelected);
++const CYCLE_TOGGLE_MS = 100;
++// Long enough for a dump taken over adb at a marker to land inside it.
++const CYCLE_SETTLE_MS = 8000;
++
++const armName = ({ drive, content, presenter }: Arm) =>
++  `${drive}-${content}-${presenter}`;
++
++// Set when the bundle is made for a device whose log the host cannot read,
++// such as an iOS device reached over Wi-Fi only: every line is posted there too.
++const REPORT_URL = process.env.BENCH_REPORT_URL;
++let pendingReport: Promise<unknown> = Promise.resolve();
++
++const logMarker = (event: string, detail: string) => {
++  const line = `BENCH ${event} ${detail} jsNow=${performance.now().toFixed(1)}`;
++  console.log(line);
++  if (REPORT_URL !== undefined && REPORT_URL !== "") {
++    pendingReport = pendingReport
++      .then(() => fetch(REPORT_URL, { method: "POST", body: line }))
++      .catch(() => undefined);
++  }
++};
++
++// Set when the runner records a trace over the first measured window of these
++// arms: the bench holds each one at a gate the receiver opens once the
++// recorder is live.
++const GATED_ARMS = new Set(
++  (process.env.BENCH_GATED_ARMS ?? "").split(" ").filter((arm) => arm !== "")
++);
++
++const passGate = async (detail: string): Promise<string> => {
++  logMarker("gate-wait", detail);
++  await pendingReport;
++  try {
++    const response = await fetch(`${REPORT_URL}/gate?${detail.split(" ")[0]}`);
++    return await response.text();
++  } catch {
++    return "unreachable";
++  }
++};
++
++const formatHex = (value: number) =>
++  Math.round(value * 255)
++    .toString(16)
++    .padStart(2, "0");
++
++const formatHueColor = (hue: number) => {
++  const sector = (((hue % 360) + 360) % 360) / 60;
++  const fraction = sector - Math.floor(sector);
++  const channels: readonly (readonly [number, number, number])[] = [
++    [1, fraction, 0],
++    [1 - fraction, 1, 0],
++    [0, 1, fraction],
++    [0, 1 - fraction, 1],
++    [fraction, 0, 1],
++    [1, 0, 1 - fraction],
++  ];
++  const [red, green, blue] = channels[Math.floor(sector) % 6];
++  return `#${formatHex(red)}${formatHex(green)}${formatHex(blue)}`;
++};
++
++const makeGradientPaint = (width: number, height: number, hue: number) => {
++  const paint = Skia.Paint();
++  paint.setAntiAlias(true);
++  paint.setShader(
++    Skia.Shader.MakeLinearGradient(
++      { x: 0, y: 0 },
++      { x: width, y: height },
++      [
++        Skia.Color(formatHueColor(hue)),
++        Skia.Color(formatHueColor(hue + 120)),
++        Skia.Color(formatHueColor(hue + 240)),
++      ],
++      null,
++      TileMode.Clamp
++    )
++  );
++  return paint;
++};
++
++const makeRoundedRect = (width: number, height: number) => {
++  const radius = Math.min(width, height) / 4;
++  return Skia.RRectXY(Skia.XYWHRect(0, 0, width, height), radius, radius);
++};
++
++const bakeImage = (width: number, height: number, hue: number) => {
++  const surface = Skia.Surface.MakeOffscreen(width, height);
++  if (surface === null) {
++    throw new Error(`no offscreen surface of ${width}x${height}`);
++  }
++  surface
++    .getCanvas()
++    .drawRRect(
++      makeRoundedRect(width, height),
++      makeGradientPaint(width, height, hue)
++    );
++  surface.flush();
++  return surface.asImage();
++};
++
++const recordPicture = (
++  width: number,
++  height: number,
++  hue: number
++): SkPicture => {
++  const recorder = Skia.PictureRecorder();
++  const canvas = recorder.beginRecording(Skia.XYWHRect(0, 0, width, height));
++  canvas.drawRRect(
++    makeRoundedRect(width, height),
++    makeGradientPaint(width, height, hue)
++  );
++  return recorder.finishRecordingAsPicture();
++};
++
++const computeMedian = (values: readonly number[]) => {
++  const sorted = [...values].sort((left, right) => left - right);
++  const middle = Math.floor(sorted.length / 2);
++  return sorted.length % 2
++    ? sorted[middle]
++    : (sorted[middle - 1] + sorted[middle]) / 2;
++};
++
++// The JS-thread cost of making an image, by the two ways the library offers.
++const measureBakeCosts = (screenWidth: number, screenHeight: number) => {
++  const sizes = [
++    {
++      name: "cell",
++      width: Math.round(CELL * PixelRatio.get()),
++      height: Math.round(CELL * PixelRatio.get()),
++      runs: 20,
++    },
++    {
++      name: "screen",
++      width: Math.round(screenWidth * PixelRatio.get()),
++      height: Math.round(screenHeight * PixelRatio.get()),
++      runs: 5,
++    },
++  ];
++  for (const { name, width, height, runs } of sizes) {
++    const offscreen: number[] = [];
++    const drawAsImage: number[] = [];
++    for (let run = 0; run < runs; run++) {
++      const started = performance.now();
++      bakeImage(width, height, run * 30);
++      offscreen.push(performance.now() - started);
++      const picture = recordPicture(width, height, run * 30);
++      const startedRaster = performance.now();
++      drawAsImageFromPicture(picture, { width, height });
++      drawAsImage.push(performance.now() - startedRaster);
++    }
++    logMarker(
++      "bake-cost",
++      `size=${name} pixels=${width}x${height} runs=${runs} offscreenAsImageMedianMs=${computeMedian(
++        offscreen
++      ).toFixed(2)} drawAsImageFromPictureMedianMs=${computeMedian(
++        drawAsImage
++      ).toFixed(2)}`
++    );
++  }
++};
++
++interface Images {
++  readonly shared: SkImage;
++  readonly distinct: readonly SkImage[];
++  readonly swap: readonly SkImage[];
++  readonly large: SkImage;
++}
++
++const bakeImages = (screenWidth: number, screenHeight: number): Images => {
++  const cellPixels = Math.round(CELL * PixelRatio.get());
++  const distinct: SkImage[] = [];
++  for (let index = 0; index < COUNT; index++) {
++    distinct.push(bakeImage(cellPixels, cellPixels, (index * 360) / COUNT));
++  }
++  const swap: SkImage[] = [];
++  for (let index = 0; index < SWAP_IMAGES; index++) {
++    swap.push(bakeImage(cellPixels, cellPixels, (index * 360) / SWAP_IMAGES));
++  }
++  return {
++    shared: bakeImage(cellPixels, cellPixels, 0),
++    distinct,
++    swap,
++    large: bakeImage(
++      Math.round(screenWidth * PixelRatio.get()),
++      Math.round(screenHeight * PixelRatio.get()),
++      200
++    ),
++  };
++};
++
++const CellContent = ({
++  presenter,
++  image,
++  width,
++  height,
++}: {
++  presenter: Presenter;
++  image: SkImage;
++  width: number;
++  height: number;
++}) => {
++  const style = { width, height };
++  switch (presenter) {
++    case "none":
++      return <View style={[style, styles.plain]} />;
++    case "image-view":
++      return <SkiaImageView image={image} style={style} />;
++    case "canvas-texture":
++      return (
++        <Canvas style={style}>
++          <Image image={image} x={0} y={0} width={width} height={height} />
++        </Canvas>
++      );
++    case "canvas-surface":
++      return (
++        <Canvas
++          style={style}
++          android={{
++            backingView: "SurfaceView",
++            opaque: false,
++            zOrderOnTop: true,
++          }}
++        >
++          <Image image={image} x={0} y={0} width={width} height={height} />
++        </Canvas>
++      );
++    case "canvas-static":
++      return (
++        <Canvas style={style} static>
++          <Image image={image} x={0} y={0} width={width} height={height} />
++        </Canvas>
++      );
++  }
++};
++
++// A cell renders again only when what it shows changes, as in an app that
++// memoizes: the bench's own tick re-renders nothing else.
++const Cell = React.memo(CellContent);
++
++const Spinner = () => {
++  const rotation = useSharedValue(0);
++  useEffect(() => {
++    rotation.value = withRepeat(
++      withTiming(360, { duration: 1000, easing: Easing.linear }),
++      -1
++    );
++  }, [rotation]);
++  const style = useAnimatedStyle(() => ({
++    transform: [{ rotate: `${rotation.value}deg` }],
++  }));
++  return <Animated.View style={[styles.spinner, style]} />;
++};
++
++const Pulse = ({
++  active,
++  children,
++}: {
++  active: boolean;
++  children: React.ReactNode;
++}) => {
++  const phase = useSharedValue(0);
++  useEffect(() => {
++    if (!active) {
++      cancelAnimation(phase);
++      phase.value = 0;
++      return;
++    }
++    phase.value = withRepeat(
++      withTiming(1, { duration: 600, easing: Easing.inOut(Easing.quad) }),
++      -1,
++      true
++    );
++  }, [active, phase]);
++  const style = useAnimatedStyle(() => ({
++    opacity: 1 - phase.value * 0.5,
++    transform: [{ scale: 1 - phase.value * 0.05 }],
++  }));
++  return <Animated.View style={[styles.grid, style]}>{children}</Animated.View>;
++};
++
++interface ProbeReport {
++  readonly window: string;
++  readonly frames: number;
++  readonly maxGapMs: number;
++  readonly periodMs: number;
++  readonly missedFrames: number;
++  readonly gapsOver50Ms: number;
++  readonly gapsOver100Ms: number;
++  readonly durationMs: number;
++}
++
++const reportProbe = (report: ProbeReport) =>
++  logMarker(
++    "probe",
++    `${report.window} frames=${
++      report.frames
++    } maxGapMs=${report.maxGapMs.toFixed(1)} periodMs=${report.periodMs.toFixed(
++      2
++    )} missedFrames=${report.missedFrames} gapsOver50Ms=${
++      report.gapsOver50Ms
++    } gapsOver100Ms=${
++      report.gapsOver100Ms
++    } durationMs=${report.durationMs.toFixed(1)}`
++  );
++
++// Every UI-thread frame of a measured window, read on the UI thread itself:
++// a main-thread stall is the gap it leaves between two frames.
++const useFrameProbe = () => {
++  const command = useSharedValue<string>("idle");
++  const active = useSharedValue(false);
++  const last = useSharedValue(0);
++  const gaps = useSharedValue<number[]>([]);
++  useFrameCallback((frame) => {
++    const now = frame.timestamp;
++    const order = command.value;
++    if (order === "start") {
++      command.value = "idle";
++      active.value = true;
++      last.value = now;
++      gaps.value = [];
++      return;
++    }
++    if (!active.value) {
++      return;
++    }
++    const gap = now - last.value;
++    last.value = now;
++    gaps.modify((list) => {
++      "worklet";
++      list.push(gap);
++      return list;
++    }, false);
++    if (order.startsWith("dump ")) {
++      command.value = "idle";
++      active.value = false;
++      const list = gaps.value;
++      // iOS stamps a frame when its callback runs, not at the vsync.
++      const sorted = [...list].sort((left, right) => left - right);
++      const period = sorted[Math.floor(sorted.length / 2)] ?? 0;
++      let durationMs = 0;
++      let maxGap = 0;
++      let gapsOver50Ms = 0;
++      let gapsOver100Ms = 0;
++      for (const value of list) {
++        durationMs += value;
++        maxGap = Math.max(maxGap, value);
++        gapsOver50Ms += value > 50 ? 1 : 0;
++        gapsOver100Ms += value > 100 ? 1 : 0;
++      }
++      const missedFrames =
++        period > 0
++          ? Math.max(0, Math.round(durationMs / period) - list.length)
++          : 0;
++      scheduleOnRN(reportProbe, {
++        window: order.slice("dump ".length),
++        frames: list.length,
++        maxGapMs: maxGap,
++        periodMs: period,
++        missedFrames,
++        gapsOver50Ms,
++        gapsOver100Ms,
++        durationMs,
++      });
++    }
++  });
++  return {
++    start: () => {
++      command.value = "start";
++    },
++    dump: (window: string) => {
++      command.value = `dump ${window}`;
++    },
++  };
++};
++
++const describeTick = (tick: number) => {
++  const ticksPerPass = FORWARD_ARMS.length * TICKS_PER_ARM;
++  const pass = Math.floor(tick / ticksPerPass);
++  const order = PASS_ORDERS[pass];
++  if (order !== undefined) {
++    const withinPass = tick % ticksPerPass;
++    const arm = order[Math.floor(withinPass / TICKS_PER_ARM)];
++    return { pass, arm, phaseTick: withinPass % TICKS_PER_ARM };
++  }
++  const memoryTick = tick - PASS_ORDERS.length * ticksPerPass;
++  const ticksPerMemoryArm = 2 * MEMORY_HOLD_TICKS;
++  const ticksPerMemoryPass = MEMORY_ARMS.length * ticksPerMemoryArm;
++  const memoryPass = Math.floor(memoryTick / ticksPerMemoryPass);
++  const memoryOrder = MEMORY_ORDERS[memoryPass];
++  if (memoryOrder === undefined) {
++    return undefined;
++  }
++  const withinMemoryPass = memoryTick % ticksPerMemoryPass;
++  const arm = memoryOrder[Math.floor(withinMemoryPass / ticksPerMemoryArm)];
++  return {
++    pass: memoryPass,
++    arm,
++    phaseTick: withinMemoryPass % ticksPerMemoryArm,
++  };
++};
++
++const sleep = (milliseconds: number) =>
++  new Promise<void>((resolve) => setTimeout(resolve, milliseconds));
++
++interface CycleState {
++  readonly arm: Arm;
++  readonly mounted: boolean;
++}
++
++const CycleCheck = () => {
++  const { width, height } = useWindowDimensions();
++  const [images] = useState(() => bakeImages(width, height));
++  const [state, setState] = useState<CycleState | "done">({
++    arm: CYCLE_ARMS[0],
++    mounted: false,
++  });
++
++  useEffect(() => {
++    let cancelled = false;
++    const run = async () => {
++      for (const arm of CYCLE_ARMS) {
++        const name = armName(arm);
++        await sleep(CYCLE_SETTLE_MS);
++        logMarker("memory-unmounted", `arm=${name}-before pass=0`);
++        await sleep(CYCLE_SETTLE_MS);
++        const started = performance.now();
++        for (let cycle = 0; cycle < CYCLES && !cancelled; cycle++) {
++          setState({ arm, mounted: true });
++          await sleep(CYCLE_TOGGLE_MS);
++          setState({ arm, mounted: false });
++          await sleep(CYCLE_TOGGLE_MS);
++        }
++        logMarker(
++          "cycles",
++          `arm=${name} cycles=${CYCLES} durationMs=${(
++            performance.now() - started
++          ).toFixed(0)}`
++        );
++        await sleep(CYCLE_SETTLE_MS);
++        logMarker("memory-unmounted", `arm=${name}-after pass=0`);
++        await sleep(CYCLE_SETTLE_MS);
++      }
++      logMarker("done", `cycles=${CYCLES}`);
++      setState("done");
++    };
++    run();
++    return () => {
++      cancelled = true;
++    };
++  }, []);
++
++  if (state === "done") {
++    return (
++      <View style={styles.container}>
++        <Text style={styles.label}>done</Text>
++      </View>
++    );
++  }
++  const { arm, mounted } = state;
++  return (
++    <View style={styles.container}>
++      <View style={styles.header}>
++        <Text style={styles.label}>{armName(arm)}</Text>
++        <Spinner />
++      </View>
++      <View style={styles.grid}>
++        {mounted
++          ? Array.from({ length: COUNT }, (_, index) => (
++              <Cell
++                key={index}
++                presenter={arm.presenter}
++                image={
++                  arm.content === "distinct"
++                    ? images.distinct[index]
++                    : images.shared
++                }
++                width={CELL}
++                height={CELL}
++              />
++            ))
++          : null}
++      </View>
++    </View>
++  );
++};
++
++export const StaticContentBench = () =>
++  CYCLES > 0 ? <CycleCheck /> : <PassBench />;
++
++const PassBench = () => {
++  const { width, height } = useWindowDimensions();
++  const [images] = useState(() => {
++    measureBakeCosts(width, height);
++    return bakeImages(width, height);
++  });
++  const [tick, setTick] = useState(0);
++  const position = describeTick(tick);
++  const probe = useFrameProbe();
++  const heldAtGate = useRef(false);
++
++  useEffect(() => {
++    const interval = setInterval(() => {
++      if (!heldAtGate.current) {
++        setTick((value) => value + 1);
++      }
++    }, TOGGLE_INTERVAL_MS);
++    return () => clearInterval(interval);
++  }, []);
++
++  useEffect(() => {
++    if (position === undefined) {
++      logMarker("done", `ticks=${tick}`);
++      return;
++    }
++    const detail = `arm=${armName(position.arm)} pass=${position.pass}`;
++    if (position.arm.drive === "memory") {
++      if (position.phaseTick === MEMORY_MARKER_TICK) {
++        logMarker("memory-mounted", detail);
++      }
++      if (position.phaseTick === MEMORY_HOLD_TICKS + MEMORY_MARKER_TICK) {
++        logMarker("memory-unmounted", detail);
++      }
++      return;
++    }
++    if (position.phaseTick === 0) {
++      logMarker("arm-start", detail);
++    }
++    if (position.phaseTick === WARMUP_TICKS) {
++      if (position.pass === 0 && GATED_ARMS.has(armName(position.arm))) {
++        heldAtGate.current = true;
++        passGate(detail).then((verdict) => {
++          logMarker(`gate-${verdict}`, detail);
++          heldAtGate.current = false;
++          probe.start();
++          logMarker("measure-start", detail);
++        });
++      } else {
++        probe.start();
++        logMarker("measure-start", detail);
++      }
++    }
++    if (position.phaseTick === WARMUP_TICKS + MEASURED_TICKS) {
++      probe.dump(`arm=${armName(position.arm)} pass=${position.pass}`);
++      logMarker("measure-end", detail);
++    }
++    if (position.phaseTick === WARMUP_TICKS + MEASURED_TICKS + 1) {
++      logMarker("unmounted", detail);
++    }
++  }, [tick, position, probe]);
++
++  if (position === undefined) {
++    return (
++      <View style={styles.container}>
++        <Text style={styles.label}>done</Text>
++      </View>
++    );
++  }
++  const { arm, phaseTick } = position;
++  const active =
++    arm.drive === "memory"
++      ? phaseTick < MEMORY_HOLD_TICKS
++      : phaseTick < WARMUP_TICKS + MEASURED_TICKS;
++  const mounted = active && (arm.drive !== "mount" || phaseTick % 2 === 0);
++  const imageAt = (index: number) => {
++    switch (arm.content) {
++      case "distinct":
++        return images.distinct[index];
++      case "large":
++        return images.large;
++      case "shared":
++        return arm.drive === "swap" ? images.swap[phaseTick] : images.shared;
++    }
++  };
++  return (
++    <View style={styles.container}>
++      <View style={styles.header}>
++        <Text style={styles.label}>{armName(arm)}</Text>
++        <Spinner />
++      </View>
++      {mounted ? <View style={styles.marker} /> : null}
++      {arm.content === "large" && mounted ? (
++        <View style={StyleSheet.absoluteFill}>
++          <Cell
++            presenter={arm.presenter}
++            image={images.large}
++            width={width}
++            height={height}
++          />
++        </View>
++      ) : null}
++      {arm.content === "large" ? null : (
++        <Pulse active={active && arm.drive === "render"}>
++          {mounted
++            ? Array.from({ length: COUNT }, (_, index) => (
++                <Cell
++                  key={index}
++                  presenter={arm.presenter}
++                  image={imageAt(index)}
++                  width={CELL}
++                  height={CELL}
++                />
++              ))
++            : null}
++        </Pulse>
++      )}
++    </View>
++  );
++};
++
++const styles = StyleSheet.create({
++  container: { flex: 1, backgroundColor: "white" },
++  header: {
++    flexDirection: "row",
++    alignItems: "center",
++    justifyContent: "space-between",
++    padding: 16,
++  },
++  label: { fontWeight: "bold" },
++  spinner: {
++    width: 24,
++    height: 24,
++    borderRadius: 4,
++    backgroundColor: "#ff3b30",
++  },
++  marker: {
++    position: "absolute",
++    top: 0,
++    left: 0,
++    width: 8,
++    height: 8,
++    backgroundColor: "black",
++  },
++  grid: {
++    flexDirection: "row",
++    flexWrap: "wrap",
++    paddingHorizontal: 12,
++    gap: 4,
++  },
++  plain: { backgroundColor: "#48dbfb", borderRadius: 10 },
++});
+diff --git a/apps/example/static-content-bench.js b/apps/example/static-content-bench.js
+new file mode 100644
+index 000000000..d5011ac41
+--- /dev/null
++++ b/apps/example/static-content-bench.js
+@@ -0,0 +1,11 @@
++import { AppRegistry } from "react-native";
++import "react-native-skia";
++
++import { StaticContentBench } from "./src/Examples/ImageViews/StaticContentBench";
++import { name as appName } from "./app.json";
++
++if (!Symbol.dispose) {
++  Symbol.dispose = Symbol.for("Symbol.dispose");
++}
++
++AppRegistry.registerComponent(appName, () => StaticContentBench);

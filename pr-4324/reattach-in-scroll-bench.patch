@@ -1,0 +1,333 @@
+diff --git a/apps/example/reattach-in-scroll-bench.js b/apps/example/reattach-in-scroll-bench.js
+new file mode 100644
+--- /dev/null
++++ b/apps/example/reattach-in-scroll-bench.js
+@@ -0,0 +1,11 @@
++import { AppRegistry } from "react-native";
++import "react-native-skia";
++
++import { ReattachInScrollBench } from "./src/Examples/Performance/ReattachInScrollBench";
++import { name as appName } from "./app.json";
++
++if (!Symbol.dispose) {
++  Symbol.dispose = Symbol.for("Symbol.dispose");
++}
++
++AppRegistry.registerComponent(appName, () => ReattachInScrollBench);
+diff --git a/apps/example/src/Examples/Performance/ReattachInScrollBench.tsx b/apps/example/src/Examples/Performance/ReattachInScrollBench.tsx
+new file mode 100644
+--- /dev/null
++++ b/apps/example/src/Examples/Performance/ReattachInScrollBench.tsx
+@@ -0,0 +1,312 @@
++import React, { useEffect, useRef, useState } from "react";
++import { BackHandler, ScrollView, StyleSheet, View } from "react-native";
++import { Canvas, Circle, Group } from "react-native-skia";
++
++// Evidence only: canvases at the top of a scroll view that clips its
++// subviews, scrolled away and back, so that each round trip takes every
++// canvas's native view out of the window and puts it back (on Android, with a
++// window of its own each time). No layout effect inside a canvas, since React
++// records the scene on every commit that runs one. Each window mounts a scroll
++// view of its own: on Android, one whose clipping was turned off and on again
++// took nothing out of the window any more.
++
++type Arm = "unchanged" | "changed";
++
++interface BenchWindow {
++  readonly arm: Arm;
++  readonly canvases: number;
++}
++
++const ARMS: readonly Arm[] = ["unchanged", "changed"];
++const CANVAS_COUNTS: readonly number[] = [1, 6];
++const FORWARD: readonly BenchWindow[] = ARMS.flatMap((arm) =>
++  CANVAS_COUNTS.map((canvases) => ({ arm, canvases }))
++);
++const PASS_ORDERS: readonly (readonly BenchWindow[])[] = [
++  FORWARD,
++  [...FORWARD].reverse(),
++  FORWARD,
++];
++const NODES = 100;
++const COLUMNS = 10;
++const SPACING = 11;
++const CANVAS_SIZE = COLUMNS * SPACING;
++const RADII = [4, 5] as const;
++const AWAY = 4000;
++const WARMUP_TRIPS = 10;
++const MEASURED_TRIPS = 100;
++// Long enough for every canvas's presents to land before the next trip.
++const SETTLE_FRAMES = 6;
++
++class SceneHub {
++  private readonly bumps = new Map<number, () => void>();
++  private registered: { count: number; resolve: () => void } | null = null;
++  private committed: { remaining: number; resolve: () => void } | null = null;
++
++  register(index: number, bump: () => void) {
++    this.bumps.set(index, bump);
++    if (this.registered !== null && this.bumps.size >= this.registered.count) {
++      const { resolve } = this.registered;
++      this.registered = null;
++      resolve();
++    }
++  }
++
++  unregister(index: number) {
++    this.bumps.delete(index);
++  }
++
++  mounted(count: number) {
++    return new Promise<void>((resolve) => {
++      if (this.bumps.size >= count) {
++        resolve();
++        return;
++      }
++      this.registered = { count, resolve };
++    });
++  }
++
++  reportCommit() {
++    if (this.committed === null) {
++      return;
++    }
++    this.committed.remaining -= 1;
++    if (this.committed.remaining === 0) {
++      const { resolve } = this.committed;
++      this.committed = null;
++      resolve();
++    }
++  }
++
++  update() {
++    return new Promise<void>((resolve) => {
++      this.committed = { remaining: this.bumps.size, resolve };
++      for (const bump of this.bumps.values()) {
++        bump();
++      }
++    });
++  }
++}
++
++interface SceneProps {
++  readonly arm: Arm;
++  readonly hub: SceneHub;
++  readonly index: number;
++}
++
++const Scene = ({ arm, hub, index }: SceneProps) => {
++  const [renders, setRenders] = useState(0);
++  useEffect(() => {
++    hub.register(index, () => setRenders((value) => value + 1));
++    return () => hub.unregister(index);
++  }, [hub, index]);
++  // A passive effect counts the commit without running React's mutation pass.
++  useEffect(() => {
++    hub.reportCommit();
++  });
++  const radius = arm === "changed" ? RADII[renders % RADII.length] : RADII[0];
++  return (
++    <Group>
++      {Array.from({ length: NODES }, (_, node) => (
++        <Circle
++          key={node}
++          cx={(node % COLUMNS) * SPACING + SPACING / 2}
++          cy={Math.floor(node / COLUMNS) * SPACING + SPACING / 2}
++          r={radius}
++          color="#ff4757"
++        />
++      ))}
++    </Group>
++  );
++};
++
++interface PendingScroll {
++  readonly reached: (offset: number) => boolean;
++  readonly resolve: () => void;
++}
++
++// Each scroll settles once the scroll view reports the offset it went to.
++class ScrollDriver {
++  private pending: PendingScroll | null = null;
++
++  constructor(
++    private readonly scrollView: { readonly current: ScrollView | null }
++  ) {}
++
++  onScroll(offset: number) {
++    if (this.pending !== null && this.pending.reached(offset)) {
++      const { resolve } = this.pending;
++      this.pending = null;
++      resolve();
++    }
++  }
++
++  // Android can report the offset a fraction of a point short of AWAY.
++  away() {
++    return this.scrollTo(AWAY, (offset) => offset > AWAY - 1);
++  }
++
++  back() {
++    return this.scrollTo(0, (offset) => offset === 0);
++  }
++
++  private scrollTo(y: number, reached: (offset: number) => boolean) {
++    return new Promise<void>((resolve) => {
++      this.pending = { reached, resolve };
++      this.scrollView.current?.scrollTo({ y, animated: false });
++    });
++  }
++}
++
++const frames = (count: number) =>
++  new Promise<void>((resolve) => {
++    let left = count;
++    const step = () => {
++      left -= 1;
++      if (left === 0) {
++        resolve();
++      } else {
++        requestAnimationFrame(step);
++      }
++    };
++    requestAnimationFrame(step);
++  });
++
++const roundTrip = async (arm: Arm, hub: SceneHub, driver: ScrollDriver) => {
++  await driver.away();
++  if (arm === "changed") {
++    await hub.update();
++    // The canvases record the change while away, before they come back.
++    await frames(SETTLE_FRAMES);
++  }
++  await driver.back();
++  await frames(SETTLE_FRAMES);
++};
++
++// The harness presses Back once it has read the device at a marker.
++const awaitHarness = () =>
++  new Promise<void>((resolve) => {
++    const subscription = BackHandler.addEventListener(
++      "hardwareBackPress",
++      () => {
++        subscription.remove();
++        resolve();
++        return true;
++      }
++    );
++  });
++
++const sortedCopy = (values: readonly number[]) =>
++  [...values].sort((left, right) => left - right);
++
++const percentile = (values: readonly number[], fraction: number) => {
++  const sorted = sortedCopy(values);
++  if (sorted.length === 0) {
++    return Number.NaN;
++  }
++  const rank = Math.ceil(fraction * sorted.length) - 1;
++  return sorted[Math.min(Math.max(rank, 0), sorted.length - 1)];
++};
++
++const format = (value: number) => value.toFixed(3);
++
++interface MountedWindow extends BenchWindow {
++  readonly clipped: boolean;
++  readonly hub: SceneHub;
++  readonly id: number;
++}
++
++export const ReattachInScrollBench = () => {
++  const scrollView = useRef<ScrollView>(null);
++  const [driver] = useState(() => new ScrollDriver(scrollView));
++  const [mounted, setMounted] = useState<MountedWindow | null>(null);
++  useEffect(() => {
++    // Back belongs to the harness for the whole run, so it never closes the activity.
++    const consumer = BackHandler.addEventListener(
++      "hardwareBackPress",
++      () => true
++    );
++    const run = async () => {
++      console.log(
++        `BENCH start nodes=${NODES} warmup=${WARMUP_TRIPS} trips=${MEASURED_TRIPS} passes=${PASS_ORDERS.length}`
++      );
++      let id = 0;
++      for (const [passIndex, order] of PASS_ORDERS.entries()) {
++        const pass = passIndex + 1;
++        for (const { arm, canvases } of order) {
++          id += 1;
++          const hub = new SceneHub();
++          const marker = `arm=${arm} canvases=${canvases} pass=${pass}`;
++          // Mounted unclipped, so that their native views are in the window
++          // first, as a list's rows are before they scroll away.
++          setMounted({ arm, canvases, clipped: false, hub, id });
++          await hub.mounted(canvases);
++          setMounted({ arm, canvases, clipped: true, hub, id });
++          await frames(SETTLE_FRAMES);
++          for (let trip = 0; trip < WARMUP_TRIPS; trip++) {
++            await roundTrip(arm, hub, driver);
++          }
++          const armed = awaitHarness();
++          console.log(`BENCH armed ${marker}`);
++          await armed;
++          const tripMs: number[] = [];
++          const windowStartedAt = performance.now();
++          for (let trip = 0; trip < MEASURED_TRIPS; trip++) {
++            const startedAt = performance.now();
++            await roundTrip(arm, hub, driver);
++            tripMs.push(performance.now() - startedAt);
++          }
++          const windowMs = performance.now() - windowStartedAt;
++          console.log(
++            `BENCH window ${marker} updates=${tripMs.length} windowMs=${format(windowMs)} updateMedianMs=${format(percentile(tripMs, 0.5))} updateP90Ms=${format(percentile(tripMs, 0.9))} updateMaxMs=${format(percentile(tripMs, 1))} updateMs=${tripMs.map(format).join(",")}`
++          );
++          const ended = awaitHarness();
++          console.log(`BENCH ended ${marker}`);
++          await ended;
++          setMounted(null);
++        }
++      }
++      console.log("BENCH done");
++    };
++    run().catch((error: unknown) => {
++      console.log(
++        `BENCH failed ${error instanceof Error ? error.message : String(error)}`
++      );
++    });
++    return () => consumer.remove();
++  }, [driver]);
++  if (mounted === null) {
++    return <View style={styles.container} />;
++  }
++  return (
++    <ScrollView
++      key={mounted.id}
++      ref={scrollView}
++      removeClippedSubviews={mounted.clipped}
++      onScroll={(event) => driver.onScroll(event.nativeEvent.contentOffset.y)}
++      scrollEventThrottle={16}
++      style={styles.container}
++    >
++      <View style={styles.grid}>
++        {Array.from({ length: mounted.canvases }, (_, index) => (
++          <Canvas key={index} style={styles.canvas}>
++            <Scene arm={mounted.arm} hub={mounted.hub} index={index} />
++          </Canvas>
++        ))}
++      </View>
++      <View style={styles.spacer} />
++    </ScrollView>
++  );
++};
++
++const styles = StyleSheet.create({
++  container: { flex: 1, backgroundColor: "white" },
++  grid: {
++    flexDirection: "row",
++    flexWrap: "wrap",
++    gap: 8,
++    padding: 16,
++  },
++  canvas: { width: CANVAS_SIZE, height: CANVAS_SIZE },
++  spacer: { height: 2 * AWAY },
++});
