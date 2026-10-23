@@ -6,5 +6,6 @@ Builds, steps and device readings behind my pull requests to [wcandillon/react-n
 | --- | --- |
 | [#4086](https://github.com/wcandillon/react-native-skia/pull/4086): `onSize` from the canvas's layout event | [pr-4086](pr-4086/README.md) |
 | [#4102](https://github.com/wcandillon/react-native-skia/pull/4102): the `SurfaceView` frame-rate vote | [pr-4102](pr-4102/README.md) |
+| [#4324](https://github.com/wcandillon/react-native-skia/pull/4324): a view's native view kept out of its superview | [pr-4324](pr-4324/README.md) |
 
 [`tools/measure-surfaceflinger.sh`](tools/measure-surfaceflinger.sh) records 10 s of SurfaceFlinger's per-layer stats for an app's `SurfaceView` and reads its frame-rate vote. [`images/`](images) holds the screenshots the PR comments show, named after the pull request, or after the branch of a change I have not opened yet.
