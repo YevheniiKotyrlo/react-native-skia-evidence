@@ -1,0 +1,357 @@
+diff --git a/apps/example/src/Tests/Screens/ReorderCanvases.tsx b/apps/example/src/Tests/Screens/ReorderCanvases.tsx
+new file mode 100644
+index 000000000..6a62c9525
+--- /dev/null
++++ b/apps/example/src/Tests/Screens/ReorderCanvases.tsx
+@@ -0,0 +1,34 @@
++import React, { useEffect, useState } from "react";
++import { View } from "react-native";
++import { Canvas, Fill } from "react-native-skia";
++
++import { useScreenDone } from "../ScreenDone";
++
++// The re-attach probe: three keyed canvases whose order flips every 300 ms, which
++// Fabric mounts as a remove and an insert of the same views; done after the
++// last flip.
++const COLORS = ["red", "lime", "blue"];
++const FLIPS = 6;
++
++export const ReorderCanvases = () => {
++  const [flips, setFlips] = useState(0);
++  const done = useScreenDone();
++  useEffect(() => {
++    if (flips >= FLIPS) {
++      done();
++      return;
++    }
++    const timer = setTimeout(() => setFlips((value) => value + 1), 300);
++    return () => clearTimeout(timer);
++  }, [flips, done]);
++  const order = flips % 2 === 0 ? COLORS : [...COLORS].reverse();
++  return (
++    <View style={{ flex: 1, flexDirection: "row" }} collapsable={false}>
++      {order.map((color) => (
++        <Canvas key={color} style={{ flex: 1 }}>
++          <Fill color={color} />
++        </Canvas>
++      ))}
++    </View>
++  );
++};
+diff --git a/apps/example/src/Tests/Screens/index.ts b/apps/example/src/Tests/Screens/index.ts
+index 779900950..c98177b50 100644
+--- a/apps/example/src/Tests/Screens/index.ts
++++ b/apps/example/src/Tests/Screens/index.ts
+@@ -10,6 +10,7 @@ import {
+ import { GraphiteView, GraphiteViewTransform } from "./GraphiteView";
+ import { IsOnMainThread } from "./IsOnMainThread";
+ import { OnLayout } from "./OnLayout";
++import { ReorderCanvases } from "./ReorderCanvases";
+ import { ResizeGrow, ResizeShrink } from "./Resize";
+ import { SharedImage } from "./SharedImage";
+ import { SharedValueReads } from "./SharedValueReads";
+@@ -39,6 +40,7 @@ export const Screens: Readonly<Record<string, Screen>> = {
+   GraphiteViewTransform: shown(GraphiteViewTransform),
+   IsOnMainThread: shown(IsOnMainThread),
+   OnLayout: shown(OnLayout),
++  ReorderCanvases: settling(ReorderCanvases),
+   ResizeGrow: shown(ResizeGrow),
+   ResizeShrink: shown(ResizeShrink),
+   SharedImage: shown(SharedImage),
+diff --git a/packages/skia/apple/SkiaView.mm b/packages/skia/apple/SkiaView.mm
+index bd83288fe..9aad6cf56 100644
+--- a/packages/skia/apple/SkiaView.mm
++++ b/packages/skia/apple/SkiaView.mm
+@@ -18,6 +18,7 @@
+ #include <memory>
+ 
+ #import "RNSkManager.h"
++#import "RNSkReattachProbe.h"
+ #import "RNSkView.h"
+ #import "RNSkWindowSurface.h"
+ #import "RNSkiaModule.h"
+@@ -40,6 +41,50 @@ static bool appIsBackgrounded() {
+ #endif // !TARGET_OS_OSX
+ }
+ 
++#pragma mark - Re-attach probe
++
++#if !TARGET_OS_OSX
++@interface ReattachProbeTicker : NSObject
++@end
++
++@implementation ReattachProbeTicker
++- (void)tick:(CADisplayLink *)link {
++  RNSkia::reattachProbeLog("VSYNC t=%.6f timestamp=%.6f target=%.6f",
++                           RNSkia::reattachProbeNow(), link.timestamp,
++                           link.targetTimestamp);
++}
++@end
++#endif
++
++// A layer made for a view put back in its superview: when it is made, when
++// the run loop turn's Core Animation commit is through, and every vsync.
++static void probeReattach(CAMetalLayer *layer) {
++  void *handle = (__bridge void *)layer;
++  RNSkia::reattachProbeLog("MADE layer=%p t=%.6f", handle,
++                           RNSkia::reattachProbeNow());
++#if !TARGET_OS_OSX
++  static CADisplayLink *displayLink = nil;
++  if (displayLink == nil) {
++    static ReattachProbeTicker *ticker = [ReattachProbeTicker new];
++    displayLink = [CADisplayLink displayLinkWithTarget:ticker
++                                              selector:@selector(tick:)];
++    if (@available(iOS 15.0, *)) {
++      displayLink.preferredFrameRateRange = CAFrameRateRangeMake(120, 120, 120);
++    }
++    [displayLink addToRunLoop:[NSRunLoop mainRunLoop]
++                      forMode:NSRunLoopCommonModes];
++  }
++#endif
++  CFRunLoopObserverRef observer = CFRunLoopObserverCreateWithHandler(
++      kCFAllocatorDefault, kCFRunLoopBeforeWaiting | kCFRunLoopExit, false,
++      INT_MAX, ^(CFRunLoopObserverRef, CFRunLoopActivity) {
++        RNSkia::reattachProbeLog("COMMITTED layer=%p t=%.6f", handle,
++                                 RNSkia::reattachProbeNow());
++      });
++  CFRunLoopAddObserver(CFRunLoopGetMain(), observer, kCFRunLoopCommonModes);
++  CFRelease(observer);
++}
++
+ @implementation SkiaView {
+   // The native view and its window surface, from the view's first superview
+   // until it is recycled, and the layer the surface presents into, while the
+@@ -135,19 +180,8 @@ static bool appIsBackgrounded() {
+     // AppKit lays out a view put in a superview only when asked: the layout
+     // attaches the window's surface to the layer (see layoutSubviews).
+     [self setNeedsLayout];
+-    // A view put back gets its last frame onto the new layer now: the layout
+-    // comes after the Core Animation commit that carries the layer, which
+-    // would show it empty for a frame or two.
+     if (_view != nullptr) {
+-      [CATransaction begin];
+-      [CATransaction setDisableActions:YES];
+-      _layer.frame =
+-          CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+-      [self attachSurface];
+-      [CATransaction commit];
+-      if (!_surface->showsFrame()) {
+-        _view->redraw();
+-      }
++      probeReattach(_layer);
+     }
+   }
+   if (_view != nullptr) {
+diff --git a/packages/skia/cpp/rnskia/RNSkReattachProbe.h b/packages/skia/cpp/rnskia/RNSkReattachProbe.h
+new file mode 100644
+index 000000000..71d08763b
+--- /dev/null
++++ b/packages/skia/cpp/rnskia/RNSkReattachProbe.h
+@@ -0,0 +1,48 @@
++#pragma once
++
++// The re-attach probe (not part of the change): timestamped lines in $TMPDIR/reattach-probe.log,
++// on CACurrentMediaTime's clock (mach_absolute_time in seconds).
++#if defined(__APPLE__)
++#include <mach/mach_time.h>
++
++#include <cstdarg>
++#include <cstdio>
++#include <cstdlib>
++#include <mutex>
++#include <string>
++
++namespace RNSkia {
++
++inline double reattachProbeNow() {
++  static const mach_timebase_info_data_t timebase = [] {
++    mach_timebase_info_data_t info;
++    mach_timebase_info(&info);
++    return info;
++  }();
++  return static_cast<double>(mach_absolute_time()) * timebase.numer /
++         timebase.denom / 1e9;
++}
++
++inline void reattachProbeLog(const char *format, ...) {
++  static std::mutex mutex;
++  static FILE *file = [] {
++    const char *directory = std::getenv("TMPDIR");
++    const std::string path =
++        std::string(directory != nullptr ? directory : "/tmp/") +
++        "/reattach-probe.log";
++    return std::fopen(path.c_str(), "w");
++  }();
++  if (file == nullptr) {
++    return;
++  }
++  std::lock_guard<std::mutex> lock(mutex);
++  va_list arguments;
++  va_start(arguments, format);
++  std::vfprintf(file, format, arguments);
++  va_end(arguments);
++  std::fputc('\n', file);
++  std::fflush(file);
++}
++
++} // namespace RNSkia
++#endif
+diff --git a/packages/skia/cpp/rnskia/RNSkView.h b/packages/skia/cpp/rnskia/RNSkView.h
+index cb2883043..cb0d42d8a 100644
+--- a/packages/skia/cpp/rnskia/RNSkView.h
++++ b/packages/skia/cpp/rnskia/RNSkView.h
+@@ -16,6 +16,7 @@
+ #include "RNSkOffscreenSurface.h"
+ #include "RNSkPlatformContext.h"
+ #include "RNSkPresentOrKeep.h"
++#include "RNSkReattachProbe.h"
+ #include "RNSkRedrawRequest.h"
+ #include "RNSkSurface.h"
+ #include "RNSkWindowSurface.h"
+@@ -179,7 +180,14 @@ public:
+    */
+   void redraw() {
+     RNSkGraphiteTargetInfo targetInfo;
+-    switch (_redrawRequest.start(*_surface, &targetInfo)) {
++    const auto started = _redrawRequest.start(*_surface, &targetInfo);
++#ifdef __APPLE__
++    reattachProbeLog("REDRAW surface=%p start=%d size=%dx%d t=%.6f",
++                     static_cast<void *>(_surface.get()),
++                     static_cast<int>(started), targetInfo.width,
++                     targetInfo.height, reattachProbeNow());
++#endif
++    switch (started) {
+     case RNSkRedrawRequest::Start::kPresent:
+       break;
+     case RNSkRedrawRequest::Start::kPostAgain:
+@@ -211,10 +219,32 @@ public:
+       }
+       if ((frameComing && _surface->showsFrame()) || lastPresented == nullptr ||
+           !lastPresented->isCurrent()) {
++#ifdef __APPLE__
++        reattachProbeLog("REDRAW_NOTHING surface=%p coming=%d shows=%d last=%d",
++                         static_cast<void *>(_surface.get()),
++                         static_cast<int>(frameComing),
++                         static_cast<int>(_surface->showsFrame()),
++                         static_cast<int>(lastPresented != nullptr));
++#endif
+         return;
+       }
++#ifdef __APPLE__
++      reattachProbeLog("REDRAW_LAST surface=%p last=%dx%d window=%dx%d coming=%d "
++                       "content=%d",
++                       static_cast<void *>(_surface.get()),
++                       lastPresented->getTarget().width,
++                       lastPresented->getTarget().height, targetInfo.width,
++                       targetInfo.height, static_cast<int>(frameComing),
++                       static_cast<int>(_producer->hasContent()));
++#endif
+       recordings.push_back(std::move(lastPresented));
+     }
++#ifdef __APPLE__
++    else {
++      reattachProbeLog("REDRAW_QUEUED surface=%p count=%zu",
++                       static_cast<void *>(_surface.get()), recordings.size());
++    }
++#endif
+     if (presentOrKeep(*target, targetInfo, std::move(recordings)).allDone) {
+       return;
+     }
+diff --git a/packages/skia/cpp/rnskia/RNSkWindowSurface.cpp b/packages/skia/cpp/rnskia/RNSkWindowSurface.cpp
+index 1602a18b3..7f382724d 100644
+--- a/packages/skia/cpp/rnskia/RNSkWindowSurface.cpp
++++ b/packages/skia/cpp/rnskia/RNSkWindowSurface.cpp
+@@ -8,6 +8,7 @@
+ #include "RNDawnContext.h"
+ #include "RNDawnUtils.h"
+ #include "RNMetalLayerColorSpace.h"
++#include "RNSkReattachProbe.h"
+ #include "utils/RNSkLog.h"
+ 
+ #ifdef __APPLE__
+@@ -439,6 +440,9 @@ bool RNSkWindowSurface::presentRecordings(
+   // The device check first: it may configure the window again.
+   if (readStateLocked(nullptr) != RNSkWindowState::kReady ||
+       !ensureDeviceLocked() || !isTargetLocked(target)) {
++#ifdef __APPLE__
++    reattachProbeLog("DECLINED layer=%p t=%.6f", _nativeHandle, reattachProbeNow());
++#endif
+     return false;
+   }
+   configureIfNeededLocked();
+@@ -446,6 +450,10 @@ bool RNSkWindowSurface::presentRecordings(
+   _surface.GetCurrentTexture(&surfaceTexture);
+   auto texture = surfaceTexture.texture;
+   if (!texture) {
++#ifdef __APPLE__
++    reattachProbeLog("NO_DRAWABLE layer=%p t=%.6f status=%d", _nativeHandle,
++                     reattachProbeNow(), static_cast<int>(surfaceTexture.status));
++#endif
+     return false;
+   }
+   auto *recorder = presentRecorder();
+@@ -469,6 +477,9 @@ bool RNSkWindowSurface::presentRecordings(
+   dawn::native::metal::WaitForCommandsToBeScheduled(_device.Get());
+ #endif
+   _surface.Present();
++#ifdef __APPLE__
++  reattachProbeLog("PRESENT layer=%p t=%.6f", _nativeHandle, reattachProbeNow());
++#endif
+   _showsFrame = true;
+   return true;
+ }
+@@ -479,6 +490,9 @@ bool RNSkWindowSurface::presentImage(const RNSkGraphiteTargetInfo &target,
+   std::lock_guard<std::mutex> lock(_mutex);
+   if (readStateLocked(nullptr) != RNSkWindowState::kReady ||
+       !ensureDeviceLocked() || !isTargetLocked(target)) {
++#ifdef __APPLE__
++    reattachProbeLog("DECLINED layer=%p t=%.6f", _nativeHandle, reattachProbeNow());
++#endif
+     return false;
+   }
+   configureIfNeededLocked();
+@@ -486,6 +500,10 @@ bool RNSkWindowSurface::presentImage(const RNSkGraphiteTargetInfo &target,
+   _surface.GetCurrentTexture(&surfaceTexture);
+   auto texture = surfaceTexture.texture;
+   if (!texture) {
++#ifdef __APPLE__
++    reattachProbeLog("NO_DRAWABLE layer=%p t=%.6f status=%d", _nativeHandle,
++                     reattachProbeNow(), static_cast<int>(surfaceTexture.status));
++#endif
+     return false;
+   }
+   auto *recorder = presentRecorder();
+@@ -506,6 +524,9 @@ bool RNSkWindowSurface::presentImage(const RNSkGraphiteTargetInfo &target,
+   dawn::native::metal::WaitForCommandsToBeScheduled(_device.Get());
+ #endif
+   _surface.Present();
++#ifdef __APPLE__
++  reattachProbeLog("PRESENT layer=%p t=%.6f", _nativeHandle, reattachProbeNow());
++#endif
+   _showsFrame = true;
+   return true;
+ }
+diff --git a/packages/skia/src/renderer/__tests__/e2e/ReattachFrames.probe.spec.tsx b/packages/skia/src/renderer/__tests__/e2e/ReattachFrames.probe.spec.tsx
+new file mode 100644
+index 000000000..3c7e250bb
+--- /dev/null
++++ b/packages/skia/src/renderer/__tests__/e2e/ReattachFrames.probe.spec.tsx
+@@ -0,0 +1,18 @@
++import { itRunsE2eOnly } from "../../../__tests__/setup";
++import { surface } from "../setup";
++
++// The re-attach probe: views put back in their superview, for the native trace in
++// $TMPDIR/reattach-probe.log.
++describe("A view put back in its superview (probe)", () => {
++  itRunsE2eOnly("comes back from a scroll view's clipping", async () => {
++    for (let trip = 0; trip < 5; trip++) {
++      await surface.screen("ClippedSubviewsBack");
++    }
++  });
++
++  itRunsE2eOnly("moves with a reorder", async () => {
++    for (let trip = 0; trip < 3; trip++) {
++      await surface.screen("ReorderCanvases");
++    }
++  });
++});

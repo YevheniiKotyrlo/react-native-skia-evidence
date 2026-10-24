@@ -9,7 +9,7 @@ Release builds of the example app, arm64-v8a on Android, from a clone set up as 
 | Build | Source |
 | --- | --- |
 | `main` | `cce3cf0f2`, the PR's base; for the e2e cases, with the PR's `ClippedSubviews` screens and specs |
-| this PR | its head, `dd9545fd5` |
+| this PR | `dd9545fd5` for the drives and the re-attach bench, its head for the trace of a view put back |
 
 Each bench is a scene of its own, applied to either build for the bundle only:
 
@@ -29,6 +29,18 @@ Each bench starts on launch and logs its readings, one `BENCH` line per measured
 
 - [`static-content-bench.patch`](static-content-bench.patch): 120 views mounted and unmounted every 800 ms, each arm three passes of 9.6 s windows, every UI frame read inside the app (`BENCH probe … missedFrames=…`). Three rounds per build.
 - [`reattach-in-scroll-bench.patch`](reattach-in-scroll-bench.patch): one or six canvases at the top of a scroll view that clips its subviews, scrolled away and back on every update, unchanged or changed while away, three passes of 100 trips each. Each window's CPU per thread is read from `/proc/<pid>/task/*/schedstat` at its `BENCH armed` and `BENCH ended` markers. Three pairs.
+
+## A view put back in its superview
+
+On the iPad Pro, a Release build of the example with [`reattach-frames/reattach-probe.patch`](reattach-frames/reattach-probe.patch) applied to this PR's head, and one with [`reattach-probe-at-layout.patch`](reattach-frames/reattach-probe-at-layout.patch) in its place: the same probe, with a view put back attached at layout, as before the fix. On `CACurrentMediaTime`'s clock, the probe logs each `CAMetalLayer` made for a view put back, the end of the run loop turn whose Core Animation commit carries it, every present onto it, every vsync, and what the attach's redraw decided. Its spec, `ReattachFrames.probe`, run as the e2e suite runs a spec, takes the clipped screen away and back five times and reorders three canvases six times, three times over. The log is `reattach-probe.log` in the app's `tmp` folder:
+
+```sh
+python analyze.py reattach-probe.log    # the vsyncs between each layer's commit and its first present
+python sequence.py reattach-probe.log   # each layer's events in order
+python classify.py reattach-probe.log   # what each attach's redraw decided, and whether it presented before the commit
+```
+
+51 views put back. Attached at layout, 47 first presented a vsync or more after the commit that carried their layer, empty until then. With this PR, the 45 that had a frame to show, 43 a queued recording and 2 their last frame, each presented it before that commit; the other 6 had presented nothing since they mounted and had nothing queued, and showed their first frame when it landed.
 
 ## Readings
 
