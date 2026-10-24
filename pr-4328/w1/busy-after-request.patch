@@ -1,0 +1,47 @@
+diff --git a/packages/skia/cpp/rnskia/RNSkThreadPool.h b/packages/skia/cpp/rnskia/RNSkThreadPool.h
+index 6095db78d..7e02b793a 100644
+--- a/packages/skia/cpp/rnskia/RNSkThreadPool.h
++++ b/packages/skia/cpp/rnskia/RNSkThreadPool.h
+@@ -86,2 +86,42 @@ public:
+     _condition.notify_all();
++    armBusyJobs();
++  }
++
++  // W1's race probe (not upstream): 100 ms after the latest idle request, a
++  // 5 ms job for every thread, as the queued job of a view dropped with the
++  // request would be, so that each thread ran a job after the request.
++  void armBusyJobs() {
++    static std::mutex probeMutex;
++    static std::condition_variable probeCondition;
++    static Clock::time_point due;
++    static bool started = false;
++    {
++      std::lock_guard<std::mutex> lock(probeMutex);
++      due = Clock::now() + std::chrono::milliseconds(100);
++      if (!started) {
++        started = true;
++        std::thread([this]() {
++          std::unique_lock<std::mutex> lock(probeMutex);
++          for (;;) {
++            if (due == Clock::time_point()) {
++              probeCondition.wait(lock);
++              continue;
++            }
++            if (Clock::now() < due) {
++              probeCondition.wait_until(lock, due);
++              continue;
++            }
++            due = Clock::time_point();
++            lock.unlock();
++            for (int job = 0; job < 4; job++) {
++              post([]() {
++                std::this_thread::sleep_for(std::chrono::milliseconds(5));
++              });
++            }
++            lock.lock();
++          }
++        }).detach();
++      }
++    }
++    probeCondition.notify_one();
+   }

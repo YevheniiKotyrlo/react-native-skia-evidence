@@ -1,0 +1,66 @@
+diff --git a/packages/skia/cpp/api/JsiSkApi.h b/packages/skia/cpp/api/JsiSkApi.h
+index 75b8c7bf4..6d917ea4a 100644
+--- a/packages/skia/cpp/api/JsiSkApi.h
++++ b/packages/skia/cpp/api/JsiSkApi.h
+@@ -12,6 +12,11 @@
+ 
+ #include "rnskia/RNDawnContext.h"
+ 
++#include <chrono>
++#include <thread>
++
++#include "dawn/native/DawnNative.h"
++
+ #include "JsiSkAnimatedImage.h"
+ #include "JsiSkAnimatedImageFactory.h"
+ #include "JsiSkColor.h"
+@@ -197,6 +202,49 @@ public:
+                                      : jsi::Value(runtime, string(gpu.error)));
+     result.setProperty(runtime, "lost",
+                        getLostPromise(runtime, gpu.generation));
++    // W1's probe (not upstream): Dawn's account of the device's memory,
++    // after it gives back what it caches when `reduce` is true.
++    result.setProperty(
++        runtime, "__memory",
++        jsi::Function::createFromHostFunction(
++            runtime, jsi::PropNameID::forAscii(runtime, "__memory"), 1,
++            [](jsi::Runtime &runtime, const jsi::Value &,
++               const jsi::Value *arguments, size_t count) -> jsi::Value {
++              auto *context = DawnContext::tryGetInstance();
++              if (context == nullptr) {
++                return jsi::Value::null();
++              }
++              auto device = context->getWGPUDevice();
++              int rounds = 0;
++              if (count > 0 && arguments[0].isBool() &&
++                  arguments[0].getBool()) {
++                while (rounds < 40 &&
++                       dawn::native::ReduceMemoryUsage(device.Get())) {
++                  rounds++;
++                  std::this_thread::sleep_for(std::chrono::milliseconds(25));
++                  dawn::native::DeviceTick(device.Get());
++                }
++              }
++              const auto usage =
++                  dawn::native::ComputeEstimatedMemoryUsageInfo(device.Get());
++              const auto allocator =
++                  dawn::native::GetAllocatorMemoryInfo(device.Get());
++              jsi::Object info(runtime);
++              info.setProperty(runtime, "rounds", rounds);
++              info.setProperty(runtime, "total",
++                               static_cast<double>(usage.totalUsage));
++              info.setProperty(runtime, "textures",
++                               static_cast<double>(usage.texturesUsage));
++              info.setProperty(runtime, "buffers",
++                               static_cast<double>(usage.buffersUsage));
++              info.setProperty(
++                  runtime, "allocatorUsed",
++                  static_cast<double>(allocator.totalUsedMemory));
++              info.setProperty(
++                  runtime, "allocatorAllocated",
++                  static_cast<double>(allocator.totalAllocatedMemory));
++              return info;
++            }));
+     return result;
+   }
+ 

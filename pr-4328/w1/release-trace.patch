@@ -1,0 +1,40 @@
+diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
+index f3b307c82..2c4cfb505 100644
+--- a/packages/skia/cpp/rnskia/RNDawnContext.h
++++ b/packages/skia/cpp/rnskia/RNDawnContext.h
+@@ -1237,6 +1237,13 @@ private:
+             round = dawn::native::ReduceMemoryUsage(getWGPUDevice().Get())
+                         ? Release::Round::kAgain
+                         : Release::Round::kDone;
++            RNSkLogger::logToConsole(
++                "W1_MEMORY_RELEASE again=%d allocated=%llu",
++                round == Release::Round::kAgain ? 1 : 0,
++                static_cast<unsigned long long>(
++                    dawn::native::GetAllocatorMemoryInfo(
++                        getWGPUDevice().Get())
++                        .totalAllocatedMemory));
+           }
+         }
+       }
+diff --git a/packages/skia/cpp/rnskia/RNSkThreadPool.h b/packages/skia/cpp/rnskia/RNSkThreadPool.h
+index 6095db78d..5bf7e6d0a 100644
+--- a/packages/skia/cpp/rnskia/RNSkThreadPool.h
++++ b/packages/skia/cpp/rnskia/RNSkThreadPool.h
+@@ -14,6 +14,7 @@
+ #include <condition_variable>
+ 
+ #include "RNSkIdleTaskSchedule.h"
++#include "utils/RNSkLog.h"
+ #include "utils/RNSkOverloaded.h"
+ 
+ #if defined(__APPLE__)
+@@ -137,6 +138,9 @@ private:
+                          },
+                          [&](const RNSkIdleTaskSchedule::RunIdleTask &run) {
+                            idle = run.idle;
++                           RNSkLogger::logToConsole(
++                               "W1_IDLE_RUN thread=%u idle=%d", index,
++                               idle ? 1 : 0);
+                            return true;
+                          }},
+               schedule.next(_idleRequest, _idleRequestTime, Clock::now()));

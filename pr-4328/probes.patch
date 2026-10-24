@@ -1,0 +1,576 @@
+diff --git a/apps/example/e2e/ImageViews.probe.spec.ts b/apps/example/e2e/ImageViews.probe.spec.ts
+new file mode 100644
+index 000000000..8f389752b
+--- /dev/null
++++ b/apps/example/e2e/ImageViews.probe.spec.ts
+@@ -0,0 +1,118 @@
++import { test, expect } from "playwright/test";
++import type { Page } from "playwright/test";
++
++// The image-views example on the web, per presenter and source: frames while
++// 120 cells mount and unmount every 800 ms, and each window's long tasks. The
++// presenters take every place in the order in turn, PASSES windows per arm: a
++// window reads differently by the arm before it. A static canvas is a canvas on
++// the web, so its arm reads the canvas's code a second time.
++
++test.use({ viewport: { width: 1024, height: 768 } });
++
++const PRESENTERS = ["Canvas", "Static canvas", "SkiaImageView"] as const;
++const SOURCES = ["GPU drawing", "Decoded photo"] as const;
++const WINDOW_MS = 9600;
++const PASSES = 2 * 3;
++
++interface LongTaskHolder {
++  longTasks: number[];
++  longTaskObserver?: PerformanceObserver;
++}
++
++const sampleFrames = (page: Page, windowMs: number) =>
++  page.evaluate(
++    (duration) =>
++      new Promise<number[]>((resolve) => {
++        const stamps: number[] = [];
++        const start = performance.now();
++        const tick = (now: number) => {
++          stamps.push(now);
++          if (now - start < duration) {
++            requestAnimationFrame(tick);
++          } else {
++            resolve(stamps);
++          }
++        };
++        requestAnimationFrame(tick);
++      }),
++    windowMs
++  );
++
++const summarizeFrames = (stamps: readonly number[]) => {
++  const gaps = stamps.slice(1).map((stamp, index) => stamp - stamps[index]);
++  const sorted = [...gaps].sort((a, b) => a - b);
++  const period = sorted[Math.floor(sorted.length / 2)];
++  const missed = gaps.reduce(
++    (sum, gap) => sum + Math.max(0, Math.round(gap / period) - 1),
++    0
++  );
++  return {
++    frames: stamps.length,
++    periodMs: Math.round(period * 100) / 100,
++    maxGapMs: Math.round(sorted[sorted.length - 1] * 10) / 10,
++    missedFrames: missed,
++  };
++};
++
++// One observer per window: the one before it is disconnected, so that each
++// long task is counted once.
++const observeLongTasks = (page: Page) =>
++  page.evaluate(() => {
++    const holder = window as unknown as LongTaskHolder;
++    holder.longTaskObserver?.disconnect();
++    holder.longTasks = [];
++    holder.longTaskObserver = new PerformanceObserver((list) => {
++      for (const entry of list.getEntries()) {
++        holder.longTasks.push(Math.round(entry.duration));
++      }
++    });
++    holder.longTaskObserver.observe({ type: "longtask" });
++  });
++
++const takeLongTasks = (page: Page) =>
++  page.evaluate(() => (window as unknown as LongTaskHolder).longTasks);
++
++const setChurn = async (page: Page, on: boolean) => {
++  const toggle = page.getByTestId("churn");
++  const checked = (await toggle.getAttribute("aria-checked")) === "true";
++  if (checked !== on) {
++    await toggle.click();
++  }
++};
++
++test("image views on the web, per presenter and source, in passes (probe)", async ({
++  page,
++}) => {
++  test.setTimeout(1_200_000);
++  // A production bundle, as an app ships one: the page asks the dev server for
++  // a development bundle.
++  await page.route("**/index.bundle?*", (route) => {
++    const url = new URL(route.request().url());
++    url.searchParams.set("dev", "false");
++    url.searchParams.set("minify", "true");
++    return route.continue({ url: url.toString() });
++  });
++  await page.goto("/image-views");
++  await expect(page.getByTestId("grid")).toBeVisible({ timeout: 60_000 });
++  const windows = [];
++  for (let pass = 0; pass < PASSES; pass++) {
++    for (const source of SOURCES) {
++      await page.getByText(source, { exact: true }).click();
++      const order = PRESENTERS.map(
++        (_, index) => PRESENTERS[(index + pass) % PRESENTERS.length]
++      );
++      for (const [place, presenter] of order.entries()) {
++        await page.getByText(presenter, { exact: true }).click();
++        await observeLongTasks(page);
++        await setChurn(page, true);
++        const frames = summarizeFrames(await sampleFrames(page, WINDOW_MS));
++        await setChurn(page, false);
++        await sampleFrames(page, 1000);
++        const longTasks = await takeLongTasks(page);
++        windows.push({ pass, place, presenter, source, ...frames, longTasks });
++      }
++    }
++  }
++  console.log(`IMAGE_VIEWS_WEB_PASSES ${JSON.stringify(windows)}`);
++  expect(windows.length).toBe(PASSES * PRESENTERS.length * SOURCES.length);
++});
+diff --git a/apps/example/src/Tests/Screens/FirstPixel.tsx b/apps/example/src/Tests/Screens/FirstPixel.tsx
+new file mode 100644
+index 000000000..b882b2923
+--- /dev/null
++++ b/apps/example/src/Tests/Screens/FirstPixel.tsx
+@@ -0,0 +1,246 @@
++import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
++import { AppState, PixelRatio, View } from "react-native";
++import type { SkImage } from "react-native-skia";
++import {
++  AlphaType,
++  Canvas,
++  ColorType,
++  Fill,
++  Skia,
++  SkiaImageView,
++} from "react-native-skia";
++import { importDevice } from "react-native-webgpu";
++
++// Background.probe reads the app's AppState changes from here: this module
++// loads with the registry, when the app starts.
++const appStates: string[] = [];
++AppState.addEventListener("change", (state) => appStates.push(state));
++(globalThis as { __appStates?: string[] }).__appStates = appStates;
++
++type Presenter = "canvas" | "canvas-static" | "image-view" | "image-view-5200";
++
++interface Trial {
++  readonly presenter: Presenter;
++  readonly size: number;
++}
++
++const PRESENTERS: readonly Presenter[] = [
++  "canvas",
++  "canvas-static",
++  "image-view",
++  "image-view-5200",
++];
++// Past the 100 MB Android draws of one bitmap, so it is presented scaled down.
++const OVERSIZED = 5200;
++// A cell of the static-content bench, and the e2e screen's whole box.
++const SIZES: readonly number[] = [40, 240];
++const SAMPLES = 12;
++const MAX_FRAMES = 240;
++
++const TRIALS: readonly Trial[] = PRESENTERS.flatMap((presenter) =>
++  SIZES.flatMap((size) =>
++    Array.from({ length: SAMPLES }, () => ({ presenter, size }))
++  )
++);
++
++// Filled in place as the trials end: the samples and the misses are appended.
++interface FirstPixelResult {
++  readonly presenter: Presenter;
++  readonly size: number;
++  milliseconds: number[];
++  missed: number;
++}
++
++declare global {
++  var __firstPixel: FirstPixelResult[] | undefined;
++  var __firstPixelDone: boolean | undefined;
++}
++
++const makeCyanImage = (pixels: number) => {
++  const surface = Skia.Surface.MakeOffscreen(pixels, pixels);
++  if (surface === null) {
++    throw new Error("FirstPixel: no offscreen surface");
++  }
++  surface.getCanvas().drawColor(Skia.Color("cyan"));
++  surface.flush();
++  return surface.makeImageSnapshot();
++};
++
++const centerIsCyan = (image: SkImage) => {
++  const pixel = image.readPixels(
++    Math.round(image.width() / 2),
++    Math.round(image.height() / 2),
++    {
++      width: 1,
++      height: 1,
++      colorType: ColorType.RGBA_8888,
++      alphaType: AlphaType.Unpremul,
++    }
++  );
++  return pixel !== null && pixel[0] < 60 && pixel[1] > 200 && pixel[2] > 200;
++};
++
++// The view captured as the e2e harness captures a screen (Tests.tsx).
++const captureShowsCyan = async (
++  device: GPUDevice,
++  view: React.RefObject<View | null>,
++  pixels: number
++) => {
++  const texture = device.createTexture({
++    size: [pixels, pixels],
++    format: "rgba8unorm",
++    usage:
++      GPUTextureUsage.COPY_DST |
++      GPUTextureUsage.RENDER_ATTACHMENT |
++      GPUTextureUsage.TEXTURE_BINDING,
++  });
++  try {
++    await device.queue.drawElementImageToTexture(
++      { source: view },
++      { texture, premultipliedAlpha: true }
++    );
++    const image = Skia.Image.MakeImageFromGPUTexture(texture);
++    try {
++      return centerIsCyan(image);
++    } finally {
++      image.dispose();
++    }
++  } finally {
++    texture.destroy();
++  }
++};
++
++const Probe = ({
++  trial,
++  image,
++  device,
++  onDone,
++}: {
++  readonly trial: Trial;
++  readonly image: SkImage;
++  readonly device: GPUDevice;
++  readonly onDone: (milliseconds: number | null) => void;
++}) => {
++  const view = useRef<View>(null);
++  useLayoutEffect(() => {
++    const committed = performance.now();
++    const pixels = Math.round(trial.size * PixelRatio.get());
++    let frames = 0;
++    let frame = 0;
++    let stopped = false;
++    const poll = async () => {
++      frames++;
++      const shown = await captureShowsCyan(device, view, pixels);
++      if (stopped) {
++        return;
++      }
++      if (shown) {
++        onDone(performance.now() - committed);
++      } else if (frames >= MAX_FRAMES) {
++        onDone(null);
++      } else {
++        frame = requestAnimationFrame(poll);
++      }
++    };
++    frame = requestAnimationFrame(poll);
++    return () => {
++      stopped = true;
++      cancelAnimationFrame(frame);
++    };
++  }, [device, onDone, trial]);
++  return (
++    <View
++      ref={view}
++      collapsable={false}
++      style={{ width: trial.size, height: trial.size }}
++    >
++      {trial.presenter === "image-view" ||
++      trial.presenter === "image-view-5200" ? (
++        <SkiaImageView image={image} style={{ flex: 1 }} />
++      ) : (
++        <Canvas
++          style={{ flex: 1 }}
++          static={trial.presenter === "canvas-static"}
++        >
++          <Fill color="cyan" />
++        </Canvas>
++      )}
++    </View>
++  );
++};
++
++// One view at a time, for every presenter and size: mounted, captured on every
++// frame from the commit that mounts it until a capture shows its pixels, then
++// unmounted. The samples land in globalThis.__firstPixel, and
++// globalThis.__firstPixelDone says when the last trial ended: the trials take
++// longer than one message of the test harness may, so the spec polls.
++export const FirstPixel = () => {
++  useEffect(() => {
++    globalThis.__firstPixel = undefined;
++    globalThis.__firstPixelDone = false;
++  }, []);
++  const [device] = useState(() => importDevice(Skia.getNativeDevice()));
++  const [images] = useState(() =>
++    SIZES.map((size) => makeCyanImage(Math.round(size * PixelRatio.get())))
++  );
++  const [oversized] = useState(() => makeCyanImage(OVERSIZED));
++  const [index, setIndex] = useState(0);
++  const [mounted, setMounted] = useState(true);
++  const results = useRef<FirstPixelResult[]>([]);
++  useEffect(() => {
++    if (mounted || index >= TRIALS.length) {
++      return;
++    }
++    let second = 0;
++    const first = requestAnimationFrame(() => {
++      second = requestAnimationFrame(() => setMounted(true));
++    });
++    return () => {
++      cancelAnimationFrame(first);
++      cancelAnimationFrame(second);
++    };
++  }, [index, mounted]);
++  if (index >= TRIALS.length || !mounted) {
++    return null;
++  }
++  const trial = TRIALS[index];
++  const onDone = (milliseconds: number | null) => {
++    let result = results.current.find(
++      (entry) =>
++        entry.presenter === trial.presenter && entry.size === trial.size
++    );
++    if (result === undefined) {
++      result = {
++        presenter: trial.presenter,
++        size: trial.size,
++        milliseconds: [],
++        missed: 0,
++      };
++      results.current.push(result);
++    }
++    if (milliseconds === null) {
++      result.missed++;
++    } else {
++      result.milliseconds.push(Math.round(milliseconds * 10) / 10);
++    }
++    globalThis.__firstPixel = results.current;
++    setMounted(false);
++    setIndex(index + 1);
++    if (index + 1 >= TRIALS.length) {
++      globalThis.__firstPixelDone = true;
++    }
++  };
++  return (
++    <Probe
++      key={index}
++      trial={trial}
++      image={
++        trial.presenter === "image-view-5200"
++          ? oversized
++          : images[SIZES.indexOf(trial.size)]
++      }
++      device={device}
++      onDone={onDone}
++    />
++  );
++};
+diff --git a/apps/example/src/Tests/Screens/index.ts b/apps/example/src/Tests/Screens/index.ts
+index 819f9195f..678e7023f 100644
+--- a/apps/example/src/Tests/Screens/index.ts
++++ b/apps/example/src/Tests/Screens/index.ts
+@@ -11,6 +11,7 @@ import {
+   ClippedSubviewsStateChanged,
+   ClippedSubviewsTwice,
+ } from "./ClippedSubviews";
++import { FirstPixel } from "./FirstPixel";
+ import { GraphiteView, GraphiteViewTransform } from "./GraphiteView";
+ import { ImageView, ImageViewRounded } from "./ImageView";
+ import { ImageViewMinified, ImageViewMinifiedOdd } from "./ImageViewMinified";
+@@ -48,6 +49,7 @@ export const Screens: Readonly<Record<string, Screen>> = {
+   ),
+   ClippedSubviewsStateChanged: settling(ClippedSubviewsStateChanged),
+   ClippedSubviewsTwice: settling(ClippedSubviewsTwice),
++  FirstPixel: shown(FirstPixel),
+   GraphiteView: shown(GraphiteView),
+   GraphiteViewTransform: shown(GraphiteViewTransform),
+   ImageView: shown(ImageView),
+diff --git a/packages/skia/src/renderer/__tests__/e2e/Background.probe.spec.tsx b/packages/skia/src/renderer/__tests__/e2e/Background.probe.spec.tsx
+new file mode 100644
+index 000000000..da9c36a27
+--- /dev/null
++++ b/packages/skia/src/renderer/__tests__/e2e/Background.probe.spec.tsx
+@@ -0,0 +1,129 @@
++import { execFileSync } from "child_process";
++
++import { itRunsE2eOnly } from "../../../__tests__/setup";
++import { readScreenHalves, surface, wait } from "../setup";
++
++type Waited = "reached" | "timed-out";
++
++// Android: run-e2e.sh exports the device it holds.
++const serial = process.env.ANDROID_SERIAL ?? "";
++
++const adb = (...args: string[]) =>
++  execFileSync("adb", ["-s", serial, ...args], {
++    encoding: "utf8",
++    windowsHide: true,
++  });
++
++const resumedActivity = () =>
++  adb("shell", "dumpsys", "activity", "activities")
++    .split("\n")
++    .find(
++      (line) =>
++        line.includes("mResumedActivity") || line.includes("topResumedActivity")
++    ) ?? "";
++
++// The package of the app in front, e.g. "{… com.example/.MainActivity t12}".
++const frontPackage = () => {
++  const match = /\s([\w.]+)\/[\w.]*/.exec(resumedActivity());
++  return match === null ? "" : match[1];
++};
++
++// adb has no event for an activity's state: polled, with a verdict of its own
++// once the attempts run out.
++const waitForFront = async (appPackage: string, inFront: boolean) => {
++  for (let attempt = 0; attempt < 50; attempt++) {
++    if ((frontPackage() === appPackage) === inFront) {
++      return "reached" as Waited;
++    }
++    await new Promise((resolve) => setTimeout(resolve, 100));
++  }
++  return "timed-out" as Waited;
++};
++
++const backgroundAndBackOnAndroid = async () => {
++  const appPackage = frontPackage();
++  expect(appPackage).not.toBe("");
++  adb("shell", "input", "keyevent", "KEYCODE_HOME");
++  expect(await waitForFront(appPackage, false)).toBe("reached");
++  adb(
++    "shell",
++    "monkey",
++    "-p",
++    appPackage,
++    "-c",
++    "android.intent.category.LAUNCHER",
++    "1"
++  );
++  expect(await waitForFront(appPackage, true)).toBe("reached");
++};
++
++// iOS: run-e2e-wifi.zsh exports the device and the app's bundle id.
++const devicectl = (...args: string[]) =>
++  execFileSync("xcrun", ["devicectl", ...args], { encoding: "utf8" });
++
++// The app's AppState changes since it started (FirstPixel.tsx records them).
++const appStates = async () =>
++  JSON.parse(
++    await surface.eval(
++      () =>
++        JSON.stringify(
++          (globalThis as { __appStates?: string[] }).__appStates ?? []
++        ),
++      {}
++    )
++  ) as string[];
++
++// Settings is brought to the front, then the app; the app's own AppState
++// says it went to the background and came back to the same process, as a
++// relaunched app would have no record of the trip.
++const backgroundAndBackOnIOS = async () => {
++  const device = process.env.IOS_DEVICE ?? "";
++  const bundleId = process.env.IOS_BUNDLE_ID ?? "";
++  expect(device).not.toBe("");
++  expect(bundleId).not.toBe("");
++  const before = (await appStates()).length;
++  devicectl(
++    "device",
++    "process",
++    "launch",
++    "--device",
++    device,
++    "com.apple.Preferences"
++  );
++  await wait(3000);
++  devicectl("device", "process", "launch", "--device", device, bundleId);
++  let waited: Waited = "timed-out";
++  for (let attempt = 0; attempt < 50 && waited === "timed-out"; attempt++) {
++    const states = (await appStates()).slice(before);
++    if (
++      states.includes("background") &&
++      states[states.length - 1] === "active"
++    ) {
++      waited = "reached";
++    } else {
++      await wait(200);
++    }
++  }
++  expect(waited).toBe("reached");
++};
++
++const backgroundAndBack = () =>
++  surface.OS === "ios"
++    ? backgroundAndBackOnIOS()
++    : backgroundAndBackOnAndroid();
++
++describe("Static presentation through the background (probe)", () => {
++  itRunsE2eOnly("keeps a static canvas's frame", async () => {
++    const before = readScreenHalves(await surface.screen("StaticCanvas"));
++    await backgroundAndBack();
++    const after = readScreenHalves(await surface.screen("StaticCanvas"));
++    expect(after).toEqual(before);
++  });
++
++  itRunsE2eOnly("keeps an image view's bitmap", async () => {
++    const before = readScreenHalves(await surface.screen("ImageView"));
++    await backgroundAndBack();
++    const after = readScreenHalves(await surface.screen("ImageView"));
++    expect(after).toEqual(before);
++  });
++});
+diff --git a/packages/skia/src/renderer/__tests__/e2e/FirstPixel.probe.spec.tsx b/packages/skia/src/renderer/__tests__/e2e/FirstPixel.probe.spec.tsx
+new file mode 100644
+index 000000000..abfaa56be
+--- /dev/null
++++ b/packages/skia/src/renderer/__tests__/e2e/FirstPixel.probe.spec.tsx
+@@ -0,0 +1,39 @@
++import { itRunsE2eOnly } from "../../../__tests__/setup";
++import { surface, wait } from "../setup";
++
++interface FirstPixelReport {
++  done: boolean;
++  results: unknown;
++}
++
++const readReport = async () =>
++  JSON.parse(
++    await surface.eval(() => {
++      const state = globalThis as {
++        __firstPixel?: unknown;
++        __firstPixelDone?: boolean;
++      };
++      return JSON.stringify({
++        done: state.__firstPixelDone === true,
++        results: state.__firstPixel ?? null,
++      });
++    }, {})
++  ) as FirstPixelReport;
++
++describe("Time to first pixel, per presenter (probe)", () => {
++  itRunsE2eOnly(
++    "reports the samples of every presenter and size",
++    async () => {
++      await surface.screen("FirstPixel");
++      // The trials outlast one message of the harness: their end is polled.
++      let report = await readReport();
++      while (!report.done) {
++        await wait(1000);
++        report = await readReport();
++      }
++      console.log(`FIRST_PIXEL ${JSON.stringify(report.results)}`);
++      expect(report.results).not.toBeNull();
++    },
++    300000
++  );
++});

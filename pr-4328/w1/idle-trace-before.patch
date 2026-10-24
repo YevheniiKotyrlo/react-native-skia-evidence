@@ -1,0 +1,62 @@
+diff --git a/packages/skia/cpp/rnskia/RNSkGraphiteProducer.cpp b/packages/skia/cpp/rnskia/RNSkGraphiteProducer.cpp
+index 0c7feee09..725054e02 100644
+--- a/packages/skia/cpp/rnskia/RNSkGraphiteProducer.cpp
++++ b/packages/skia/cpp/rnskia/RNSkGraphiteProducer.cpp
+@@ -34,9 +34,28 @@ RNSkThreadPool &renderPool() {
+     threads.setIdleTask([](bool idle) {
+       // What went away with the request is older than this by the time the
+       // task runs, what the views still drawing use is not.
++      RNSkLogger::logToConsole("W1_IDLE_TRIM begin idle=%d", idle ? 1 : 0);
+       DawnContext::trimThreadRecorders(RNSkThreadPool::kIdleDelay / 2, idle);
++      RNSkLogger::logToConsole("W1_IDLE_TRIM end idle=%d", idle ? 1 : 0);
+       if (idle) {
++        // W1's probe (not upstream): Dawn's pool around the release.
++        auto *probeContext = DawnContext::tryGetInstance();
++        const auto before =
++            probeContext == nullptr
++                ? 0
++                : dawn::native::GetAllocatorMemoryInfo(
++                      probeContext->getWGPUDevice().Get())
++                      .totalAllocatedMemory;
+         DawnContext::reduceMemoryUsage();
++        const auto after =
++            probeContext == nullptr
++                ? 0
++                : dawn::native::GetAllocatorMemoryInfo(
++                      probeContext->getWGPUDevice().Get())
++                      .totalAllocatedMemory;
++        RNSkLogger::logToConsole("W1_IDLE_RELEASE allocated %llu -> %llu",
++                                 static_cast<unsigned long long>(before),
++                                 static_cast<unsigned long long>(after));
+       }
+     });
+     ImageProvider::setReleaseListener(
+diff --git a/packages/skia/cpp/rnskia/RNSkThreadPool.h b/packages/skia/cpp/rnskia/RNSkThreadPool.h
+index d27d0ea0f..5f5ea7987 100644
+--- a/packages/skia/cpp/rnskia/RNSkThreadPool.h
++++ b/packages/skia/cpp/rnskia/RNSkThreadPool.h
+@@ -12,6 +12,8 @@
+ 
+ #include <condition_variable>
+ 
++#include "utils/RNSkLog.h"
++
+ #if defined(__APPLE__)
+ #include <pthread.h>
+ #include <pthread/qos.h>
+@@ -136,6 +138,15 @@ private:
+           served = _idleRequest;
+           idleTask = _idleTask;
+           idle = now - lastJob >= kIdleDelay;
++          RNSkLogger::logToConsole(
++              "W1_IDLE_SERVED thread=%u request=%llu idle=%d sinceLastJobMs=%lld "
++              "task=%d",
++              index, static_cast<unsigned long long>(served), idle ? 1 : 0,
++              static_cast<long long>(
++                  std::chrono::duration_cast<std::chrono::milliseconds>(
++                      now - lastJob)
++                      .count()),
++              idleTask ? 1 : 0);
+           break;
+         }
+       }
