@@ -127,7 +127,7 @@ new file mode 100644
 index 000000000..b882b2923
 --- /dev/null
 +++ b/apps/example/src/Tests/Screens/FirstPixel.tsx
-@@ -0,0 +1,246 @@
+@@ -0,0 +1,268 @@
 +import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 +import { AppState, PixelRatio, View } from "react-native";
 +import type { SkImage } from "react-native-skia";
@@ -181,9 +181,15 @@ index 000000000..b882b2923
 +  missed: number;
 +}
 +
++type TrialOutcome =
++  | { readonly kind: "shown"; readonly milliseconds: number }
++  | { readonly kind: "missed" }
++  | { readonly kind: "failed"; readonly message: string };
++
 +declare global {
 +  var __firstPixel: FirstPixelResult[] | undefined;
 +  var __firstPixelDone: boolean | undefined;
++  var __firstPixelError: string | undefined;
 +}
 +
 +const makeCyanImage = (pixels: number) => {
@@ -229,7 +235,7 @@ index 000000000..b882b2923
 +      { source: view },
 +      { texture, premultipliedAlpha: true }
 +    );
-+    const image = Skia.Image.MakeImageFromGPUTexture(texture);
++    const image = Skia.Image.MakeFromGPUTexture(texture);
 +    try {
 +      return centerIsCyan(image);
 +    } finally {
@@ -249,7 +255,7 @@ index 000000000..b882b2923
 +  readonly trial: Trial;
 +  readonly image: SkImage;
 +  readonly device: GPUDevice;
-+  readonly onDone: (milliseconds: number | null) => void;
++  readonly onDone: (outcome: TrialOutcome) => void;
 +}) => {
 +  const view = useRef<View>(null);
 +  useLayoutEffect(() => {
@@ -258,16 +264,25 @@ index 000000000..b882b2923
 +    let frames = 0;
 +    let frame = 0;
 +    let stopped = false;
++    // Release builds drop unhandled rejections: a failed capture ends the run.
 +    const poll = async () => {
 +      frames++;
-+      const shown = await captureShowsCyan(device, view, pixels);
++      let shown: boolean;
++      try {
++        shown = await captureShowsCyan(device, view, pixels);
++      } catch (error) {
++        if (!stopped) {
++          onDone({ kind: "failed", message: String(error) });
++        }
++        return;
++      }
 +      if (stopped) {
 +        return;
 +      }
 +      if (shown) {
-+        onDone(performance.now() - committed);
++        onDone({ kind: "shown", milliseconds: performance.now() - committed });
 +      } else if (frames >= MAX_FRAMES) {
-+        onDone(null);
++        onDone({ kind: "missed" });
 +      } else {
 +        frame = requestAnimationFrame(poll);
 +      }
@@ -308,6 +323,7 @@ index 000000000..b882b2923
 +  useEffect(() => {
 +    globalThis.__firstPixel = undefined;
 +    globalThis.__firstPixelDone = false;
++    globalThis.__firstPixelError = undefined;
 +  }, []);
 +  const [device] = useState(() => importDevice(Skia.getNativeDevice()));
 +  const [images] = useState(() =>
@@ -334,7 +350,13 @@ index 000000000..b882b2923
 +    return null;
 +  }
 +  const trial = TRIALS[index];
-+  const onDone = (milliseconds: number | null) => {
++  const onDone = (outcome: TrialOutcome) => {
++    if (outcome.kind === "failed") {
++      globalThis.__firstPixelError = `${trial.presenter} at ${trial.size}: ${outcome.message}`;
++      globalThis.__firstPixelDone = true;
++      setIndex(TRIALS.length);
++      return;
++    }
 +    let result = results.current.find(
 +      (entry) =>
 +        entry.presenter === trial.presenter && entry.size === trial.size
@@ -348,10 +370,10 @@ index 000000000..b882b2923
 +      };
 +      results.current.push(result);
 +    }
-+    if (milliseconds === null) {
++    if (outcome.kind === "missed") {
 +      result.missed++;
 +    } else {
-+      result.milliseconds.push(Math.round(milliseconds * 10) / 10);
++      result.milliseconds.push(Math.round(outcome.milliseconds * 10) / 10);
 +    }
 +    globalThis.__firstPixel = results.current;
 +    setMounted(false);
@@ -534,13 +556,14 @@ new file mode 100644
 index 000000000..abfaa56be
 --- /dev/null
 +++ b/packages/skia/src/renderer/__tests__/e2e/FirstPixel.probe.spec.tsx
-@@ -0,0 +1,39 @@
+@@ -0,0 +1,43 @@
 +import { itRunsE2eOnly } from "../../../__tests__/setup";
 +import { surface, wait } from "../setup";
 +
 +interface FirstPixelReport {
 +  done: boolean;
 +  results: unknown;
++  error: string | null;
 +}
 +
 +const readReport = async () =>
@@ -549,10 +572,12 @@ index 000000000..abfaa56be
 +      const state = globalThis as {
 +        __firstPixel?: unknown;
 +        __firstPixelDone?: boolean;
++        __firstPixelError?: string;
 +      };
 +      return JSON.stringify({
 +        done: state.__firstPixelDone === true,
 +        results: state.__firstPixel ?? null,
++        error: state.__firstPixelError ?? null,
 +      });
 +    }, {})
 +  ) as FirstPixelReport;
@@ -569,6 +594,7 @@ index 000000000..abfaa56be
 +        report = await readReport();
 +      }
 +      console.log(`FIRST_PIXEL ${JSON.stringify(report.results)}`);
++      expect(report.error).toBeNull();
 +      expect(report.results).not.toBeNull();
 +    },
 +    300000
