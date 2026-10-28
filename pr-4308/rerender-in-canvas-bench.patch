@@ -1,0 +1,244 @@
+diff --git a/apps/example/rerender-in-canvas-bench.js b/apps/example/rerender-in-canvas-bench.js
+new file mode 100644
+--- /dev/null
++++ b/apps/example/rerender-in-canvas-bench.js
+@@ -0,0 +1,11 @@
++import { AppRegistry } from "react-native";
++import "react-native-skia";
++
++import { RerenderInCanvasBench } from "./src/Examples/Performance/RerenderInCanvasBench";
++import { name as appName } from "./app.json";
++
++if (!Symbol.dispose) {
++  Symbol.dispose = Symbol.for("Symbol.dispose");
++}
++
++AppRegistry.registerComponent(appName, () => RerenderInCanvasBench);
+diff --git a/apps/example/src/Examples/Performance/RerenderInCanvasBench.tsx b/apps/example/src/Examples/Performance/RerenderInCanvasBench.tsx
+new file mode 100644
+--- /dev/null
++++ b/apps/example/src/Examples/Performance/RerenderInCanvasBench.tsx
+@@ -0,0 +1,223 @@
++import React, { useEffect, useState } from "react";
++import { BackHandler, StyleSheet, View } from "react-native";
++import { Canvas, Circle, Group } from "react-native-skia";
++
++// Evidence only: no layout effect inside a canvas, since React records the scene on every commit that runs one.
++
++type Arm = "unchanged" | "changed";
++
++interface BenchWindow {
++  readonly arm: Arm;
++  readonly canvases: number;
++}
++
++const ARMS: readonly Arm[] = ["unchanged", "changed"];
++const CANVAS_COUNTS: readonly number[] = [1, 4];
++const FORWARD: readonly BenchWindow[] = ARMS.flatMap((arm) =>
++  CANVAS_COUNTS.map((canvases) => ({ arm, canvases }))
++);
++const PASS_ORDERS: readonly (readonly BenchWindow[])[] = [
++  FORWARD,
++  [...FORWARD].reverse(),
++  FORWARD,
++];
++const NODES = 100;
++const COLUMNS = 10;
++const SPACING = 11;
++const CANVAS_SIZE = COLUMNS * SPACING;
++const RADII = [4, 5] as const;
++const WARMUP_UPDATES = 20;
++const MEASURED_UPDATES = 200;
++
++class SceneHub {
++  private readonly bumps = new Map<number, () => void>();
++  private registered: { count: number; resolve: () => void } | null = null;
++  private committed: { remaining: number; resolve: () => void } | null =
++    null;
++
++  register(index: number, bump: () => void) {
++    this.bumps.set(index, bump);
++    if (this.registered !== null && this.bumps.size >= this.registered.count) {
++      const { resolve } = this.registered;
++      this.registered = null;
++      resolve();
++    }
++  }
++
++  unregister(index: number) {
++    this.bumps.delete(index);
++  }
++
++  mounted(count: number) {
++    return new Promise<void>((resolve) => {
++      if (this.bumps.size >= count) {
++        resolve();
++        return;
++      }
++      this.registered = { count, resolve };
++    });
++  }
++
++  reportCommit() {
++    if (this.committed === null) {
++      return;
++    }
++    this.committed.remaining -= 1;
++    if (this.committed.remaining === 0) {
++      const { resolve } = this.committed;
++      this.committed = null;
++      resolve();
++    }
++  }
++
++  update() {
++    return new Promise<void>((resolve) => {
++      this.committed = { remaining: this.bumps.size, resolve };
++      for (const bump of this.bumps.values()) {
++        bump();
++      }
++    });
++  }
++}
++
++interface SceneProps {
++  readonly arm: Arm;
++  readonly hub: SceneHub;
++  readonly index: number;
++}
++
++const Scene = ({ arm, hub, index }: SceneProps) => {
++  const [renders, setRenders] = useState(0);
++  useEffect(() => {
++    hub.register(index, () => setRenders((value) => value + 1));
++    return () => hub.unregister(index);
++  }, [hub, index]);
++  // A passive effect counts the commit without running React's mutation pass.
++  useEffect(() => {
++    hub.reportCommit();
++  });
++  const radius = arm === "changed" ? RADII[renders % RADII.length] : RADII[0];
++  return (
++    <Group>
++      {Array.from({ length: NODES }, (_, node) => (
++        <Circle
++          key={node}
++          cx={(node % COLUMNS) * SPACING + SPACING / 2}
++          cy={Math.floor(node / COLUMNS) * SPACING + SPACING / 2}
++          r={radius}
++          color="#ff4757"
++        />
++      ))}
++    </Group>
++  );
++};
++
++// The harness presses Back once it has read the device at a marker.
++const awaitHarness = () =>
++  new Promise<void>((resolve) => {
++    const subscription = BackHandler.addEventListener(
++      "hardwareBackPress",
++      () => {
++        subscription.remove();
++        resolve();
++        return true;
++      }
++    );
++  });
++
++const sortedCopy = (values: readonly number[]) =>
++  [...values].sort((left, right) => left - right);
++
++const percentile = (values: readonly number[], fraction: number) => {
++  const sorted = sortedCopy(values);
++  if (sorted.length === 0) {
++    return Number.NaN;
++  }
++  const rank = Math.ceil(fraction * sorted.length) - 1;
++  return sorted[Math.min(Math.max(rank, 0), sorted.length - 1)];
++};
++
++const format = (value: number) => value.toFixed(3);
++
++interface MountedWindow extends BenchWindow {
++  readonly hub: SceneHub;
++  readonly id: number;
++}
++
++export const RerenderInCanvasBench = () => {
++  const [mounted, setMounted] = useState<MountedWindow | null>(null);
++  useEffect(() => {
++    // Back belongs to the harness for the whole run, so it never closes the activity.
++    const consumer = BackHandler.addEventListener(
++      "hardwareBackPress",
++      () => true
++    );
++    const run = async () => {
++      console.log(
++        `BENCH start nodes=${NODES} warmup=${WARMUP_UPDATES} updates=${MEASURED_UPDATES} passes=${PASS_ORDERS.length}`
++      );
++      let id = 0;
++      for (const [passIndex, order] of PASS_ORDERS.entries()) {
++        const pass = passIndex + 1;
++        for (const { arm, canvases } of order) {
++          id += 1;
++          const hub = new SceneHub();
++          const marker = `arm=${arm} canvases=${canvases} pass=${pass}`;
++          setMounted({ arm, canvases, hub, id });
++          await hub.mounted(canvases);
++          for (let update = 0; update < WARMUP_UPDATES; update++) {
++            await hub.update();
++          }
++          const armed = awaitHarness();
++          console.log(`BENCH armed ${marker}`);
++          await armed;
++          const updateMs: number[] = [];
++          const windowStartedAt = performance.now();
++          for (let update = 0; update < MEASURED_UPDATES; update++) {
++            const startedAt = performance.now();
++            await hub.update();
++            updateMs.push(performance.now() - startedAt);
++          }
++          const windowMs = performance.now() - windowStartedAt;
++          console.log(
++            `BENCH window ${marker} updates=${updateMs.length} windowMs=${format(windowMs)} updateMedianMs=${format(percentile(updateMs, 0.5))} updateP90Ms=${format(percentile(updateMs, 0.9))} updateMaxMs=${format(percentile(updateMs, 1))} updateMs=${updateMs.map(format).join(",")}`
++          );
++          const ended = awaitHarness();
++          console.log(`BENCH ended ${marker}`);
++          await ended;
++          setMounted(null);
++        }
++      }
++      console.log("BENCH done");
++    };
++    run().catch((error: unknown) => {
++      console.log(
++        `BENCH failed ${error instanceof Error ? error.message : String(error)}`
++      );
++    });
++    return () => consumer.remove();
++  }, []);
++  return (
++    <View style={styles.container}>
++      {mounted === null
++        ? null
++        : Array.from({ length: mounted.canvases }, (_, index) => (
++            <Canvas key={`${mounted.id}-${index}`} style={styles.canvas}>
++              <Scene arm={mounted.arm} hub={mounted.hub} index={index} />
++            </Canvas>
++          ))}
++    </View>
++  );
++};
++
++const styles = StyleSheet.create({
++  container: {
++    flex: 1,
++    flexDirection: "row",
++    flexWrap: "wrap",
++    gap: 8,
++    padding: 16,
++    backgroundColor: "white",
++  },
++  canvas: { width: CANVAS_SIZE, height: CANVAS_SIZE },
++});
