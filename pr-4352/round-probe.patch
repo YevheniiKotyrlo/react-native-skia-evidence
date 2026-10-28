@@ -1,0 +1,29 @@
+diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
+index 1e17273ed..8439e867a 100644
+--- a/packages/skia/cpp/rnskia/RNDawnContext.h
++++ b/packages/skia/cpp/rnskia/RNDawnContext.h
+@@ -1217,10 +1217,24 @@ private:
+             retired->context->checkAsyncWorkCompletion();
+           }
+           if (release.has_value()) {
++            const auto started = std::chrono::steady_clock::now();
+             round = reduceMemoryUsageLocked(*release);
++            RNSkLogger::logToConsole(
++                "RELEASE_ROUND outcome=%d lockedUs=%lld request=%llu",
++                static_cast<int>(round),
++                static_cast<long long>(
++                    std::chrono::duration_cast<std::chrono::microseconds>(
++                        std::chrono::steady_clock::now() - started)
++                        .count()),
++                static_cast<unsigned long long>(release->request));
+           }
+         }
+       }
++      if (release.has_value() && !polled) {
++        RNSkLogger::logToConsole("RELEASE_ROUND outcome=busy request=%llu",
++                                 static_cast<unsigned long long>(
++                                     release->request));
++      }
+       if (readbacks) {
+         if (polled) {
+           interval = std::min(interval * 2, std::chrono::milliseconds(4));
