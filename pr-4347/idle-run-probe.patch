@@ -1,0 +1,315 @@
+diff --git a/packages/skia/cpp/api/JsiSkApi.h b/packages/skia/cpp/api/JsiSkApi.h
+index 75b8c7bf4..50aca4b1e 100644
+--- a/packages/skia/cpp/api/JsiSkApi.h
++++ b/packages/skia/cpp/api/JsiSkApi.h
+@@ -12,6 +12,11 @@
+ 
+ #include "rnskia/RNDawnContext.h"
+ 
++#include <condition_variable>
++#include <mutex>
++
++#include "rnskia/RNSkThreadPool.h"
++
+ #include "JsiSkAnimatedImage.h"
+ #include "JsiSkAnimatedImageFactory.h"
+ #include "JsiSkColor.h"
+@@ -197,6 +202,68 @@ public:
+                                      : jsi::Value(runtime, string(gpu.error)));
+     result.setProperty(runtime, "lost",
+                        getLostPromise(runtime, gpu.generation));
++    // Probe only, not for merging: four render-pool jobs that wait for
++    // each other, so each runs on a thread of its own, log what that thread's
++    // drawing recorder holds; and Dawn's own account of the device's memory.
++    result.setProperty(
++        runtime, "__idleRunCensus",
++        jsi::Function::createFromHostFunction(
++            runtime, jsi::PropNameID::forAscii(runtime, "__idleRunCensus"), 1,
++            [](jsi::Runtime &runtime, const jsi::Value &,
++               const jsi::Value *arguments, size_t count) -> jsi::Value {
++              auto mark = std::make_shared<std::string>(
++                  count > 0 && arguments[0].isString()
++                      ? arguments[0].asString(runtime).utf8(runtime)
++                      : std::string("census"));
++              struct Latch {
++                std::mutex mutex;
++                std::condition_variable condition;
++                int arrived = 0;
++              };
++              auto latch = std::make_shared<Latch>();
++              constexpr int threads = 4;
++              for (int job = 0; job < threads; job++) {
++                RNSkThreadPool::getInstance().post([latch, mark]() {
++                  std::unique_lock<std::mutex> lock(latch->mutex);
++                  latch->arrived++;
++                  latch->condition.notify_all();
++                  latch->condition.wait_for(
++                      lock, std::chrono::milliseconds(500),
++                      [&latch]() { return latch->arrived >= threads; });
++                  lock.unlock();
++                  DawnContext::logThreadRecorder(mark->c_str());
++                });
++              }
++              return jsi::Value::undefined();
++            }));
++    result.setProperty(
++        runtime, "__memory",
++        jsi::Function::createFromHostFunction(
++            runtime, jsi::PropNameID::forAscii(runtime, "__memory"), 0,
++            [](jsi::Runtime &runtime, const jsi::Value &, const jsi::Value *,
++               size_t) -> jsi::Value {
++              auto *context = DawnContext::tryGetInstance();
++              if (context == nullptr) {
++                return jsi::Value::null();
++              }
++              auto device = context->getWGPUDevice();
++              const auto usage =
++                  dawn::native::ComputeEstimatedMemoryUsageInfo(device.Get());
++              const auto allocator =
++                  dawn::native::GetAllocatorMemoryInfo(device.Get());
++              jsi::Object info(runtime);
++              info.setProperty(runtime, "textures",
++                               static_cast<double>(usage.texturesUsage));
++              info.setProperty(runtime, "total",
++                               static_cast<double>(usage.totalUsage));
++              info.setProperty(
++                  runtime, "allocatorUsed",
++                  static_cast<double>(allocator.totalUsedMemory));
++              info.setProperty(
++                  runtime, "allocatorAllocated",
++                  static_cast<double>(allocator.totalAllocatedMemory));
++              return info;
++            }));
+     return result;
+   }
+ 
+diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
+index e7bab52f9..f550f73e7 100644
+--- a/packages/skia/cpp/rnskia/RNDawnContext.h
++++ b/packages/skia/cpp/rnskia/RNDawnContext.h
+@@ -426,6 +426,9 @@ public:
+       return;
+     }
+     instance->checkFinishedWork();
++    // Probe only, not for merging: what the drawing recorder holds
++    // around the trim.
++    logThreadRecorder(everything ? "trim-idle-before" : "trim-busy-before");
+     if (drawing.recorder != nullptr) {
+       if (everything) {
+         drawing.recorder->freeGpuResources();
+@@ -440,6 +443,22 @@ public:
+       uploads.recorder->freeGpuResources();
+     }
+     instance->checkFinishedWork();
++    logThreadRecorder(everything ? "trim-idle-after" : "trim-busy-after");
++  }
++
++  // Probe only, not for merging: the calling thread's drawing recorder,
++  // formatted on this thread's stack (logcat's own column names the thread).
++  static void logThreadRecorder(const char *mark) {
++    auto &drawing = threadSlot();
++    if (drawing.recorder == nullptr) {
++      __android_log_print(ANDROID_LOG_INFO, "RNSkia", "IDLEDIAG %s recorder=none",
++                          mark);
++      return;
++    }
++    __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                        "IDLEDIAG %s budgeted=%zu purgeable=%zu", mark,
++                        drawing.recorder->currentBudgetedBytes(),
++                        drawing.recorder->currentPurgeableBytes());
+   }
+ 
+   /**
+diff --git a/apps/example/idle-run-probe.js b/apps/example/idle-run-probe.js
+new file mode 100644
+index 0000000..2fcea88
+--- /dev/null
++++ b/apps/example/idle-run-probe.js
+@@ -0,0 +1,11 @@
++import { AppRegistry } from "react-native";
++import "react-native-skia";
++
++import { IdleRunProbe } from "./src/IdleRunProbe";
++import { name as appName } from "./app.json";
++
++if (!Symbol.dispose) {
++  Symbol.dispose = Symbol.for("Symbol.dispose");
++}
++
++AppRegistry.registerComponent(appName, () => IdleRunProbe);
+diff --git a/apps/example/src/IdleRunProbe.tsx b/apps/example/src/IdleRunProbe.tsx
+new file mode 100644
+index 0000000..9acfc71
+--- /dev/null
++++ b/apps/example/src/IdleRunProbe.tsx
+@@ -0,0 +1,170 @@
++import React, { useEffect, useState } from "react";
++import { StyleSheet, Text as NativeText, View } from "react-native";
++import {
++  Blur,
++  Canvas,
++  Circle,
++  Group,
++  Path,
++  Rect,
++  Skia,
++  Text,
++  matchFont,
++} from "react-native-skia";
++import type { SharedValue } from "react-native-reanimated";
++import {
++  Easing,
++  cancelAnimation,
++  useDerivedValue,
++  useSharedValue,
++  withRepeat,
++  withTiming,
++} from "react-native-reanimated";
++
++// Probe only, not for merging: what each render thread keeps once canvases unmount while another canvas still
++// draws, then stops. Each cycle mounts the content canvases beside a spinning one, unmounts them while it spins on past
++// the idle task's due time (RNSkThreadPool::kIdleDelay, 2 s), stops it, waits past the delay again, and asks every
++// render thread for what its drawing recorder holds (IDLEDIAG census lines, from the probe's native patch).
++
++const contentCanvasCount = 30;
++const canvasSide = 110;
++const cycles = 8;
++const settleMilliseconds = 6000;
++const mountedMilliseconds = 2500;
++const spinAfterUnmountMilliseconds = 3000;
++const afterStopMilliseconds = 4500;
++const censusMilliseconds = 1000;
++
++type ProbeGpu = {
++  __idleRunCensus(mark: string): void;
++  __memory(): {
++    textures: number;
++    total: number;
++    allocatorUsed: number;
++    allocatorAllocated: number;
++  } | null;
++};
++
++const probeGpu = () => Skia.gpu as unknown as ProbeGpu;
++
++const wait = (milliseconds: number) =>
++  new Promise<void>((resolve) => setTimeout(resolve, milliseconds));
++
++const megabytes = (bytes: number) => (bytes / (1024 * 1024)).toFixed(2);
++
++const census = async (mark: string) => {
++  probeGpu().__idleRunCensus(mark);
++  const memory = probeGpu().__memory();
++  if (memory !== null) {
++    console.log(
++      `IDLE memory mark=${mark} textures=${megabytes(memory.textures)} total=${megabytes(memory.total)} ` +
++        `allocatorUsed=${megabytes(memory.allocatorUsed)} allocatorAllocated=${megabytes(memory.allocatorAllocated)}`
++    );
++  }
++  await wait(censusMilliseconds);
++};
++
++const starPath = (index: number) => {
++  const points = 7 + (index % 9);
++  const builder = Skia.PathBuilder.Make();
++  for (let point = 0; point <= points * 2; point++) {
++    const radius = point % 2 === 0 ? canvasSide * 0.42 : canvasSide * 0.18;
++    const angle = (Math.PI * point) / points;
++    const x = canvasSide / 2 + radius * Math.cos(angle);
++    const y = canvasSide / 2 + radius * Math.sin(angle);
++    if (point === 0) {
++      builder.moveTo(x, y);
++    } else {
++      builder.lineTo(x, y);
++    }
++  }
++  builder.close();
++  return builder.build();
++};
++
++// Glyphs of a size and a run of characters of its own, a path of its own and a blurred circle, so every canvas adds
++// atlas entries and scratch textures to the recorder of the thread that draws it.
++const ContentCanvas = ({ index }: { index: number }) => {
++  const font = matchFont({ fontFamily: "sans-serif", fontSize: 9 + (index % 23) });
++  const first = 0x41 + ((index * 7) % 50);
++  const label = Array.from({ length: 12 }, (_, offset) => String.fromCharCode(first + offset)).join("");
++  return (
++    <Canvas style={styles.canvas}>
++      <Rect x={0} y={0} width={canvasSide} height={canvasSide} color={`rgb(${150 + ((index * 37) % 100)}, ${150 + ((index * 53) % 100)}, ${150 + ((index * 71) % 100)})`} />
++      <Circle cx={canvasSide / 2} cy={canvasSide / 2} r={canvasSide * 0.3} color="steelblue">
++        <Blur blur={2 + (index % 6)} />
++      </Circle>
++      <Path path={starPath(index)} color={`rgb(${(index * 83) % 200}, ${(index * 29) % 200}, ${(index * 61) % 200})`} />
++      <Text x={4} y={canvasSide - 8} text={label} font={font} color="black" />
++    </Canvas>
++  );
++};
++
++const SpinningCanvas = ({ progress }: { progress: SharedValue<number> }) => {
++  const transform = useDerivedValue(() => [{ rotate: progress.value * 2 * Math.PI }]);
++  return (
++    <Canvas style={styles.canvas}>
++      <Group origin={{ x: canvasSide / 2, y: canvasSide / 2 }} transform={transform}>
++        <Rect x={canvasSide * 0.2} y={canvasSide * 0.45} width={canvasSide * 0.6} height={canvasSide * 0.1} color="tomato" />
++      </Group>
++    </Canvas>
++  );
++};
++
++export const IdleRunProbe = () => {
++  const [step, setStep] = useState("starting");
++  const [showContent, setShowContent] = useState(false);
++  const progress = useSharedValue(0);
++
++  useEffect(() => {
++    const spin = () => {
++      progress.value = 0;
++      progress.value = withRepeat(withTiming(1, { duration: 1000, easing: Easing.linear }), -1);
++    };
++    const mark = (name: string) => {
++      setStep(name);
++      console.log(`IDLE mark=${name}`);
++    };
++    const run = async () => {
++      await wait(settleMilliseconds);
++      await census("baseline");
++      for (let cycle = 1; cycle <= cycles; cycle++) {
++        mark(`cycle-${cycle}-mount`);
++        spin();
++        setShowContent(true);
++        await wait(mountedMilliseconds);
++        mark(`cycle-${cycle}-unmount`);
++        setShowContent(false);
++        await wait(spinAfterUnmountMilliseconds);
++        mark(`cycle-${cycle}-stop`);
++        cancelAnimation(progress);
++        await wait(afterStopMilliseconds);
++        mark(`cycle-${cycle}-census`);
++        await census(`cycle-${cycle}-end`);
++      }
++      mark("done");
++    };
++    run().catch((error: unknown) => {
++      console.log(`IDLE error ${String(error)}`);
++      setStep(`error: ${String(error)}`);
++    });
++  }, [progress]);
++
++  return (
++    <View style={styles.container}>
++      <NativeText style={styles.step}>{step}</NativeText>
++      <SpinningCanvas progress={progress} />
++      <View style={styles.grid}>
++        {showContent &&
++          Array.from({ length: contentCanvasCount }, (_, index) => <ContentCanvas key={index} index={index} />)}
++      </View>
++    </View>
++  );
++};
++
++const styles = StyleSheet.create({
++  container: { flex: 1, backgroundColor: "white", paddingTop: 32, alignItems: "center" },
++  step: { fontSize: 18, color: "black" },
++  grid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center" },
++  canvas: { width: canvasSide, height: canvasSide, margin: 2 },
++});
