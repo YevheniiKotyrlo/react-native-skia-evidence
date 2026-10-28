@@ -1,0 +1,15 @@
+
+
+Test server listening on port 4250 (waiting for the example app to open on E2E tests screen)
+android device connected
+(node:28576) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx (58.84 s)
+  A canvas animating through GPU device losses
+    √ keeps drawing on each device that replaced a lost one (58063 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        58.881 s
+Ran all test suites matching src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx.

@@ -1,0 +1,1187 @@
+10-28 15:20:54.162 30823 30823 I iveskia.example: Using CollectorTypeCMC GC.
+10-28 15:20:54.165 30823 30823 E iveskia.example: Not starting debugger since process cannot load the jdwp agent.
+10-28 15:20:54.169 30823 30823 D ActivityThread: setConscryptValidator
+10-28 15:20:54.170 30823 30823 D ActivityThread: setConscryptValidator - put
+10-28 15:20:54.174 30823 30823 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10330; state: ENABLED
+10-28 15:20:54.174 30823 30823 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 10330; state: ENABLED
+10-28 15:20:54.179 30823 30823 I iveskia.example: Failed to add image file: Failed to find OatDexFile for DexFile /data/app/~~lUWDsCd7e_CO-0S6NJ2Hlg==/com.reactnativeskia.example-g8MDJK2pr6Zkqr5W0IQu6A==/base.apk (canonical path /data/app/~~lUWDsCd7e_CO-0S6NJ2Hlg==/com.reactnativeskia.example-g8MDJK2pr6Zkqr5W0IQu6A==/base.apk) in OatFile /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/oat/arm64/base.odex
+10-28 15:20:54.180 30823 30823 D nativeloader: Configuring clns-4 for other apk /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64:/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.reactnativeskia.example
+10-28 15:20:54.185 30823 30823 V GraphicsEnvironment: Currently set values for:
+10-28 15:20:54.185 30823 30823 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+10-28 15:20:54.185 30823 30823 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+10-28 15:20:54.185 30823 30823 V GraphicsEnvironment: ANGLE GameManagerService for com.reactnativeskia.example: false
+10-28 15:20:54.185 30823 30823 V GraphicsEnvironment: com.reactnativeskia.example is not listed in per-application setting
+10-28 15:20:54.185 30823 30823 V GraphicsEnvironment: App is not on the allowlist for updatable production driver.
+10-28 15:20:54.191 30823 30823 W SoLoader: Initializing SoLoader: 0
+10-28 15:20:54.191 30823 30823 W SoLoader: Recording new base apk path: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk
+10-28 15:20:54.191 30823 30823 W SoLoader: Previously recorded 0 base apk paths.
+10-28 15:20:54.191 30823 30823 I SoLoader: Preparing SO source: DirectorySoSource[root = /vendor/lib64 flags = 2]
+10-28 15:20:54.191 30823 30823 I SoLoader: Preparing SO source: DirectorySoSource[root = /system/lib64 flags = 2]
+10-28 15:20:54.191 30823 30823 I SoLoader: Preparing SO source: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.195 30823 30823 I SoLoader: Preparing SO source: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.195 30823 30823 I SoLoader: init finish: 4 SO sources prepared
+10-28 15:20:54.195 30823 30823 W SoLoader: SoLoader initialized: 8
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Entering merged library JNI_OnLoad.
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x78c47957f8
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x78c484fa7c
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x78c4869518
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x78c48aa1f8
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x78c4949c88
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x78c4960548
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x78c4966e24
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x78c4980c50
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x78c4a29e38
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x78c4a31330
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x78c4a388f4
+10-28 15:20:54.206 30823 30823 D jni_lib_merge: About to register 11 actual methods.
+10-28 15:20:54.206 30823 30823 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.206 30823 30823 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.206 30823 30823 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.206 30823 30823 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.206 30823 30823 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 2]
+10-28 15:20:54.206 30823 30823 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 2]
+10-28 15:20:54.206 30823 30823 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.206 30823 30823 W soloader.recovery.CheckBaseApkExists: Base apk exists: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk
+10-28 15:20:54.207 30823 30823 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.207 30823 30823 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 2]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 2]
+10-28 15:20:54.207 30823 30823 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.207 30823 30823 E SoLoader: Checking /data/app missing libraries.
+10-28 15:20:54.207 30823 30823 E SoLoader: Successfully recovered from /data/app disk failure.
+10-28 15:20:54.207 30823 30823 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.207 30823 30823 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.207 30823 30823 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.207 30823 30823 E SoLoader: Checking /data/data missing libraries.
+10-28 15:20:54.207 30823 30823 E SoLoader: No libraries missing from unpacking so paths while recovering /data/data failure
+10-28 15:20:54.207 30823 30823 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.207 30823 30823 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.207 30823 30823 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.207 30823 30823 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.207 30823 30823 W SoLoader: Failed to recover
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Entering merged library JNI_OnLoad.
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x78c47957f8
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x78c484fa7c
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x78c4869518
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x78c48aa1f8
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x78c4949c88
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x78c4960548
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x78c4966e24
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x78c4980c50
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x78c4a29e38
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x78c4a31330
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x78c4a388f4
+10-28 15:20:54.211 30823 30823 D jni_lib_merge: About to register 11 actual methods.
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Entering merged library JNI_OnLoad.
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x78c47957f8
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x78c484fa7c
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x78c4869518
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x78c48aa1f8
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x78c4949c88
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x78c4960548
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x78c4966e24
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x78c4980c50
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x78c4a29e38
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x78c4a31330
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x78c4a388f4
+10-28 15:20:54.213 30823 30823 D jni_lib_merge: About to register 11 actual methods.
+10-28 15:20:54.222 30823 30823 D jni_lib_merge: Entering merged library JNI_OnLoad.
+10-28 15:20:54.222 30823 30823 D jni_lib_merge: Preparing 4 pre-merged libs (including stub)
+10-28 15:20:54.222 30823 30823 D jni_lib_merge: Preparing to register libhermes_executor_so.  onload_func: 0x795e8e9760
+10-28 15:20:54.222 30823 30823 D jni_lib_merge: Preparing to register libhermesinstancejni_so.  onload_func: 0x795e8f0dd4
+10-28 15:20:54.222 30823 30823 D jni_lib_merge: Preparing to register libjsijniprofiler_so.  onload_func: 0x795e8f15c0
+10-28 15:20:54.222 30823 30823 D jni_lib_merge: About to register 3 actual methods.
+10-28 15:20:54.223 30823 30823 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.223 30823 30823 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.223 30823 30823 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.223 30823 30823 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.223 30823 30823 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.223 30823 30823 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.223 30823 30823 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.224 30823 30823 W soloader.recovery.CheckBaseApkExists: Base apk exists: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk
+10-28 15:20:54.224 30823 30823 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.224 30823 30823 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.224 30823 30823 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.224 30823 30823 E SoLoader: Checking /data/app missing libraries.
+10-28 15:20:54.224 30823 30823 E SoLoader: Successfully recovered from /data/app disk failure.
+10-28 15:20:54.224 30823 30823 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.224 30823 30823 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.224 30823 30823 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.224 30823 30823 E SoLoader: Checking /data/data missing libraries.
+10-28 15:20:54.224 30823 30823 E SoLoader: No libraries missing from unpacking so paths while recovering /data/data failure
+10-28 15:20:54.224 30823 30823 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.224 30823 30823 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.224 30823 30823 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.224 30823 30823 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.224 30823 30823 W SoLoader: Failed to recover
+10-28 15:20:54.226 30823 30823 D OpenGLRenderer: HWUI - treat SMPTE_170M as sRGB
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: QUALCOMM build                   : 7b26bdd942, Iab69c31769
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: Build Date                       : 08/28/23
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: OpenGL ES Shader Compiler Version: E031.41.03.44
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: Local Branch                     : 
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: Remote Branch                    : refs/tags/AU_LINUX_ANDROID_LA.VENDOR.13.2.0.11.00.00.855.659
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: Remote Branch                    : NONE
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: Reconstruct Branch               : NOTHING
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: Build Config                     : S P 14.1.4 AArch64
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: Driver Path                      : /vendor/lib64/egl/libGLESv2_adreno.so
+10-28 15:20:54.228 30823 30854 I AdrenoGLES-0: Driver Version                   : 0676.42
+10-28 15:20:54.230 30823 30823 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+10-28 15:20:54.231 30823 30854 I AdrenoGLES-0: PFP: 0x01740158, ME: 0x00000000
+10-28 15:20:54.233 30823 30854 W Adreno-AppProfiles: Could not find QSPM HAL service. Skipping adreno profile processing.
+10-28 15:20:54.235 30823 30854 I AdrenoUtils: <ReadGpuID:407>: Reading chip ID through GSL
+10-28 15:20:54.244 30823 30823 I DecorView: setWindowBackground: isPopOver=false color=ff121212 d=android.graphics.drawable.ColorDrawable@69c57e0
+10-28 15:20:54.247 30823 30823 W unknown:BridgelessReact: ReactHost{0}.onUserLeaveHint(activity)
+10-28 15:20:54.256 30823 30823 W unknown:BridgelessReact: ReactHost{0}.startSurface(surfaceId = 0): Schedule
+10-28 15:20:54.256 30823 30823 W unknown:BridgelessReact: ReactHost{0}.attachSurface(surfaceId = 0)
+10-28 15:20:54.256 30823 30859 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask()
+10-28 15:20:54.256 30823 30859 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Start
+10-28 15:20:54.256 30823 30859 W unknown:BridgelessReact: ReactHost{0}.getJSBundleLoader()
+10-28 15:20:54.256 30823 30859 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Creating BridgelessReactContext
+10-28 15:20:54.257 30823 30859 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Creating ReactInstance
+10-28 15:20:54.257 30823 30823 I DecorView: setWindowBackground: isPopOver=false color=ff121212 d=android.graphics.drawable.ColorDrawable@3b5f621
+10-28 15:20:54.260 30823 30823 W unknown:BridgelessReact: ReactHost{0}.onHostResume(activity)
+10-28 15:20:54.260 30823 30823 W unknown:BridgelessReact: ReactHost{0}.ReactContext.onHostResume()
+10-28 15:20:54.261 30823 30859 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.261 30823 30859 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.261 30823 30859 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.261 30823 30859 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.261 30823 30859 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.261 30823 30859 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.261 30823 30859 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.261 30823 30859 W soloader.recovery.CheckBaseApkExists: Base apk exists: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk
+10-28 15:20:54.261 30823 30823 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10330; state: DISABLED
+10-28 15:20:54.261 30823 30859 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.261 30823 30859 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.261 30823 30859 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.261 30823 30859 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.261 30823 30859 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.261 30823 30859 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.261 30823 30859 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.261 30823 30859 E SoLoader: Checking /data/app missing libraries.
+10-28 15:20:54.261 30823 30859 E SoLoader: Successfully recovered from /data/app disk failure.
+10-28 15:20:54.262 30823 30859 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.262 30823 30859 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.262 30823 30859 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.262 30823 30859 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.262 30823 30859 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.262 30823 30859 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.262 30823 30859 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.262 30823 30859 E SoLoader: Checking /data/data missing libraries.
+10-28 15:20:54.262 30823 30859 E SoLoader: No libraries missing from unpacking so paths while recovering /data/data failure
+10-28 15:20:54.262 30823 30859 W SoLoader: Running a recovery step for libappmodules.so due to com.facebook.soloader.SoLoaderDSONotFoundError: couldn't find DSO to load: libappmodules.so
+10-28 15:20:54.262 30823 30859 W SoLoader: 	existing SO sources: 
+10-28 15:20:54.262 30823 30859 W SoLoader: 		SoSource 0: ApplicationSoSource[DirectorySoSource[root = /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64 flags = 0]]
+10-28 15:20:54.262 30823 30859 W SoLoader: 		SoSource 1: DirectApkSoSource[root = [/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a]]
+10-28 15:20:54.262 30823 30859 W SoLoader: 		SoSource 2: DirectorySoSource[root = /system/lib64 flags = 3]
+10-28 15:20:54.262 30823 30859 W SoLoader: 		SoSource 3: DirectorySoSource[root = /vendor/lib64 flags = 3]
+10-28 15:20:54.262 30823 30859 W SoLoader: 	Native lib dir: /data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64
+10-28 15:20:54.262 30823 30859 W SoLoader: Failed to recover
+10-28 15:20:54.263 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:20:54.266 30823 30823 I InsetsController: onStateChanged: host=com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity, from=android.view.ViewRootImpl.setView:1753, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1080, 2340), mDisplayCutout=DisplayCutout{insets=Rect(0, 81 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(512, 0 - 568, 81), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1080 displayHeight=2340 physicalDisplayWidth=1080 physicalDisplayHeight=2340 density={3.0} cutoutSpec={M 0,0 H -9.333333333333333‬ V 27 H 9.333333333333333‬ V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=102, center=Point(102, 102)}, RoundedCorner{position=TopRight, radius=102, center=Point(978, 102)}, RoundedCorner{position=BottomRight, radius=102, center=Point(978, 2238)}, RoundedCorner{position=BottomLeft, radius=102, center=Point(102, 2238)}]}  mRoundedCornerFrame=Rect(0, 0 - 1080, 2340), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(948, 0 - 1080, 81) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1080 displayHeight=2340 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mVisible=false mFlags=[]}, InsetsSource: {27 mType=displayCutout mFrame=[0,0][1080,81] mVisible=true mFlags=[]}, InsetsSource: {1bb10001 mType=navigationBars mFrame=[0,2295][1080,2340] mVisible=true mFlags=[SUPPRESS_SCRIM]}, InsetsSource: {1bb10004 mType=systemGestures mFrame=[0,0][90,2340] mVisible=true mFlags=[]}, InsetsSource: {1bb10005 mType=mandatorySystemGestures mFrame=[0,2244][1080,2340] mVisible=true mFlags=[]}, InsetsSource: {1bb10006 mType=tappableElement mFrame=[0,0][0,0] mVisible=true mFlags=[]}, InsetsSource: {1bb10024 mType=systemGestures mFrame=[990,0][1080,2340] mVisible=true mFlags=[]}, InsetsSource: {3fe10000 mType=statusBars mFrame=[0,0][1080,81] mVisible=true mFlags=[]}, InsetsSource: {3fe10005 mType=mandatorySystemGestures mFrame=[0,0][1080,117] mVisible=true mFlags=[]}, InsetsSource: {3fe10006 mType=tappableElement mFrame=[0,0][1080,81] mVisible=true mFlags=[]} }
+10-28 15:20:54.266 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: synced displayState. AttachInfo displayState=2
+10-28 15:20:54.266 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: setView = com.android.internal.policy.DecorView@f051901 TM=true
+10-28 15:20:54.266 30823 30823 I IDS_TAG : Clearing training data of com.microsoft.reacttestapp.TestApp@a9023a6
+10-28 15:20:54.267 30823 30823 I IDS_TAG : Starting IDS observe window
+10-28 15:20:54.267 30823 30823 I IDS_TAG : Getting Shared Preference for com.microsoft.reacttestapp.TestApp@a9023a6 uid = 10330
+10-28 15:20:54.267 30823 30823 I IDS_TAG : App com.microsoft.reacttestapp.TestApp@a9023a6 has not finished training
+10-28 15:20:54.267 30823 30854 D OpenGLRenderer: HWUI - treat SMPTE_170M as sRGB
+10-28 15:20:54.268 30823 30823 I IDS_TAG : Closing IDS observe window
+10-28 15:20:54.268 30823 30823 I IDS_TAG : Getting Shared Preference for com.microsoft.reacttestapp.TestApp@a9023a6 uid = 10330
+10-28 15:20:54.268 30823 30823 I IDS_TAG : IDS count updated to 1 for com.microsoft.reacttestapp.TestApp@a9023a6
+10-28 15:20:54.274 30823 30823 I BufferQueueProducer: [](id:786700000000,api:0,p:0,c:30823) setDequeueTimeout:2077252342
+10-28 15:20:54.274 30823 30823 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007923944800 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3028 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 android.view.Choreographer$CallbackRecord.run:1698 android.view.Choreographer.doCallbacks:1153 android.view.Choreographer.doFrame:1079 android.view.Choreographer$FrameDisplayEventReceiver.run:1646 
+10-28 15:20:54.274 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007923944800 format= -1 caller= android.graphics.BLASTBufferQueue.<init>:89 android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3028 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 
+10-28 15:20:54.274 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=false req=(1080,2340)0 dur=3 res=0x403 s={true 0xb4000078c027e800} ch=true seqId=0
+10-28 15:20:54.274 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: performConfigurationChange setNightDimText nightDimLevel=0
+10-28 15:20:54.275 30823 30823 D ViewRootImpl@1dea7b8[ComponentActivity]: mThreadedRenderer.initialize() mSurface={isValid=true 0xb4000078c027e800} hwInitialized=true
+10-28 15:20:54.275 30823 30823 D ViewRootImpl@1dea7b8[ComponentActivity]: reportNextDraw android.view.ViewRootImpl.performTraversals:4718 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 android.view.Choreographer$CallbackRecord.run:1698 
+10-28 15:20:54.275 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Setup new sync=wmsSync-ViewRootImpl@1dea7b8[ComponentActivity]#0
+10-28 15:20:54.275 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Creating new active sync group ViewRootImpl@1dea7b8[ComponentActivity]#1
+10-28 15:20:54.276 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbacksForSync syncBuffer=false
+10-28 15:20:54.276 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: Received frameDrawingCallback syncResult=0 frameNum=1.
+10-28 15:20:54.276 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb4000078c02b3600 mBlastBufferQueue=0xb40000792b053f00 fn= 1 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$8.onFrameDraw:13841 android.view.ThreadedRenderer$1.onFrameDraw:792 <bottom of call stack> 
+10-28 15:20:54.276 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: Setting up sync and frameCommitCallback
+10-28 15:20:54.281 30823 30859 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Loading JS Bundle
+10-28 15:20:54.281 30823 30854 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-28 15:20:54.282 30823 30854 I ViewRootImpl@1dea7b8[ComponentActivity]: Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true
+10-28 15:20:54.282 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:20:54.282 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: reportDrawFinished seqId=0
+10-28 15:20:54.283 30823 30823 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=statusBars, host=com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity
+10-28 15:20:54.283 30823 30823 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=navigationBars, host=com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity
+10-28 15:20:54.284 30823 30859 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): DevSupportManager.onNewReactContextCreated()
+10-28 15:20:54.289 30823 30823 W unknown:BridgelessReact: ReactHost{0}.ReactContext.onHostResume()
+10-28 15:20:54.289 30823 30823 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Executing ReactInstanceEventListeners
+10-28 15:20:54.289 30823 30859 W unknown:BridgelessReact: ReactHost{0}.startSurface(surfaceId = 0): Execute
+10-28 15:20:54.421 30823 30860 D CompatibilityChangeReporter: Compat change id reported: 210923482; UID 10330; state: ENABLED
+10-28 15:20:54.423 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaProviderManager
+10-28 15:20:54.424 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.uimanager.LayoutShadowNode
+10-28 15:20:54.424 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.SearchBarManager
+10-28 15:20:54.425 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.webgpu.WebGPUViewManager
+10-28 15:20:54.425 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenFooterManager
+10-28 15:20:54.425 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.tabs.TabScreenViewManager
+10-28 15:20:54.425 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenContainerViewManager
+10-28 15:20:54.426 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.gamma.tabs.TabsHostViewManager
+10-28 15:20:54.426 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ModalScreenViewManager
+10-28 15:20:54.426 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenStackHeaderConfigViewManager
+10-28 15:20:54.427 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenContentWrapperManager
+10-28 15:20:54.427 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaViewManager
+10-28 15:20:54.427 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaViewShadowNode
+10-28 15:20:54.427 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.safearea.SafeAreaViewManager
+10-28 15:20:54.428 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.safearea.paper.SafeAreaViewShadowNode
+10-28 15:20:54.428 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenViewManager
+10-28 15:20:54.428 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.reanimated.view.REASharedTransitionBoundaryManager
+10-28 15:20:54.428 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenStackHeaderSubviewManager
+10-28 15:20:54.428 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.rnscreens.ScreenStackViewManager
+10-28 15:20:54.428 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.reactnative.skia.SkiaViewManager
+10-28 15:20:54.434 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$DefsViewManager
+10-28 15:20:54.434 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.VirtualViewManager$RenderableShadowNode
+10-28 15:20:54.435 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeMergeManager
+10-28 15:20:54.436 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.safeareaview.ReactSafeAreaViewManager
+10-28 15:20:54.436 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$LinearGradientManager
+10-28 15:20:54.437 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeGaussianBlurManager
+10-28 15:20:54.437 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ReactProgressBarViewManager
+10-28 15:20:54.438 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ProgressBarShadowNode
+10-28 15:20:54.438 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollViewManager
+10-28 15:20:54.439 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextViewManager
+10-28 15:20:54.439 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextShadowNode
+10-28 15:20:54.440 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeColorMatrixManager
+10-28 15:20:54.440 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollContainerViewManager
+10-28 15:20:54.441 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$ClipPathViewManager
+10-28 15:20:54.442 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$SymbolManager
+10-28 15:20:54.442 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$PatternManager
+10-28 15:20:54.443 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeBlendManager
+10-28 15:20:54.444 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.view.ReactViewManager
+10-28 15:20:54.444 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.SvgViewManager
+10-28 15:20:54.445 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchManager
+10-28 15:20:54.445 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchShadowNode
+10-28 15:20:54.446 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$UseViewManager
+10-28 15:20:54.446 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$CircleViewManager
+10-28 15:20:54.447 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$TSpanViewManager
+10-28 15:20:54.448 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FilterManager
+10-28 15:20:54.448 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$MarkerManager
+10-28 15:20:54.450 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.gesturehandler.react.RNGestureHandlerButtonViewManager
+10-28 15:20:54.451 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.modal.ReactModalHostManager
+10-28 15:20:54.451 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$ForeignObjectManager
+10-28 15:20:54.452 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$EllipseViewManager
+10-28 15:20:54.453 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$LineViewManager
+10-28 15:20:54.453 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.frescosupport.FrescoBasedReactTextInlineImageViewManager
+10-28 15:20:54.453 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.frescosupport.FrescoBasedReactTextInlineImageShadowNode
+10-28 15:20:54.454 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeFloodManager
+10-28 15:20:54.454 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$GroupViewManager
+10-28 15:20:54.455 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$TextViewManager
+10-28 15:20:54.455 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$ImageViewManager
+10-28 15:20:54.456 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeCompositeManager
+10-28 15:20:54.457 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.image.ReactImageManager
+10-28 15:20:54.457 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$RadialGradientManager
+10-28 15:20:54.458 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$MaskManager
+10-28 15:20:54.459 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.unimplementedview.ReactUnimplementedViewManager
+10-28 15:20:54.459 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$RectViewManager
+10-28 15:20:54.460 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$TextPathViewManager
+10-28 15:20:54.461 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactScrollViewManager
+10-28 15:20:54.461 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$FeOffsetManager
+10-28 15:20:54.462 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.horcrux.svg.RenderableViewManager$PathViewManager
+10-28 15:20:54.463 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.drawer.ReactDrawerLayoutManager
+10-28 15:20:54.463 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.swiperefresh.SwipeRefreshLayoutManager
+10-28 15:20:54.464 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputManager
+10-28 15:20:54.465 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputShadowNode
+10-28 15:20:54.465 30823 30860 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.swmansion.gesturehandler.react.RNGestureHandlerRootViewManager
+10-28 15:20:54.493 30823 30860 I ReactNativeJS: Running "example"
+10-28 15:20:54.541 30823 30860 D skia    : [SkFontMgr Android Parser] '/product/etc/fonts_customization.xml' could not be opened
+10-28 15:20:54.545 30823 30872 D vulkan  : searching for layers in '/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/lib/arm64'
+10-28 15:20:54.546 30823 30872 D vulkan  : searching for layers in '/data/app/~~GBEsKGmY64vg4g8Qhg5C4Q==/com.reactnativeskia.example-31BD8IxFHDZ9hVSJ9vtxOw==/base.apk!/lib/arm64-v8a'
+10-28 15:20:54.551 30823 30823 W unknown:BridgelessReact: ReactHost{0}.onHostDestroy(activity)
+10-28 15:20:54.551 30823 30872 W Adreno-AppProfiles: Could not find QSPM HAL service. Skipping adreno profile processing.
+10-28 15:20:54.553 30823 30872 I AdrenoVK-0: ===== BEGIN DUMP OF OVERRIDDEN SETTINGS =====
+10-28 15:20:54.553 30823 30872 I AdrenoVK-0: ===== END DUMP OF OVERRIDDEN SETTINGS =====
+10-28 15:20:54.555 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: handleWindowFocusChanged: 1 0 call from android.view.ViewRootImpl.-$$Nest$mhandleWindowFocusChanged:0
+10-28 15:20:54.555 30823 30823 D ViewRootImpl@1dea7b8[ComponentActivity]: mThreadedRenderer.initializeIfNeeded()#2 mSurface={isValid=true 0xb4000078c027e800}
+10-28 15:20:54.555 30823 30823 D InputMethodManagerUtils: startInputInner - Id : 0
+10-28 15:20:54.555 30823 30823 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: QUALCOMM build          : 7b26bdd942, Iab69c31769
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Build Date              : 08/28/23
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Shader Compiler Version : E031.41.03.44
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Local Branch            : 
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Remote Branch           : refs/tags/AU_LINUX_ANDROID_LA.VENDOR.13.2.0.11.00.00.855.659
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Remote Branch           : NONE
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Reconstruct Branch      : NOTHING
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Build Config            : S P 14.1.4 AArch64
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Driver Path             : /vendor/lib64/hw/vulkan.adreno.so
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Driver Version          : 0676.42
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: PFP                     : 0x01740158
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: ME                      : 0x00000000
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Application Name    : (null)
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Application Version : 0x00000000
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Engine Name         : Dawn
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Engine Version      : 0x00000000
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Api Version         : 0x00401000
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.556 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.556 30823 30872 W Dawn    : Warning: maxDynamicUniformBuffersPerPipelineLayout artificially reduced from 32 to 16 to fit dynamic offset allocation limit.
+10-28 15:20:54.556 30823 30872 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: Adreno (TM) 740, Description: Qualcomm Technologies Inc. Adreno Vulkan Driver: Driver Build: 7b26bdd942, Iab69c31769, 1693222181
+10-28 15:20:54.556 30823 30872 I RNSkia  : Date: 08/28/23
+10-28 15:20:54.556 30823 30872 I RNSkia  : Compiler Version: E031.41.03.44
+10-28 15:20:54.556 30823 30872 I RNSkia  : Driver Branch: 
+10-28 15:20:54.556 30823 30872 I RNSkia  :  512.676.0
+10-28 15:20:54.557 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.557 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.557 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.557 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.557 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.557 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.557 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.557 30823 30872 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:54.560 30823 30823 D InputMethodManagerUtils: startInputInner - Id : 0
+10-28 15:20:54.566 30823 30823 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=false, type=ime, host=com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity
+10-28 15:20:54.760 30823 30860 W BridgelessReactContext: [WARNING] Bridgeless doesn't support CatalystInstance. Accessing an API that's not part of the new architecture is not encouraged usage.
+10-28 15:20:54.797 30823 30860 D CompatibilityChangeReporter: Compat change id reported: 289878283; UID 10330; state: ENABLED
+10-28 15:20:54.804 30823 30823 I ReactNative: [GESTURE HANDLER] Initialize gesture handler for root view com.facebook.react.runtime.ReactSurfaceView{3719e39 V.E...... ......ID 0,0-1080,2214 #1}
+10-28 15:20:54.805 30823 30823 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.uimanager.RootViewManager
+10-28 15:20:54.805 30823 30823 I InsetsController: setRequestedVisibleTypes: visible=false, mask=statusBars, host=com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity, from=android.view.InsetsController.controlAnimationUnchecked:1445 android.view.InsetsController.applyAnimation:2005 android.view.InsetsController.applyAnimation:1968 android.view.InsetsController.hide:1403 android.view.InsetsController.hide:1342 android.view.ViewRootImpl.controlInsetsForCompatibility:3513 android.view.ViewRootImpl.performTraversals:4066 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:20:54.806 30823 30823 I InsetsController: controlAnimationUncheckedInner: Added types=statusBars, animType=1, host=com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity, from=android.view.InsetsController.controlAnimationUnchecked:1449 android.view.InsetsController.applyAnimation:2005 android.view.InsetsController.applyAnimation:1968 
+10-28 15:20:54.806 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007923944800 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:20:54.806 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=0
+10-28 15:20:54.806 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:20:54.807 30823 30869 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb400007825b5e280 mBlastBufferQueue=0xb40000792b053f00 fn= 2 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:20:54.810 30823 30840 I ViewRootImpl@1dea7b8[ComponentActivity]: Resizing android.view.ViewRootImpl@85fe22c: frame = [0,81][1080,2340] reportDraw = true forceLayout = true syncSeqId = 1
+10-28 15:20:54.812 30823 30823 V ViewRootImpl@1dea7b8[ComponentActivity]: updateAppliedLetterboxDirection, direction=4, Caller=android.view.ViewRootImpl.handleDispatchLetterboxDirectionChanged:14139
+10-28 15:20:54.812 30823 30823 I InsetsController: onStateChanged: host=com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity, from=android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl:7196, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1080, 2340), mDisplayCutout=DisplayCutout{insets=Rect(0, 81 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(512, 0 - 568, 81), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1080 displayHeight=2340 physicalDisplayWidth=1080 physicalDisplayHeight=2340 density={3.0} cutoutSpec={M 0,0 H -9.333333333333333‬ V 27 H 9.333333333333333‬ V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=102, center=Point(102, 102)}, RoundedCorner{position=TopRight, radius=102, center=Point(978, 102)}, RoundedCorner{position=BottomRight, radius=102, center=Point(978, 2238)}, RoundedCorner{position=BottomLeft, radius=102, center=Point(102, 2238)}]}  mRoundedCornerFrame=Rect(0, 0 - 1080, 2340), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(948, 0 - 1080, 81) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1080 displayHeight=2340 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mVisible=false mFlags=[]}, InsetsSource: {27 mType=displayCutout mFrame=[0,0][1080,81] mVisible=true mFlags=[]}, InsetsSource: {1bb10001 mType=navigationBars mFrame=[0,2295][1080,2340] mVisible=true mFlags=[SUPPRESS_SCRIM]}, InsetsSource: {1bb10004 mType=systemGestures mFrame=[0,0][90,2340] mVisible=true mFlags=[]}, InsetsSource: {1bb10005 mType=mandatorySystemGestures mFrame=[0,2244][1080,2340] mVisible=true mFlags=[]}, InsetsSource: {1bb10006 mType=tappableElement mFrame=[0,0][0,0] mVisible=true mFlags=[]}, InsetsSource: {1bb10024 mType=systemGestures mFrame=[990,0][1080,2340] mVisible=true mFlags=[]}, InsetsSource: {3fe10000 mType=statusBars mFrame=[0,0][1080,81] mVisible=false mFlags=[]}, InsetsSource: {3fe10005 mType=mandatorySystemGestures mFrame=[0,0][1080,117] mVisible=true mFlags=[]}, InsetsSource: {3fe10006 mType=tappableElement mFrame=[0,0][1080,81] mVisible=true mFlags=[]} }
+10-28 15:20:54.812 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: handleResized, msg = 5 frames=ClientWindowFrames{frame=[0,81][1080,2340] display=[0,81][1080,2340] parentFrame=[0,0][0,0]} forceNextWindowRelayout=true displayId=0 dragResizing=false compatScale=1.0 frameChanged=true attachedFrameChanged=false configChanged=false displayChanged=false compatScaleChanged=false
+10-28 15:20:54.812 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: handleResized mSyncSeqId = 1
+10-28 15:20:54.812 30823 30823 D ViewRootImpl@1dea7b8[ComponentActivity]: reportNextDraw android.view.ViewRootImpl.handleResized:2530 android.view.ViewRootImpl.-$$Nest$mhandleResized:0 android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl:7197 android.view.ViewRootImpl$ViewRootHandler.handleMessage:7166 android.os.Handler.dispatchMessage:106 
+10-28 15:20:54.813 30823 30840 I ViewRootImpl@1dea7b8[ComponentActivity]: Resizing android.view.ViewRootImpl@85fe22c: frame = [0,0][1080,2340] reportDraw = true forceLayout = true syncSeqId = 2
+10-28 15:20:54.822 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:20:54.822 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,81,1080,2340) new=(0,0,1080,2340) relayoutAsync=false req=(1080,2259)0 dur=1 res=0x400 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:20:54.822 30823 30823 D ViewRootImpl@1dea7b8[ComponentActivity]: Relayout called with blastSync
+10-28 15:20:54.822 30823 30823 D ViewRootImpl@1dea7b8[ComponentActivity]: reportNextDraw android.view.ViewRootImpl.performTraversals:4120 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 android.view.Choreographer$CallbackRecord.run:1698 
+10-28 15:20:54.822 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Setup new sync=wmsSync-ViewRootImpl@1dea7b8[ComponentActivity]#2
+10-28 15:20:54.822 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Creating new active sync group ViewRootImpl@1dea7b8[ComponentActivity]#3
+10-28 15:20:54.823 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbacksForSync syncBuffer=true
+10-28 15:20:54.823 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: Received frameDrawingCallback syncResult=0 frameNum=3.
+10-28 15:20:54.823 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb400007825cb5600 mBlastBufferQueue=0xb40000792b053f00 fn= 3 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$8.onFrameDraw:13841 android.view.ThreadedRenderer$1.onFrameDraw:792 <bottom of call stack> 
+10-28 15:20:54.823 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: Setting up sync and frameCommitCallback
+10-28 15:20:54.823 30823 30868 I BLASTBufferQueue_Java: syncNextTransaction, mName= ViewRootImpl@1dea7b8[ComponentActivity] acquireSingleBuffer= true mNativeObject= 0xb40000792b053f00 callback= android.view.ViewRootImpl$8$$ExternalSyntheticLambda0@f0f0d56 caller= android.graphics.BLASTBufferQueue.syncNextTransaction:152 android.view.ViewRootImpl$8.onFrameDraw:13865 android.view.ThreadedRenderer$1.onFrameDraw:792 <bottom of call stack> <bottom of call stack> <bottom of call stack> 
+10-28 15:20:54.823 30823 30868 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:1,s:0) syncNextTransaction callback: 1, acquireSingleBuffer: 1, mTransactionReadyCallback: 0
+10-28 15:20:54.823 30823 30854 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:1,s:0) onFrameAvailable-start syncTransactionSet=true
+10-28 15:20:54.823 30823 30854 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:1,s:0) onFrameAvailable framenumber=3 syncTransactionSet=true
+10-28 15:20:54.823 30823 30854 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:1,a:1,s:0) onFrameAvailable framenumber=3 syncTransactionSet=true
+10-28 15:20:54.823 30823 30854 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:2,s:1) mergePendingTransactions t: 132383776964642, frameNumber: 3
+10-28 15:20:54.823 30823 30854 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0] transaction merge. this(id: 132383776964642, fn: 3). other(id: 132383776964641, fn: 3)
+10-28 15:20:54.823 30823 30854 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:2,s:1) acquireNextBufferLocked t: 132383776964642, mLastAppliedFrameNumber: 2
+10-28 15:20:54.823 30823 30854 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:2,s:1) acquireNextBufferLocked size=1080x2340 mFrameNumber=3 applyTransaction=false mTimestamp=3441265805426783(auto) mPendingTransactions.size=0 graphicBufferId=132383776964610 transform=0
+10-28 15:20:54.823 30823 30854 I BLASTBufferQueue: nativeSyncNextTransaction() syncNextTransaction callback invoked. t=132383776964642
+10-28 15:20:54.824 30823 30854 I ViewRootImpl@1dea7b8[ComponentActivity]: Received ready transaction from native, debugName=syncBuffer_ViewRootImpl@1dea7b8[ComponentActivity]#3
+10-28 15:20:54.824 30823 30854 I ViewRootImpl@1dea7b8[ComponentActivity]: Received frameCommittedCallback lastAttemptedDrawFrameNum=3 didProduceBuffer=true
+10-28 15:20:54.824 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: reportDrawFinished seqId=2
+10-28 15:20:54.824 30823 30823 I SurfaceComposerClient: uncacheWithoutTransaction() cacheId: 132383776964610
+10-28 15:20:54.824 30823 30823 V ViewRootImpl@1dea7b8[ComponentActivity]: updateAppliedLetterboxDirection, direction=0, Caller=android.view.ViewRootImpl.handleDispatchLetterboxDirectionChanged:14139
+10-28 15:20:54.825 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: handleResized, msg = 5 frames=ClientWindowFrames{frame=[0,0][1080,2340] display=[0,0][1080,2340] parentFrame=[0,0][0,0]} forceNextWindowRelayout=true displayId=0 dragResizing=false compatScale=1.0 frameChanged=false attachedFrameChanged=false configChanged=false displayChanged=false compatScaleChanged=false
+10-28 15:20:54.825 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: handleResized mSyncSeqId = 2
+10-28 15:20:54.825 30823 30823 D ViewRootImpl@1dea7b8[ComponentActivity]: reportNextDraw android.view.ViewRootImpl.handleResized:2530 android.view.ViewRootImpl.-$$Nest$mhandleResized:0 android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl:7197 android.view.ViewRootImpl$ViewRootHandler.handleMessage:7166 android.os.Handler.dispatchMessage:106 
+10-28 15:20:54.828 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:20:54.828 30823 30823 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:2,s:1) update width=1080 height=2340 format=-1 mTransformHint=0
+10-28 15:20:54.828 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:20:54.828 30823 30842 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:2,s:1) transactionCommittedCallback
+10-28 15:20:54.828 30823 30842 I BLASTBufferQueue: [ViewRootImpl@1dea7b8[ComponentActivity]#0](f:0,a:2,s:0) transactionCommittedCallback mSyncedFrameNumbers.erase(3)
+10-28 15:20:54.829 30823 30823 D ViewRootImpl@1dea7b8[ComponentActivity]: cancelDraw returned false
+10-28 15:20:54.830 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Setup new sync=wmsSync-ViewRootImpl@1dea7b8[ComponentActivity]#5
+10-28 15:20:54.830 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Creating new active sync group ViewRootImpl@1dea7b8[ComponentActivity]#6
+10-28 15:20:54.830 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbacksForSync syncBuffer=false
+10-28 15:20:54.830 30823 30869 I ViewRootImpl@1dea7b8[ComponentActivity]: Received frameDrawingCallback syncResult=0 frameNum=4.
+10-28 15:20:54.830 30823 30869 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb400007825cdb680 mBlastBufferQueue=0xb40000792b053f00 fn= 4 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$8.onFrameDraw:13841 android.view.ThreadedRenderer$1.onFrameDraw:792 <bottom of call stack> 
+10-28 15:20:54.830 30823 30869 I ViewRootImpl@1dea7b8[ComponentActivity]: Setting up sync and frameCommitCallback
+10-28 15:20:54.832 30823 30854 I ViewRootImpl@1dea7b8[ComponentActivity]: Received frameCommittedCallback lastAttemptedDrawFrameNum=4 didProduceBuffer=true
+10-28 15:20:54.832 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: reportDrawFinished seqId=2
+10-28 15:20:54.907 30823 30823 W [RNScreens]: backTitleFontFamily prop is not available on Android
+10-28 15:20:54.908 30823 30823 W [RNScreens]: disableBackButtonMenu prop is not available on Android
+10-28 15:20:54.908 30823 30823 W [RNScreens]: backTitleVisible prop is not available on Android
+10-28 15:20:54.908 30823 30823 W [RNScreens]: topInsetEnabled prop is not available on Android
+10-28 15:20:54.908 30823 30823 W [RNScreens]: largeTitleHideShadow prop is not available on Android
+10-28 15:20:54.908 30823 30823 W [RNScreens]: largeTitleFontWeight prop is not available on Android
+10-28 15:20:54.908 30823 30823 W [RNScreens]: userInterfaceStyle prop is not available on Android
+10-28 15:20:54.908 30823 30823 W [RNScreens]: largeTitleFontFamily prop is not available on Android
+10-28 15:20:54.939 30823 30823 I SkiaTextureView: onSurfaceTextureAvailable:  768x768
+10-28 15:20:54.939 30823 30823 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:54.939 30823 30823 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:54.939 30823 30823 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:54.939 30823 30823 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:54.939 30823 30823 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:54.939 30823 30823 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:54.939 30823 30823 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:54.939 30823 30823 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:54.939 30823 30823 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:54.939 30823 30823 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:54.939 30823 30823 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:54.939 30823 30823 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:54.939 30823 30823 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:54.939 30823 30823 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:54.947 30823 30861 I WebViewFactory: Loading com.google.android.webview version 118.0.5993.80 (code 599308031)
+10-28 15:20:54.948 30823 30861 W ziparchive: Unable to open '/product/app/TrichromeLibrary/TrichromeLibrary.dm': No such file or directory
+10-28 15:20:54.948 30823 30861 W ziparchive: Unable to open '/product/app/TrichromeLibrary/TrichromeLibrary.dm': No such file or directory
+10-28 15:20:54.949 30823 30861 W iveskia.example: Entry not found
+10-28 15:20:54.949 30823 30861 D nativeloader: InitLlndkLibrariesProduct: libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libRS.so:libandroid_net.so:libbinder_ndk.so:libc.so:libcgrouprc.so:libclang_rt.asan-aarch64-android.so:libclang_rt.asan-arm-android.so:libclang_rt.hwasan-aarch64-android.so:libcom.android.tethering.connectivity_native.so:libdl.so:libft2.so:liblog.so:libm.so:libmediandk.so:libnativewindow.so:libneuralnetworks.so:libselinux.so:libsync.so:libvndksupport.so:libvulkan.so
+10-28 15:20:54.949 30823 30861 D nativeloader: Configuring product-clns-5 for unbundled product apk /product/app/TrichromeLibrary/TrichromeLibrary.apk. target_sdk_version=34, uses_libraries=ALL, library_path=/product/app/WebViewGoogle/lib/arm64:/product/app/WebViewGoogle/WebViewGoogle.apk!/lib/arm64-v8a:/product/app/TrichromeLibrary/TrichromeLibrary.apk!/lib/arm64-v8a:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/product/lib64:/system/product/lib64
+10-28 15:20:54.949 30823 30861 D nativeloader: Extending system_exposed_libraries: libhumantracking.arcsoft.so:libPortraitDistortionCorrection.arcsoft.so:libPortraitDistortionCorrectionCali.arcsoft.so:libface_landmark.arcsoft.so:libFacialStickerEngine.arcsoft.so:libfrtracking_engine.arcsoft.so:libFaceRecognition.arcsoft.so:libveengine.arcsoft.so:lib_pet_detection.arcsoft.so:libae_bracket_hdr.arcsoft.so:libaiclearzoom_raw.arcsoft.so:libacz_hhdr.arcsoft.so:libhybrid_high_dynamic_range.arcsoft.so:libimage_enhancement.arcsoft.so:liblow_light_hdr.arcsoft.so:libhigh_dynamic_range.arcsoft.so:libsuperresolution_raw.arcsoft.so:libobjectcapture_jni.arcsoft.so:libobjectcapture.arcsoft.so:libFacialAttributeDetection.arcsoft.so:libaudiomirroring_jni.audiomirroring.samsung.so:libBeauty_v4.camera.samsung.so:libexifa.camera.samsung.so:libjpega.camera.samsung.so:libOpenCv.camera.samsung.so:libaifrcInterface.camera.samsung.so:libVideoClassifier.camera.samsung.so:libImageScreener.camera.samsung.so:libMyFilter.camera.samsung.so:libtflite2.myfilters.camera.samsung.so:libHIDT
+10-28 15:20:54.950 30823 30861 D nativeloader: InitVndkspLibrariesProduct: android.hardware.common-V2-ndk.so:android.hardware.common-V2-ndk_platform.so:android.hardware.common.fmq-V1-ndk.so:android.hardware.common.fmq-V1-ndk_platform.so:android.hardware.graphics.allocator-V2-ndk.so:android.hardware.graphics.allocator-V2-ndk_platform.so:android.hardware.graphics.common-V4-ndk.so:android.hardware.graphics.common-V4-ndk_platform.so:android.hardware.graphics.common@1.0.so:android.hardware.graphics.common@1.1.so:android.hardware.graphics.common@1.2.so:android.hardware.graphics.composer3-V1-ndk.so:android.hardware.graphics.composer3-V1-ndk_platform.so:android.hardware.graphics.mapper@2.0.so:android.hardware.graphics.mapper@2.1.so:android.hardware.graphics.mapper@3.0.so:android.hardware.graphics.mapper@4.0.so:android.hardware.renderscript@1.0.so:android.hidl.memory.token@1.0.so:android.hidl.memory@1.0-impl.so:android.hidl.memory@1.0.so:android.hidl.safe_union@1.0.so:libRSCpuRef.so:libRSDriver.so:libRS_internal.so:libbase.so:libbcinfo.so:libblas.so:libc++.so:lib
+10-28 15:20:54.951 30823 30861 W iveskia.example: ClassLoaderContext shared library size mismatch. Expected=0, found=1 (PCL[] | PCL[]{PCL[]})
+10-28 15:20:54.951 30823 30861 D nativeloader: Configuring product-clns-6 for unbundled product apk /product/app/WebViewGoogle/WebViewGoogle.apk. target_sdk_version=34, uses_libraries=, library_path=/product/app/WebViewGoogle/lib/arm64:/product/app/WebViewGoogle/WebViewGoogle.apk!/lib/arm64-v8a:/product/app/TrichromeLibrary/TrichromeLibrary.apk!/lib/arm64-v8a:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/product/lib64:/system/product/lib64
+10-28 15:20:54.957 30823 30861 I cr_WVCFactoryProvider: Loaded version=118.0.5993.80 minSdkVersion=29 isBundle=true multiprocess=true packageId=2
+10-28 15:20:54.961 30823 30902 E chromium: [1028/152054.961117:ERROR:variations_seed_loader.cc(69)] Failed to open file for reading. Errno: 2
+10-28 15:20:54.964 30823 30861 I cr_LibraryLoader: Successfully loaded native library
+10-28 15:20:54.964 30823 30861 I cr_CachingUmaRecorder: Flushed 7 samples from 7 histograms, 0 samples were dropped.
+10-28 15:20:54.970 30823 30905 D TrafficStats: tagSocket(152) with statsTag=0xffffffff, statsUid=-1
+10-28 15:20:54.978 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:20:54.978 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:20:54.979 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:20:54.979 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb4000078260f2f80 mBlastBufferQueue=0xb40000792b053f00 fn= 22 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Entering merged library JNI_OnLoad.
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x78c47957f8
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x78c484fa7c
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x78c4869518
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x78c48aa1f8
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x78c4949c88
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x78c4960548
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libreactnativejni_common_so.  onload_func: 0x78c4966e24
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x78c4980c50
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x78c4a29e38
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x78c4a31330
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x78c4a388f4
+10-28 15:20:54.983 30823 30860 D jni_lib_merge: About to register 11 actual methods.
+10-28 15:20:54.987 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:54.987 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:54.987 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:54.987 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:54.987 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:54.987 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:54.987 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:54.988 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:54.988 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:54.988 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:54.988 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:54.988 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:54.988 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:54.988 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:54.988 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:54.988 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:54.989 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:54.989 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:55.155 30823 30823 I InsetsController: cancelAnimation: types=statusBars, animType=1, host=com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity, from=android.view.InsetsController.notifyFinished:1748 android.view.InsetsAnimationThreadControlRunner$1.lambda$notifyFinished$0:85 android.view.InsetsAnimationThreadControlRunner$1.$r8$lambda$RAf1SfIREsj9-wH5FOigMy6eLkM:0 
+10-28 15:20:55.977 30823 30823 I SkiaTextureView: onSurfaceTextureAvailable:  768x768
+10-28 15:20:55.978 30823 30823 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:55.978 30823 30823 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:55.978 30823 30823 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:55.978 30823 30823 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:55.978 30823 30823 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:55.979 30823 30823 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:55.979 30823 30823 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:55.979 30823 30823 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:55.979 30823 30823 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:55.979 30823 30823 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:55.979 30823 30823 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:55.979 30823 30823 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:55.979 30823 30823 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:55.979 30823 30823 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:56.064 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:56.064 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:56.064 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:56.064 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:56.064 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:56.064 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:56.065 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:56.065 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:56.065 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:56.065 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:56.065 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:56.065 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:56.065 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:56.065 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:56.065 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:56.066 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:56.066 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:56.067 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:56.184 30823 30835 W iveskia.example: Cleared Reference was only reachable from finalizer (only reported once)
+10-28 15:20:56.198 30823 30837 W iveskia.example: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/WebViewGoogle/WebViewGoogle.apk' with 1 weak references
+10-28 15:20:56.198 30823 30837 W iveskia.example: ApkAssets: Deleting an ApkAssets object '<empty> and /product/app/TrichromeLibrary/TrichromeLibrary.apk' with 1 weak references
+10-28 15:20:57.158 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: onDisplayChanged oldDisplayState=2 newDisplayState=2
+10-28 15:20:57.467 30823 30823 D CompatibilityChangeReporter: Compat change id reported: 236825255; UID 10330; state: ENABLED
+10-28 15:20:57.469 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:20:57.473 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:20:57.474 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:20:57.482 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:20:57.608 30823 30860 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+10-28 15:20:57.608 30823 30860 I RNSkia  :  - While handling unexpected error type Internal when allowed errors are Validation.
+10-28 15:20:57.608 30823 30860 I RNSkia  :     at APIForceLoss (/home/runner/work/react-native-skia/react-native-skia/externals/skia/third_party/externals/dawn/src/dawn/native/Device.cpp:900)
+10-28 15:20:58.609 30823 30932 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: Adreno (TM) 740, Description: Qualcomm Technologies Inc. Adreno Vulkan Driver: Driver Build: 7b26bdd942, Iab69c31769, 1693222181
+10-28 15:20:58.609 30823 30932 I RNSkia  : Date: 08/28/23
+10-28 15:20:58.609 30823 30932 I RNSkia  : Compiler Version: E031.41.03.44
+10-28 15:20:58.609 30823 30932 I RNSkia  : Driver Branch: 
+10-28 15:20:58.609 30823 30932 I RNSkia  :  512.676.0
+10-28 15:20:58.610 30823 30932 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:58.610 30823 30932 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:58.610 30823 30932 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:58.610 30823 30932 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:58.611 30823 30932 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:58.611 30823 30932 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:58.611 30823 30932 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:58.611 30823 30932 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:20:58.643 30823 30932 I RNSkia  : React Native Skia replaced its lost GPU device.
+10-28 15:20:58.669 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:58.669 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:58.669 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:58.669 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:58.669 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:58.669 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:58.669 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:58.669 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:58.669 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:58.669 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:58.669 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:58.669 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:58.669 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:58.669 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:58.669 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:58.669 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:58.669 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:58.669 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:58.669 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:58.669 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:58.669 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:58.669 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:58.669 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:58.669 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:58.669 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:58.669 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:58.669 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:58.669 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:58.670 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:58.670 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:58.670 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:58.670 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:58.674 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:20:58.674 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:20:58.674 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:58.674 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:58.674 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:58.674 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:58.674 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:58.674 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:58.674 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:58.674 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:58.674 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:58.674 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:58.674 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:58.674 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:58.674 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:58.674 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:58.674 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:58.674 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:58.674 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:58.674 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:58.674 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:58.674 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:58.674 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:58.674 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:20:58.674 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:20:58.674 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:20:58.674 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:20:58.674 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:20:58.674 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:20:58.674 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:20:58.675 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:58.675 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:58.675 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:58.675 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:20:58.684 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:20:58.684 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=1 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:20:58.685 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:20:58.688 30823 30869 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb4000078260d0e00 mBlastBufferQueue=0xb40000792b053f00 fn= 182 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:20:59.257 30823 30940 D ProfileInstaller: Installing profile for com.reactnativeskia.example
+10-28 15:21:00.165 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:00.169 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:00.170 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:00.177 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:00.238 30823 30931 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:00.238 30823 30931 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:02.134 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:02.138 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:02.139 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:02.146 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:04.156 30823 30860 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+10-28 15:21:04.156 30823 30860 I RNSkia  :  - While handling unexpected error type Internal when allowed errors are Validation.
+10-28 15:21:04.156 30823 30860 I RNSkia  :     at APIForceLoss (/home/runner/work/react-native-skia/react-native-skia/externals/skia/third_party/externals/dawn/src/dawn/native/Device.cpp:900)
+10-28 15:21:04.157 30823 30948 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: Adreno (TM) 740, Description: Qualcomm Technologies Inc. Adreno Vulkan Driver: Driver Build: 7b26bdd942, Iab69c31769, 1693222181
+10-28 15:21:04.157 30823 30948 I RNSkia  : Date: 08/28/23
+10-28 15:21:04.157 30823 30948 I RNSkia  : Compiler Version: E031.41.03.44
+10-28 15:21:04.157 30823 30948 I RNSkia  : Driver Branch: 
+10-28 15:21:04.157 30823 30948 I RNSkia  :  512.676.0
+10-28 15:21:04.158 30823 30948 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:04.158 30823 30948 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:04.158 30823 30948 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:04.158 30823 30948 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:04.158 30823 30948 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:04.158 30823 30948 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:04.158 30823 30948 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:04.158 30823 30948 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:04.173 30823 30948 I RNSkia  : React Native Skia replaced its lost GPU device.
+10-28 15:21:04.181 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:21:04.181 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:21:04.182 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:21:04.182 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb4000079237d6a80 mBlastBufferQueue=0xb40000792b053f00 fn= 502 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:21:04.197 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:04.197 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:04.197 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:04.197 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:04.197 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:04.197 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:04.197 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:04.197 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:04.197 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:04.197 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:04.197 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:04.197 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:04.198 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:04.198 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:04.221 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:04.221 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:04.221 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:04.221 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:04.221 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:04.221 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:04.221 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:04.221 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:04.221 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:04.221 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:04.221 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:04.221 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:04.221 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:04.221 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:04.222 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:04.222 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:04.222 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:04.222 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:04.247 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:04.247 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:04.247 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:04.247 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:04.247 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:04.247 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:04.247 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:04.248 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:04.248 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:04.248 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:04.248 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:04.248 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:04.248 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:04.248 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:04.248 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:04.248 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:04.248 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:04.248 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:04.248 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:04.248 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:04.248 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:04.248 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:04.248 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:04.248 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:04.248 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:04.248 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:04.248 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:04.248 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:04.248 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:04.248 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:04.249 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:04.249 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:04.249 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:04.249 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:04.250 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:04.250 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:05.705 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:05.708 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:05.709 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:05.717 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:07.675 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:07.678 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:07.679 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:07.686 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:09.688 30823 30860 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+10-28 15:21:09.688 30823 30860 I RNSkia  :  - While handling unexpected error type Internal when allowed errors are Validation.
+10-28 15:21:09.688 30823 30860 I RNSkia  :     at APIForceLoss (/home/runner/work/react-native-skia/react-native-skia/externals/skia/third_party/externals/dawn/src/dawn/native/Device.cpp:900)
+10-28 15:21:09.689 30823 30958 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: Adreno (TM) 740, Description: Qualcomm Technologies Inc. Adreno Vulkan Driver: Driver Build: 7b26bdd942, Iab69c31769, 1693222181
+10-28 15:21:09.689 30823 30958 I RNSkia  : Date: 08/28/23
+10-28 15:21:09.689 30823 30958 I RNSkia  : Compiler Version: E031.41.03.44
+10-28 15:21:09.689 30823 30958 I RNSkia  : Driver Branch: 
+10-28 15:21:09.689 30823 30958 I RNSkia  :  512.676.0
+10-28 15:21:09.690 30823 30958 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:09.690 30823 30958 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:09.690 30823 30958 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:09.690 30823 30958 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:09.690 30823 30958 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:09.690 30823 30958 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:09.690 30823 30958 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:09.690 30823 30958 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:09.711 30823 30958 I RNSkia  : React Native Skia replaced its lost GPU device.
+10-28 15:21:09.738 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:21:09.738 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:21:09.739 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:21:09.739 30823 30869 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb400007825b5d980 mBlastBufferQueue=0xb40000792b053f00 fn= 826 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:21:09.756 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:09.756 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:09.756 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:09.756 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:09.756 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:09.756 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:09.756 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:09.756 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:09.756 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:09.756 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:09.756 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:09.756 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:09.757 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:09.757 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:09.757 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:09.757 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:09.757 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:09.757 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:09.757 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:09.757 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:09.757 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:09.757 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:09.757 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:09.757 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:09.757 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:09.757 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:09.757 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:09.757 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:09.757 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:09.758 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:09.758 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:09.758 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:09.802 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:09.802 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:09.802 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:09.802 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:09.802 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:09.802 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:09.802 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:09.802 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:09.802 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:09.802 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:09.802 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:09.802 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:09.802 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:09.802 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:09.802 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:09.802 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:09.802 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:09.802 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:09.803 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:09.803 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:09.803 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:09.803 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:09.803 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:09.803 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:09.803 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:09.803 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:09.803 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:09.803 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:09.803 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:09.803 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:09.803 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:09.804 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:09.804 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:09.804 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:09.805 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:09.805 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:11.243 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:11.246 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:11.248 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:11.256 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:13.229 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:13.233 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:13.234 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:13.243 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:15.225 30823 30860 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+10-28 15:21:15.225 30823 30860 I RNSkia  :  - While handling unexpected error type Internal when allowed errors are Validation.
+10-28 15:21:15.225 30823 30860 I RNSkia  :     at APIForceLoss (/home/runner/work/react-native-skia/react-native-skia/externals/skia/third_party/externals/dawn/src/dawn/native/Device.cpp:900)
+10-28 15:21:15.225 30823 30964 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: Adreno (TM) 740, Description: Qualcomm Technologies Inc. Adreno Vulkan Driver: Driver Build: 7b26bdd942, Iab69c31769, 1693222181
+10-28 15:21:15.225 30823 30964 I RNSkia  : Date: 08/28/23
+10-28 15:21:15.225 30823 30964 I RNSkia  : Compiler Version: E031.41.03.44
+10-28 15:21:15.225 30823 30964 I RNSkia  : Driver Branch: 
+10-28 15:21:15.225 30823 30964 I RNSkia  :  512.676.0
+10-28 15:21:15.226 30823 30964 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:15.226 30823 30964 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:15.226 30823 30964 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:15.226 30823 30964 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:15.226 30823 30964 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:15.226 30823 30964 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:15.226 30823 30964 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:15.226 30823 30964 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:15.249 30823 30964 I RNSkia  : React Native Skia replaced its lost GPU device.
+10-28 15:21:15.265 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:21:15.265 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:21:15.266 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:21:15.266 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb40000782e471880 mBlastBufferQueue=0xb40000792b053f00 fn= 1148 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:21:15.288 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:15.288 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:15.288 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:15.288 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:15.288 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:15.288 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:15.288 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:15.288 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:15.288 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:15.288 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:15.288 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:15.288 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:15.288 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:15.288 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:15.326 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:15.326 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:15.326 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:15.326 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:15.326 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:15.327 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:15.327 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:15.327 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:15.327 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:15.327 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:15.327 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:15.327 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:15.327 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:15.327 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:15.327 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:15.328 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:15.328 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:15.328 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:15.333 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:15.333 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:15.333 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:15.333 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:15.333 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:15.333 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:15.333 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:15.333 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:15.333 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:15.333 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:15.333 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:15.333 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:15.333 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:15.333 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:15.333 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:15.333 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:15.333 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:15.333 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:15.333 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:15.333 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:15.333 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:15.334 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:15.334 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:15.334 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:15.334 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:15.334 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:15.334 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:15.334 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:15.334 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:15.334 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:15.334 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:15.335 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:15.335 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:15.335 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:15.336 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:15.336 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:16.782 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:16.784 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:16.785 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:16.796 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:18.736 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:18.740 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:18.742 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:18.750 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:20.765 30823 30860 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+10-28 15:21:20.765 30823 30860 I RNSkia  :  - While handling unexpected error type Internal when allowed errors are Validation.
+10-28 15:21:20.765 30823 30860 I RNSkia  :     at APIForceLoss (/home/runner/work/react-native-skia/react-native-skia/externals/skia/third_party/externals/dawn/src/dawn/native/Device.cpp:900)
+10-28 15:21:20.765 30823 30975 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: Adreno (TM) 740, Description: Qualcomm Technologies Inc. Adreno Vulkan Driver: Driver Build: 7b26bdd942, Iab69c31769, 1693222181
+10-28 15:21:20.765 30823 30975 I RNSkia  : Date: 08/28/23
+10-28 15:21:20.765 30823 30975 I RNSkia  : Compiler Version: E031.41.03.44
+10-28 15:21:20.765 30823 30975 I RNSkia  : Driver Branch: 
+10-28 15:21:20.765 30823 30975 I RNSkia  :  512.676.0
+10-28 15:21:20.766 30823 30975 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:20.766 30823 30975 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:20.766 30823 30975 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:20.766 30823 30975 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:20.766 30823 30975 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:20.766 30823 30975 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:20.766 30823 30975 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:20.766 30823 30975 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:20.784 30823 30975 I RNSkia  : React Native Skia replaced its lost GPU device.
+10-28 15:21:20.819 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:20.819 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:20.819 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:20.819 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:20.819 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:20.819 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:20.820 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:20.820 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:20.820 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:20.820 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:20.820 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:20.820 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:20.820 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:20.820 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:20.845 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:20.845 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:20.845 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:20.845 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:20.845 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:20.845 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:20.845 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:20.845 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:20.845 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:20.845 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:20.845 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:20.845 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:20.845 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:20.845 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:20.845 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:20.846 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:20.846 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:20.846 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:20.870 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:20.870 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:20.871 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:20.871 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:20.871 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:20.871 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:20.871 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:20.871 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:20.871 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:20.871 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:20.871 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:20.871 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:20.871 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:20.871 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:20.871 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:20.871 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:20.871 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:20.871 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:20.871 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:20.871 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:20.871 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:20.871 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:20.871 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:20.871 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:20.871 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:20.871 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:20.871 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:20.871 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:20.871 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:20.871 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:20.872 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:20.872 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:20.872 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:20.873 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:20.885 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:21:20.885 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:21:20.886 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:21:20.886 30823 30869 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb4000079237d6a80 mBlastBufferQueue=0xb40000792b053f00 fn= 1469 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:21:22.307 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:22.311 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:22.315 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:22.320 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:22.391 30823 30931 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:22.391 30823 30931 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:24.276 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:24.280 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:24.282 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:24.290 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:26.316 30823 30860 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+10-28 15:21:26.316 30823 30860 I RNSkia  :  - While handling unexpected error type Internal when allowed errors are Validation.
+10-28 15:21:26.316 30823 30860 I RNSkia  :     at APIForceLoss (/home/runner/work/react-native-skia/react-native-skia/externals/skia/third_party/externals/dawn/src/dawn/native/Device.cpp:900)
+10-28 15:21:26.318 30823 30987 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: Adreno (TM) 740, Description: Qualcomm Technologies Inc. Adreno Vulkan Driver: Driver Build: 7b26bdd942, Iab69c31769, 1693222181
+10-28 15:21:26.318 30823 30987 I RNSkia  : Date: 08/28/23
+10-28 15:21:26.318 30823 30987 I RNSkia  : Compiler Version: E031.41.03.44
+10-28 15:21:26.318 30823 30987 I RNSkia  : Driver Branch: 
+10-28 15:21:26.318 30823 30987 I RNSkia  :  512.676.0
+10-28 15:21:26.318 30823 30987 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:26.318 30823 30987 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:26.318 30823 30987 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:26.318 30823 30987 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:26.318 30823 30987 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:26.318 30823 30987 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:26.318 30823 30987 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:26.318 30823 30987 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:26.335 30823 30987 I RNSkia  : React Native Skia replaced its lost GPU device.
+10-28 15:21:26.367 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:26.367 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:26.367 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:26.367 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:26.367 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:26.367 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:26.367 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:26.368 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:26.368 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:26.368 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:26.368 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:26.368 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:26.368 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:26.368 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:26.389 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:26.389 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:26.389 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:26.389 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:26.389 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:26.389 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:26.389 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:26.389 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:26.389 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:26.389 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:26.389 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:26.389 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:26.390 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:26.390 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:26.390 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:26.390 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:26.391 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:26.391 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:26.415 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:26.415 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:26.415 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:26.415 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:26.415 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:26.415 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:26.415 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:26.415 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:26.415 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:26.415 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:26.415 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:26.415 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:26.415 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:26.415 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:26.415 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:26.415 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:26.415 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:26.415 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:26.415 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:26.415 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:26.415 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:26.415 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:26.415 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:26.415 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:26.415 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:26.415 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:26.415 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:26.415 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:26.416 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:26.416 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:26.416 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:26.416 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:26.417 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:26.417 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:26.431 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:21:26.432 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:21:26.432 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:21:26.432 30823 30868 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb40000782f60df00 mBlastBufferQueue=0xb40000792b053f00 fn= 1790 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:21:27.864 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:27.868 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:27.869 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:27.876 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:29.884 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:29.888 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:29.890 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:29.896 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:29.902 30823 30931 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:29.902 30823 30931 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:31.867 30823 30860 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+10-28 15:21:31.867 30823 30860 I RNSkia  :  - While handling unexpected error type Internal when allowed errors are Validation.
+10-28 15:21:31.867 30823 30860 I RNSkia  :     at APIForceLoss (/home/runner/work/react-native-skia/react-native-skia/externals/skia/third_party/externals/dawn/src/dawn/native/Device.cpp:900)
+10-28 15:21:31.868 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:31.868 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:31.868 30823 30998 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: Adreno (TM) 740, Description: Qualcomm Technologies Inc. Adreno Vulkan Driver: Driver Build: 7b26bdd942, Iab69c31769, 1693222181
+10-28 15:21:31.868 30823 30998 I RNSkia  : Date: 08/28/23
+10-28 15:21:31.868 30823 30998 I RNSkia  : Compiler Version: E031.41.03.44
+10-28 15:21:31.868 30823 30998 I RNSkia  : Driver Branch: 
+10-28 15:21:31.868 30823 30998 I RNSkia  :  512.676.0
+10-28 15:21:31.869 30823 30998 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:31.869 30823 30998 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:31.869 30823 30998 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:31.869 30823 30998 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:31.869 30823 30998 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:31.869 30823 30998 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:31.870 30823 30998 I AdrenoVK-0: Unknown struct with type 0x3b9ff250 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:31.870 30823 30998 I AdrenoVK-0: Unknown struct with type 0x3ba17508 provided to vkGetPhysicalDeviceFeatures2
+10-28 15:21:31.894 30823 30998 I RNSkia  : React Native Skia replaced its lost GPU device.
+10-28 15:21:31.913 30823 30823 I BLASTBufferQueue_Java: update, w= 1080 h= 2340 mName = ViewRootImpl@1dea7b8[ComponentActivity] mNativeObject= 0xb40000792b053f00 sc.mNativeObject= 0xb400007825b5f780 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3017 android.view.ViewRootImpl.relayoutWindow:10131 android.view.ViewRootImpl.performTraversals:4110 android.view.ViewRootImpl.doTraversal:3288 android.view.ViewRootImpl$TraversalRunnable.run:11344 android.view.Choreographer$CallbackRecord.run:1689 
+10-28 15:21:31.913 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=true req=(1080,2340)0 dur=0 res=0x0 s={true 0xb4000078c027e800} ch=false seqId=2
+10-28 15:21:31.914 30823 30823 I ViewRootImpl@1dea7b8[ComponentActivity]: registerCallbackForPendingTransactions
+10-28 15:21:31.914 30823 30869 I ViewRootImpl@1dea7b8[ComponentActivity]: mWNT: t=0xb4000078260cfd80 mBlastBufferQueue=0xb40000792b053f00 fn= 2112 mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$6.onFrameDraw:5635 android.view.ViewRootImpl$2.onFrameDraw:2146 android.view.ThreadedRenderer$1.onFrameDraw:792 
+10-28 15:21:31.930 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:31.930 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:31.930 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:31.930 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:31.930 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:31.931 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:31.931 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:31.931 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:31.931 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:31.931 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:31.931 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:31.931 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:31.931 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:31.931 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:31.951 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:31.951 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:31.951 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:31.951 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:31.951 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:31.952 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:31.952 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:31.952 30823 30896 E qdgralloc: GetGpuPixelFormat: No map for format: 0x3b
+10-28 15:21:31.952 30823 30896 E AdrenoUtils: <validate_memory_layout_input_parmas:2358>: Unknown Format 0
+10-28 15:21:31.952 30823 30896 E AdrenoUtils: <adreno_init_memory_layout:4845>: Memory Layout input parameter validation failed!
+10-28 15:21:31.952 30823 30896 W qdgralloc: GetGpuResourceSizeAndDimensions Graphics metadata init failed
+10-28 15:21:31.952 30823 30896 E Gralloc4: isSupported(1, 1, 59, 1, ...) failed with 7
+10-28 15:21:31.952 30823 30896 E GraphicBufferAllocator: Failed to allocate (4 x 4) layerCount 1 format 59 usage 300: 7
+10-28 15:21:31.952 30823 30896 E AHardwareBuffer: GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -7), handle=0x0
+10-28 15:21:31.952 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:31.953 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:31.953 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:31.953 30823 30896 W qdgralloc: getInterlacedFlag: getMetaData returned 3, defaulting to interlaced_flag = 0
+10-28 15:21:31.977 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:31.977 30823 30896 E skia    : [skia] Buffer async map failed with status Aborted, message '[Device] is lost.'.
+10-28 15:21:33.420 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:33.424 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:33.425 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:33.459 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2
+10-28 15:21:35.438 30823 30854 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-28 15:21:35.443 30823 30854 E FrameEvents: updateAcquireFence: Did not find frame.
+10-28 15:21:35.444 30823 30854 D OpenGLRenderer: CFMS:: SetUp Pid : 30823    Tid : 30854
+10-28 15:21:35.468 30823 30860 I AdrenoVK-0: Unknown struct with type 0x3b9d0838 provided to vkGetPhysicalDeviceImageFormatProperties2

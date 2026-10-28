@@ -1,0 +1,23 @@
+diff --git a/packages/skia/src/renderer/__tests__/setup.tsx b/packages/skia/src/renderer/__tests__/setup.tsx
+--- a/packages/skia/src/renderer/__tests__/setup.tsx
++++ b/packages/skia/src/renderer/__tests__/setup.tsx
+@@ -492,8 +492,17 @@
+     return this.handleImageResponse(await serialize(node));
+   }
+ 
+-  screen(screen: string) {
+-    return this.handleImageResponse(JSON.stringify({ screen }));
++  async screen(screen: string) {
++    const image = await this.handleImageResponse<SkImage>(
++      JSON.stringify({ screen })
++    );
++    const directory = process.env.E2E_SCREEN_DIR;
++    if (directory) {
++      fs.mkdirSync(directory, { recursive: true });
++      const taken = fs.readdirSync(directory).length + 1;
++      fs.writeFileSync(path.join(directory, `${String(taken).padStart(3, "0")}-${screen}.png`), image.encodeToBytes());
++    }
++    return image;
+   }
+ 
+   private get client() {

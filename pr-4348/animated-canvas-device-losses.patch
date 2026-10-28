@@ -1,0 +1,142 @@
+From 2fb933f033e1e8c5c488b46787c32d6a1160e410 Mon Sep 17 00:00:00 2001
+From: Yevhenii <evgeny.kotyrlo@gmail.com>
+Date: Wed, 28 Oct 2026 14:42:09 +0200
+Subject: [PATCH] =?UTF-8?q?test(=F0=9F=A7=AA):=20a=20canvas=20animating=20?=
+ =?UTF-8?q?through=20device=20losses=20keeps=20drawing?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../src/Tests/Screens/AnimatedCanvas.tsx      | 27 ++++++++
+ apps/example/src/Tests/Screens/index.ts       |  2 +
+ .../__tests__/e2e/ProducerDeviceLoss.spec.tsx | 64 +++++++++++++++++++
+ 3 files changed, 93 insertions(+)
+ create mode 100644 apps/example/src/Tests/Screens/AnimatedCanvas.tsx
+ create mode 100644 packages/skia/src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx
+
+diff --git a/apps/example/src/Tests/Screens/AnimatedCanvas.tsx b/apps/example/src/Tests/Screens/AnimatedCanvas.tsx
+new file mode 100644
+index 000000000..af72af735
+--- /dev/null
++++ b/apps/example/src/Tests/Screens/AnimatedCanvas.tsx
+@@ -0,0 +1,27 @@
++import React from "react";
++import { Canvas, Fill, Rect } from "react-native-skia";
++import {
++  useDerivedValue,
++  useFrameCallback,
++  useSharedValue,
++} from "react-native-reanimated";
++
++// The time a cyan square takes to cross the canvas: not a whole number of
++// seconds, so two snapshots taken whole seconds apart still find it moved.
++const PASS_MS = 1370;
++
++// A canvas whose content changes on every UI frame: a cyan square crossing a
++// red canvas.
++export const AnimatedCanvas = () => {
++  const time = useSharedValue(0);
++  useFrameCallback((frame) => {
++    time.value = frame.timeSinceFirstFrame;
++  });
++  const x = useDerivedValue(() => ((time.value % PASS_MS) / PASS_MS) * 600);
++  return (
++    <Canvas style={{ flex: 1 }}>
++      <Fill color="red" />
++      <Rect x={x} y={0} width={120} height={120} color="cyan" />
++    </Canvas>
++  );
++};
+diff --git a/apps/example/src/Tests/Screens/index.ts b/apps/example/src/Tests/Screens/index.ts
+index 1755b1998..3e36b4031 100644
+--- a/apps/example/src/Tests/Screens/index.ts
++++ b/apps/example/src/Tests/Screens/index.ts
+@@ -1,5 +1,6 @@
+ import type { FC } from "react";
+ 
++import { AnimatedCanvas } from "./AnimatedCanvas";
+ import { GraphiteView, GraphiteViewTransform } from "./GraphiteView";
+ import { IsOnMainThread } from "./IsOnMainThread";
+ import { OnLayout } from "./OnLayout";
+@@ -8,6 +9,7 @@ import { SharedImage } from "./SharedImage";
+ import { SharedValueReads } from "./SharedValueReads";
+ 
+ export const Screens: Record<string, FC> = {
++  AnimatedCanvas,
+   GraphiteView,
+   GraphiteViewTransform,
+   IsOnMainThread,
+diff --git a/packages/skia/src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx b/packages/skia/src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx
+new file mode 100644
+index 000000000..ba9747736
+--- /dev/null
++++ b/packages/skia/src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx
+@@ -0,0 +1,64 @@
++import { itRunsE2eOnly } from "../../../__tests__/setup";
++import { AlphaType, ColorType } from "../../../skia/types";
++import type { SkImage } from "../../../skia/types";
++import { surface, wait } from "../setup";
++
++// Whether two recordings are in flight when the device goes is a matter of
++// timing, so the device is lost several times while the canvas animates.
++const LOSSES = 10;
++// A device lost within five seconds of its creation counts as a replacement
++// that did not take, and the next replacement waits longer (DawnContext's
++// kShortLived), so each loss comes after that.
++const SETTLE_MS = 5500;
++
++const readAllPixels = (image: SkImage) => {
++  const pixels = image.readPixels(0, 0, {
++    width: image.width(),
++    height: image.height(),
++    colorType: ColorType.RGBA_8888,
++    alphaType: AlphaType.Unpremul,
++  });
++  if (pixels === null) {
++    throw new Error("The snapshot has no readable pixels");
++  }
++  return pixels;
++};
++
++const differ = (a: SkImage, b: SkImage) => {
++  const first = readAllPixels(a);
++  const second = readAllPixels(b);
++  return (
++    first.length !== second.length ||
++    first.some((channel, index) => channel !== second[index])
++  );
++};
++
++describe("A canvas animating through GPU device losses", () => {
++  itRunsE2eOnly(
++    "keeps drawing on each device that replaced a lost one",
++    async () => {
++      await surface.screen("AnimatedCanvas");
++      for (let loss = 1; loss <= LOSSES; loss++) {
++        const replaced = await surface.eval(
++          (Skia, ctx) => {
++            const { lost } = Skia.gpu;
++            ctx.forceGpuDeviceLoss();
++            return lost.then(() => Skia.gpu.isAvailable);
++          },
++          {} as { forceGpuDeviceLoss: () => void }
++        );
++        expect(replaced).toBe(true);
++        const replacedAt = Date.now();
++        // The screen is requested again without being mounted again.
++        const before = await surface.screen("AnimatedCanvas");
++        await wait(300);
++        const after = await surface.screen("AnimatedCanvas");
++        expect({ loss, moved: differ(before, after) }).toEqual({
++          loss,
++          moved: true,
++        });
++        await wait(Math.max(0, replacedAt + SETTLE_MS - Date.now()));
++      }
++    }
++  );
++});
+-- 
+2.56.0.windows.2
+

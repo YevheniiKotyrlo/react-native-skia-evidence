@@ -1,0 +1,38 @@
+
+
+Test server listening on port 4250 (waiting for the example app to open on E2E tests screen)
+android device connected
+(node:82804) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx (46.12 s)
+  A canvas animating through GPU device losses
+    × keeps drawing on each device that replaced a lost one (45192 ms)
+
+  ● A canvas animating through GPU device losses › keeps drawing on each device that replaced a lost one
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+        "loss": 8,
+    -   "moved": true,
+    +   "moved": false,
+      }
+
+    [0m [90m 54 |[39m         [36mawait[39m wait([35m300[39m)[33m;[39m
+     [90m 55 |[39m         [36mconst[39m after [33m=[39m [36mawait[39m surface[33m.[39mscreen([32m"AnimatedCanvas"[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 56 |[39m         expect({ loss[33m,[39m moved[33m:[39m differ(before[33m,[39m after) })[33m.[39mtoEqual({
+     [90m    |[39m                                                        [31m[1m^[22m[39m
+     [90m 57 |[39m           loss[33m,[39m
+     [90m 58 |[39m           moved[33m:[39m [36mtrue[39m[33m,[39m
+     [90m 59 |[39m         })[33m;[39m[0m
+
+      at Object.<anonymous> (src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx:56:56)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        46.172 s
+Ran all test suites matching src/renderer/__tests__/e2e/ProducerDeviceLoss.spec.tsx.
