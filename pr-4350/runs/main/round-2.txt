@@ -1,0 +1,23 @@
+2323055.415 ticks view=0x118e24000 84 in 1.001 s preferredMax=120
+2323056.416 ticks view=0x118e24000 120 in 1.001 s preferredMax=120
+2323057.417 ticks view=0x118e24000 120 in 1.001 s preferredMax=120
+2323058.417 ticks view=0x118e24000 120 in 1.001 s preferredMax=120
+2323059.418 ticks view=0x118e24000 120 in 1.001 s preferredMax=120
+2323059.880 stop view=0x118e24000
+2323065.892 stop view=0x118e24000
+2323065.896 stop view=0x118e24000
+2323067.907 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323068.907 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323069.908 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323070.909 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323071.909 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323072.909 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323073.910 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323074.910 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323075.911 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323076.913 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323077.913 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323078.913 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323079.913 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323080.916 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
+2323081.916 ticks view=0x118e24000 120 in 1.001 s preferredMax=0
