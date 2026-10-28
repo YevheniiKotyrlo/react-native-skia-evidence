@@ -1,0 +1,44 @@
+# RedMagic NX809J · Android 16, main feee40afc, run 1
+
+## dumpsys meminfo, EGL mtrack at each marker
+
+0-none-after: EGL mtrack 25704 kB
+0-none-before: EGL mtrack 12852 kB
+0-none-reduced: EGL mtrack 25704 kB
+1-canvas-after: EGL mtrack 79464 kB
+1-canvas-before: EGL mtrack 6426 kB
+1-canvas-reduced: EGL mtrack 25704 kB
+2-canvas-blur-after: EGL mtrack 79464 kB
+2-canvas-blur-before: EGL mtrack 6426 kB
+2-canvas-blur-reduced: EGL mtrack 25704 kB
+3-none-after: EGL mtrack 25704 kB
+3-none-before: EGL mtrack 6426 kB
+3-none-reduced: EGL mtrack 25704 kB
+
+## The bench's log lines and the release rounds (seconds since boot)
+
+213006.766 BENCH memory-unmounted arm=0-none-before pass=0 jsNow=213006766.6
+213070.762 BENCH cycles arm=0-none cycles=100 durationMs=60986 jsNow=213070762.2
+213078.769 BENCH memory-unmounted arm=0-none-after pass=0 jsNow=213078769.4
+213081.777 BENCH dawn arm=0-none phase=held {"rounds":0,"total":72108,"textures":0,"buffers":72108,"allocatorUsed":72192,"allocatorAllocated":8454144,"contextBudgeted":72100,"contextPurgeable":0} jsNow=213081777.6
+213081.777 BENCH dawn arm=0-none phase=reduced {"rounds":0,"total":72108,"textures":0,"buffers":72108,"allocatorUsed":72192,"allocatorAllocated":8454144,"contextBudgeted":72100,"contextPurgeable":0} jsNow=213081777.8
+213081.777 BENCH memory-unmounted arm=0-none-reduced pass=0 jsNow=213081777.8
+213097.791 BENCH memory-unmounted arm=1-canvas-before pass=0 jsNow=213097791.3
+213162.310 BENCH cycles arm=1-canvas cycles=100 durationMs=61510 jsNow=213162310.9
+213170.315 BENCH memory-unmounted arm=1-canvas-after pass=0 jsNow=213170315.5
+213173.325 BENCH dawn arm=1-canvas phase=held {"rounds":0,"total":139724,"textures":67600,"buffers":72124,"allocatorUsed":4935360,"allocatorAllocated":21513152,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=213173325.2
+213173.372 BENCH dawn arm=1-canvas phase=reduced {"rounds":1,"total":139724,"textures":67600,"buffers":72124,"allocatorUsed":264960,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=213173372.5
+213173.372 BENCH memory-unmounted arm=1-canvas-reduced pass=0 jsNow=213173372.5
+213189.388 BENCH memory-unmounted arm=2-canvas-blur-before pass=0 jsNow=213189388.8
+213253.904 BENCH cycles arm=2-canvas-blur cycles=100 durationMs=61505 jsNow=213253904.6
+213261.908 BENCH memory-unmounted arm=2-canvas-blur-after pass=0 jsNow=213261908.5
+213264.917 BENCH dawn arm=2-canvas-blur phase=held {"rounds":0,"total":139724,"textures":67600,"buffers":72124,"allocatorUsed":6218816,"allocatorAllocated":22296896,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=213264917.4
+213264.969 BENCH dawn arm=2-canvas-blur phase=reduced {"rounds":1,"total":139724,"textures":67600,"buffers":72124,"allocatorUsed":322304,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=213264969.2
+213264.969 BENCH memory-unmounted arm=2-canvas-blur-reduced pass=0 jsNow=213264969.2
+213280.989 BENCH memory-unmounted arm=3-none-before pass=0 jsNow=213280989.2
+213345.507 BENCH cycles arm=3-none cycles=100 durationMs=61510 jsNow=213345507.4
+213353.511 BENCH memory-unmounted arm=3-none-after pass=0 jsNow=213353511.8
+213356.520 BENCH dawn arm=3-none phase=held {"rounds":0,"total":72124,"textures":0,"buffers":72124,"allocatorUsed":322304,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=213356520.7
+213356.548 BENCH dawn arm=3-none phase=reduced {"rounds":1,"total":72124,"textures":0,"buffers":72124,"allocatorUsed":207616,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=213356548.6
+213356.548 BENCH memory-unmounted arm=3-none-reduced pass=0 jsNow=213356548.6
+213364.551 BENCH done cycles=100 jsNow=213364551.3
