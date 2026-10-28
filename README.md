@@ -6,6 +6,7 @@ Builds, steps and device readings behind my pull requests to [wcandillon/react-n
 | --- | --- |
 | [#4086](https://github.com/wcandillon/react-native-skia/pull/4086): `onSize` from the canvas's layout event | [pr-4086](pr-4086/README.md) |
 | [#4102](https://github.com/wcandillon/react-native-skia/pull/4102): the `SurfaceView` frame-rate vote | [pr-4102](pr-4102/README.md) |
+| [#4253](https://github.com/wcandillon/react-native-skia/pull/4253): a canvas's replays paced by its presents, and a present held for the GPU | [pr-4253](pr-4253/README.md) |
 | [#4324](https://github.com/wcandillon/react-native-skia/pull/4324): a view's native view kept out of its superview | [pr-4324](pr-4324/README.md) |
 | [#4328](https://github.com/wcandillon/react-native-skia/pull/4328): `SkiaImageView` and `<Canvas static>`, presented from one bitmap per image | [pr-4328](pr-4328/README.md) |
 

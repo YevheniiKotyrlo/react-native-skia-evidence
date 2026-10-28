@@ -1,0 +1,63 @@
+diff --git a/packages/skia/cpp/rnskia/RNSkWindowSurface.cpp b/packages/skia/cpp/rnskia/RNSkWindowSurface.cpp
+index 0334f84..cadc4d7 100644
+--- a/packages/skia/cpp/rnskia/RNSkWindowSurface.cpp
++++ b/packages/skia/cpp/rnskia/RNSkWindowSurface.cpp
+@@ -10,6 +10,12 @@
+ #include "RNMetalLayerColorSpace.h"
+ #include "utils/RNSkLog.h"
+ 
++#include <chrono>
++#include <cstdint>
++#include <cstdio>
++#include <string>
++#include <unordered_map>
++
+ #ifdef __APPLE__
+ #include "dawn/native/MetalBackend.h"
+ #endif
+@@ -27,6 +33,37 @@
+ 
+ namespace RNSkia {
+ 
++namespace {
++struct ProbeWindow {
++  std::chrono::steady_clock::time_point start{};
++  int presents = 0;
++};
++
++// Apple views present on the main thread.
++void recordProbePresent(const void *surface) {
++  static std::unordered_map<const void *, ProbeWindow> windows;
++  const auto now = std::chrono::steady_clock::now();
++  auto &window = windows[surface];
++  if (window.start.time_since_epoch().count() == 0) {
++    window.start = now;
++  }
++  window.presents += 1;
++  const double elapsed =
++      std::chrono::duration<double>(now - window.start).count();
++  if (elapsed >= 1.0) {
++    char line[160];
++    snprintf(line, sizeof(line),
++             "SkiaProbe view=%zu window_s=%.3f presents=%d presents_per_s=%.1f",
++             static_cast<size_t>(reinterpret_cast<uintptr_t>(surface)), elapsed,
++             window.presents, window.presents / elapsed);
++    RNSkLogger::logToConsole(std::string(line));
++    window.start = now;
++    window.presents = 0;
++  }
++}
++} // namespace
++
++
+ namespace {
+ 
+ // The windows alive, so that every surface made on a lost GPU device can be
+@@ -341,6 +378,7 @@ bool RNSkWindowSurface::canPresentLocked() {
+ 
+ void RNSkWindowSurface::presentNowLocked() {
+   _surface.Present();
++  recordProbePresent(this);
+   _framesPresented++;
+ }
+ 
