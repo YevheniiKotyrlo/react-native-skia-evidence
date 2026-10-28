@@ -1,0 +1,104 @@
+signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x40000000400
+#00 0000000000c84da0 __aarch64_ldadd4_acq_rel
+#01 000000000076a774 SkAAClip::~SkAAClip()
+#02 00000000007c16b4 SkRasterClip::~SkRasterClip()
+#03 000000000075d0e8 SkBitmapDevice::popClipStack()
+#04 000000000074f210 SkCanvas::internalRestore()
+#05 000000000074ed20 SkCanvas::restoreToCount(int)
+#06 000000000071094c SkSVGRenderContext::~SkSVGRenderContext()
+#07 000000000070bb88 SkSVGNode::render(SkSVGRenderContext const&) const
+#08 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#09 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#10 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#11 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#12 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#13 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#14 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#15 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#16 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#17 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#18 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#19 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#20 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#21 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#22 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#23 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#24 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#25 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#26 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#27 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#28 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#29 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#30 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#31 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#32 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#33 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#34 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#35 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#36 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#37 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#38 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#39 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#40 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#41 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#42 00000000007178a8 SkSVGUse::onRender(SkSVGRenderContext const&) const
+#43 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#44 00000000006f8820 SkSVGContainer::onRender(SkSVGRenderContext const&) const
+#45 000000000070bb80 SkSVGNode::render(SkSVGRenderContext const&) const
+#46 00000000006f643c SkSVGDOM::render(SkCanvas*) const
+#47 0000000000583ae0 RNSkia::JsiSkCanvas::drawSvg(sk_sp<SkSVGDOM>, RNSkia::JsiOptional<double>, RNSkia::JsiOptional<double>)
+#48 000000000058ceb0 facebook::jsi::Value RNJsi::NativeObject<RNSkia::JsiSkCanvas>::callMethod<void, sk_sp<SkSVGDOM>, RNSkia::JsiOptional<double>, RNSkia::JsiOptional<double>, 0ul, 1ul, 2ul>(RNSkia::JsiSkCanvas*, void (RNSkia::JsiSkCanvas::*)(sk_sp<SkSVGDOM>, RNSkia::JsiOptional<double>, RNSkia::JsiOptional<double>), facebook::jsi::Runtime&, facebook::jsi::Value const*, std::__ndk1::integer_sequence<unsigned long, 0ul, 1ul, 2ul>, unsigned long)
+#49 000000000058cd34 std::__ndk1::__function::__func<void RNJsi::NativeObject<RNSkia::JsiSkCanvas>::installMethod<void, sk_sp<SkSVGDOM>, RNSkia::JsiOptional<double>, RNSkia::JsiOptional<double>>(facebook::jsi::Runtime&, facebook::jsi::Object&, char const*, void (RNSkia::JsiSkCanvas::*)(sk_sp<SkSVGDOM>, RNSkia::JsiOptional<double>, RNSkia::JsiOptional<double>))::'lambda'(facebook::jsi::Runtime&, facebook::jsi::Value const&, facebook::jsi::Value const*, unsigned long), std::__ndk1::allocator<void RNJsi::NativeObject<RNSkia::JsiSkCanvas>::installMethod<void, sk_sp<SkSVGDOM>, RNSkia::JsiOptional<double>, RNSkia::JsiOptional<double>>(facebook::jsi::Runtime&, facebook::jsi::Object&, char const*, void (RNSkia::JsiSkCanvas::*)(sk_sp<SkSVGDOM>, RNSkia::JsiOptional<double>, RNSkia::JsiOptional<double>))::'lambda'(facebook::jsi::Runtime&, facebook::jsi::Value const&, facebook::jsi::Value const*, unsigned long)>, facebook::jsi::Value (facebook::jsi::Runtime&, facebook::jsi::Value const&, facebook::jsi::Value const*, unsigned long)>::operator()(facebook::jsi::Runtime&, facebook::jsi::Value const&, facebook::jsi::Value const*&&, unsigned long&&)
+#50 00000000000abe48 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#51 00000000000abb84 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#52 00000000000b4370 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#53 00000000000c6758 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#54 00000000000c60b8 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#55 00000000000b4428 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#56 00000000000b29b8 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#57 00000000000f7ac4 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#58 00000000000a0ebc /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libhermesvm.so (offset 0x744000) (BuildId: 5ecc060199caaf24c191abad40cb4d0af7fb15d6)
+#59 00000000004568b8 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libreactnative.so (offset 0xf8c000) (facebook::react::RuntimeScheduler_Modern::performMicrotaskCheckpoint(facebook::jsi::Runtime&)+88) (BuildId: 691b347289c731b84861047df2aaafbd84f47080)
+#60 0000000000456790 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libreactnative.so (offset 0xf8c000) (facebook::react::RuntimeScheduler_Modern::runEventLoopTick(facebook::jsi::Runtime&, facebook::react::Task&)+136) (BuildId: 691b347289c731b84861047df2aaafbd84f47080)
+#61 0000000000456494 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libreactnative.so (offset 0xf8c000) (facebook::react::RuntimeScheduler_Modern::runEventLoop(facebook::jsi::Runtime&)+88) (BuildId: 691b347289c731b84861047df2aaafbd84f47080)
+#62 00000000002869c4 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libreactnative.so (offset 0xf8c000) (BuildId: 691b347289c731b84861047df2aaafbd84f47080)
+#63 000000000049671c /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libreactnative.so (offset 0xf8c000) (BuildId: 691b347289c731b84861047df2aaafbd84f47080)
+#64 0000000000017dd0 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libfbjni.so (offset 0x6e8000) (_ZN8facebook3jni6detail13MethodWrapperIMNS0_15JNativeRunnableEFvvEXadL_ZNS3_3runEvEES3_vJEE8dispatchENS0_9alias_refIPNS1_8JTypeForINS0_11HybridClassIS3_NS0_9JRunnableEE8JavaPartESA_vE11_javaobjectEEE+72) (BuildId: e438f6554af1d86b210a05412e96c4251e570157)
+#65 0000000000017d10 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/base.apk!libfbjni.so (offset 0x6e8000) (_ZN8facebook3jni6detail15FunctionWrapperIPFvNS0_9alias_refIPNS1_8JTypeForINS0_11HybridClassINS0_15JNativeRunnableENS0_9JRunnableEE8JavaPartES7_vE11_javaobjectEEEESC_vJEE4callEP7_JNIEnvP8_jobjectSF_+60) (BuildId: e438f6554af1d86b210a05412e96c4251e570157)
+#66 000000000003b1bc /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/oat/arm64/base.odex (art_jni_trampoline+124)
+#67 000000000168e93c /system/framework/arm64/boot-framework.oat (android.os.Handler.dispatchMessage+76) (BuildId: 6634c446b859e3deacfadf7cef8ae6e926e50402)
+#68 0000000000137334 /apex/com.android.runtime/lib64/libart.so (art_quick_invoke_stub+548) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#69 0000000000145fec /apex/com.android.runtime/lib64/libart.so (art::ArtMethod::Invoke(art::Thread*, unsigned int*, unsigned int, art::JValue*, char const*)+244) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#70 00000000002e37d0 /apex/com.android.runtime/lib64/libart.so (art::interpreter::ArtInterpreterToCompiledCodeBridge(art::Thread*, art::ArtMethod*, art::ShadowFrame*, unsigned short, art::JValue*)+384) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#71 00000000002dea30 /apex/com.android.runtime/lib64/libart.so (bool art::interpreter::DoCall<false, false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, art::JValue*)+892) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#72 00000000005a1c10 /apex/com.android.runtime/lib64/libart.so (MterpInvokeSuper+1564) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#73 0000000000131894 /apex/com.android.runtime/lib64/libart.so (mterp_op_invoke_super+20) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#74 00000000003dfe5a /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/oat/arm64/base.vdex (com.facebook.react.bridge.queue.MessageQueueThreadHandler.dispatchMessage+10)
+#75 00000000002b4ae4 /apex/com.android.runtime/lib64/libart.so (_ZN3art11interpreterL7ExecuteEPNS_6ThreadERKNS_20CodeItemDataAccessorERNS_11ShadowFrameENS_6JValueEbb.llvm.17460956533834400288+240) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#76 000000000059250c /apex/com.android.runtime/lib64/libart.so (artQuickToInterpreterBridge+1032) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#77 0000000000140468 /apex/com.android.runtime/lib64/libart.so (art_quick_to_interpreter_bridge+88) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#78 0000000001697e04 /system/framework/arm64/boot-framework.oat (android.os.Looper.loop+1540) (BuildId: 6634c446b859e3deacfadf7cef8ae6e926e50402)
+#79 00000000001375b8 /apex/com.android.runtime/lib64/libart.so (art_quick_invoke_static_stub+568) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#80 000000000014600c /apex/com.android.runtime/lib64/libart.so (art::ArtMethod::Invoke(art::Thread*, unsigned int*, unsigned int, art::JValue*, char const*)+276) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#81 00000000002e37d0 /apex/com.android.runtime/lib64/libart.so (art::interpreter::ArtInterpreterToCompiledCodeBridge(art::Thread*, art::ArtMethod*, art::ShadowFrame*, unsigned short, art::JValue*)+384) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#82 00000000002dea30 /apex/com.android.runtime/lib64/libart.so (bool art::interpreter::DoCall<false, false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, art::JValue*)+892) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#83 00000000005a3a78 /apex/com.android.runtime/lib64/libart.so (MterpInvokeStatic+372) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#84 0000000000131994 /apex/com.android.runtime/lib64/libart.so (mterp_op_invoke_static+20) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#85 00000000003e0104 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/oat/arm64/base.vdex (com.facebook.react.bridge.queue.MessageQueueThreadImpl$Companion.startNewBackgroundThread$lambda$0+28)
+#86 00000000005a3d14 /apex/com.android.runtime/lib64/libart.so (MterpInvokeStatic+1040) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#87 0000000000131994 /apex/com.android.runtime/lib64/libart.so (mterp_op_invoke_static+20) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#88 00000000003e00a0 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/oat/arm64/base.vdex (com.facebook.react.bridge.queue.MessageQueueThreadImpl$Companion.$r8$lambda$YYXYCFexeoKtAeDpeNYkxZZlpbA)
+#89 00000000005a3d14 /apex/com.android.runtime/lib64/libart.so (MterpInvokeStatic+1040) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#90 0000000000131994 /apex/com.android.runtime/lib64/libart.so (mterp_op_invoke_static+20) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#91 00000000003dfef0 /data/app/com.reactnativeskia.example-TLHH_dg5CHzk1BUsFbcuyw==/oat/arm64/base.vdex (com.facebook.react.bridge.queue.MessageQueueThreadImpl$Companion$$ExternalSyntheticLambda0.run+4)
+#92 00000000002b4ae4 /apex/com.android.runtime/lib64/libart.so (_ZN3art11interpreterL7ExecuteEPNS_6ThreadERKNS_20CodeItemDataAccessorERNS_11ShadowFrameENS_6JValueEbb.llvm.17460956533834400288+240) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#93 000000000059250c /apex/com.android.runtime/lib64/libart.so (artQuickToInterpreterBridge+1032) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#94 0000000000140468 /apex/com.android.runtime/lib64/libart.so (art_quick_to_interpreter_bridge+88) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#95 00000000004afbd8 /system/framework/arm64/boot.oat (java.lang.Thread.run+72) (BuildId: e01ec1610790816985769350d00876306ac89d55)
+#96 0000000000137334 /apex/com.android.runtime/lib64/libart.so (art_quick_invoke_stub+548) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#97 0000000000145fec /apex/com.android.runtime/lib64/libart.so (art::ArtMethod::Invoke(art::Thread*, unsigned int*, unsigned int, art::JValue*, char const*)+244) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#98 00000000004b0f10 /apex/com.android.runtime/lib64/libart.so (art::(anonymous namespace)::InvokeWithArgArray(art::ScopedObjectAccessAlreadyRunnable const&, art::ArtMethod*, art::(anonymous namespace)::ArgArray*, art::JValue*, char const*)+104) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#99 00000000004b2024 /apex/com.android.runtime/lib64/libart.so (art::InvokeVirtualOrInterfaceWithJValues(art::ScopedObjectAccessAlreadyRunnable const&, _jobject*, _jmethodID*, jvalue const*)+416) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#100 00000000004f29e0 /apex/com.android.runtime/lib64/libart.so (art::Thread::CreateCallback(void*)+1176) (BuildId: 03574df7f7eb01baf6baa6348024974c)
+#101 00000000000d7110 /apex/com.android.runtime/lib64/bionic/libc.so (__pthread_start(void*)+36) (BuildId: f6cc5d2d702265511937b56460b37693)
+#102 0000000000075314 /apex/com.android.runtime/lib64/bionic/libc.so (__start_thread+64) (BuildId: f6cc5d2d702265511937b56460b37693)
