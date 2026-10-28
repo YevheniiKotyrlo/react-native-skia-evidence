@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="872" font-family="'Segoe UI', system-ui, sans-serif">
+<rect width="1520" height="872" fill="#fcfcfb"/>
+<text x="40.0" y="56.0" font-size="32" font-weight="600" fill="#0b0b0b">UI-thread frames missed while 120 views mount and unmount every 800 ms</text>
+<text x="40.0" y="98.0" font-size="22" fill="#52514e">per 9.6 s window: the bar is the median, the line the lowest and highest window</text>
+<line x1="600.0" y1="198" x2="600.0" y2="742" stroke="#c3c2b7" stroke-width="1"/>
+<text x="600.0" y="772.0" font-size="20" text-anchor="middle" fill="#52514e">0</text>
+<line x1="764.7" y1="198" x2="764.7" y2="742" stroke="#e1e0d9" stroke-width="1"/>
+<text x="764.7" y="772.0" font-size="20" text-anchor="middle" fill="#52514e">40</text>
+<line x1="929.4" y1="198" x2="929.4" y2="742" stroke="#e1e0d9" stroke-width="1"/>
+<text x="929.4" y="772.0" font-size="20" text-anchor="middle" fill="#52514e">80</text>
+<line x1="1094.1" y1="198" x2="1094.1" y2="742" stroke="#e1e0d9" stroke-width="1"/>
+<text x="1094.1" y="772.0" font-size="20" text-anchor="middle" fill="#52514e">120</text>
+<line x1="1258.8" y1="198" x2="1258.8" y2="742" stroke="#e1e0d9" stroke-width="1"/>
+<text x="1258.8" y="772.0" font-size="20" text-anchor="middle" fill="#52514e">160</text>
+<text x="40.0" y="186.0" font-size="24" font-weight="600" fill="#52514e">Galaxy S23 · Android 14 · 120 Hz</text>
+<text x="40.0" y="241.0" font-size="24" fill="#0b0b0b"><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;Canvas&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">, main</tspan></text>
+<path d="M600,221 H902.8 Q906.8,221 906.8,225.0 V241.0 Q906.8,245 902.8,245 H600 Z" fill="#2a78d6"/>
+<line x1="884.1" y1="233" x2="958.2" y2="233" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="884.1" y1="227" x2="884.1" y2="239" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="958.2" y1="227" x2="958.2" y2="239" stroke="#0b0b0b" stroke-width="2"/>
+<text x="972.2" y="241.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">74.5 (69–87)</text>
+<text x="40.0" y="291.0" font-size="24" fill="#0b0b0b"><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;Canvas&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">, this PR</tspan></text>
+<path d="M600,271 H900.7 Q904.7,271 904.7,275.0 V291.0 Q904.7,295 900.7,295 H600 Z" fill="#2a78d6"/>
+<line x1="896.5" y1="283" x2="908.8" y2="283" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="896.5" y1="277" x2="896.5" y2="289" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="908.8" y1="277" x2="908.8" y2="289" stroke="#0b0b0b" stroke-width="2"/>
+<text x="922.8" y="291.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">74 (72–75)</text>
+<text x="40.0" y="341.0" font-size="24" fill="#0b0b0b"><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;Canvas static&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">, this PR</tspan></text>
+<path d="M600,321 H600.1 Q604.1,321 604.1,325.0 V341.0 Q604.1,345 600.1,345 H600 Z" fill="#2a78d6"/>
+<line x1="600.0" y1="333" x2="616.5" y2="333" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="600.0" y1="327" x2="600.0" y2="339" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="616.5" y1="327" x2="616.5" y2="339" stroke="#0b0b0b" stroke-width="2"/>
+<text x="630.5" y="341.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">1 (0–4)</text>
+<text x="40.0" y="391.0" font-size="24" fill="#0b0b0b"><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;SkiaImageView&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">, this PR</tspan></text>
+
+
+<text x="614.0" y="391.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">0</text>
+<text x="40.0" y="441.0" font-size="24" fill="#0b0b0b"><tspan font-family="'Segoe UI', system-ui, sans-serif">plain </tspan><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;View&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">s</tspan></text>
+<path d="M600,421 H602.2 Q606.2,421 606.2,425.0 V441.0 Q606.2,445 602.2,445 H600 Z" fill="#2a78d6"/>
+<line x1="600.0" y1="433" x2="612.4" y2="433" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="600.0" y1="427" x2="600.0" y2="439" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="612.4" y1="427" x2="612.4" y2="439" stroke="#0b0b0b" stroke-width="2"/>
+<text x="626.4" y="441.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">1.5 (0–3)</text>
+<text x="40.0" y="512.0" font-size="24" font-weight="600" fill="#52514e">RedMagic NX809J · Android 16 · 144 Hz</text>
+<text x="40.0" y="567.0" font-size="24" fill="#0b0b0b"><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;Canvas&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">, main before the recorder pool</tspan></text>
+<path d="M600,547 H1254.8 Q1258.8,547 1258.8,551.0 V567.0 Q1258.8,571 1254.8,571 H600 Z" fill="#2a78d6"/>
+<line x1="1234.1" y1="559" x2="1262.9" y2="559" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="1234.1" y1="553" x2="1234.1" y2="565" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="1262.9" y1="553" x2="1262.9" y2="565" stroke="#0b0b0b" stroke-width="2"/>
+<text x="1276.9" y="567.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">160 (154–161)</text>
+<text x="40.0" y="617.0" font-size="24" fill="#0b0b0b"><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;Canvas&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">, main</tspan></text>
+<path d="M600,597 H1102.5 Q1106.5,597 1106.5,601.0 V617.0 Q1106.5,621 1102.5,621 H600 Z" fill="#2a78d6"/>
+<line x1="1024.1" y1="609" x2="1118.8" y2="609" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="1024.1" y1="603" x2="1024.1" y2="615" stroke="#0b0b0b" stroke-width="2"/>
+<line x1="1118.8" y1="603" x2="1118.8" y2="615" stroke="#0b0b0b" stroke-width="2"/>
+<text x="1132.8" y="617.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">123 (103–126)</text>
+<text x="40.0" y="667.0" font-size="24" fill="#0b0b0b"><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;Canvas static&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">, this PR</tspan></text>
+
+
+<text x="614.0" y="667.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">0</text>
+<text x="40.0" y="717.0" font-size="24" fill="#0b0b0b"><tspan font-family="Consolas, 'Cascadia Mono', monospace">&lt;SkiaImageView&gt;</tspan><tspan font-family="'Segoe UI', system-ui, sans-serif">, this PR</tspan></text>
+
+
+<text x="614.0" y="717.0" font-size="22" fill="#0b0b0b" font-variant-numeric="tabular-nums">0</text>
+<text x="600.0" y="806.0" font-size="20" fill="#52514e">frames missed per 9.6 s</text>
+<text x="40.0" y="848.0" font-size="20" fill="#898781">Release builds of the example. main is cce3cf0f2, after the recorder pool (#4309); before it, a83f409f9.</text>
+</svg>
