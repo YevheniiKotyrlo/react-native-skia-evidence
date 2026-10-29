@@ -1,0 +1,7 @@
+device emulator-28120: Android 11, API 30, sdk_gphone_x86_64, userdebug
+main d4a36ca4a, home run 1: alive (pid 4395) threads: iveskia.example x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, home run 2: alive (pid 4504) threads: iveskia.example x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, home run 3: alive (pid 4716) threads: iveskia.example x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, android-views run 1: alive (pid 4928) threads: iveskia.example x1,RNSkia Present x1,RNSkia Render 1 x3,RNSkia Render 2 x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, android-views run 2: alive (pid 5043) threads: iveskia.example x1,RNSkia Present x1,RNSkia Render 1 x3,RNSkia Render 2 x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, android-views run 3: alive (pid 5139) threads: iveskia.example x1,RNSkia Present x1,RNSkia Render 1 x1,RNSkia Render 2 x3,RNSkia Worker x1, crashes: none

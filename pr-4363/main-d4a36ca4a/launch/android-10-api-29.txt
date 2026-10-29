@@ -1,0 +1,7 @@
+device emulator-28120: Android 10, API 29, Android SDK built for x86_64, userdebug
+main d4a36ca4a, home run 1: alive (pid 6080) threads: iveskia.example x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, home run 2: alive (pid 6458) threads: iveskia.example x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, home run 3: alive (pid 6641) threads: iveskia.example x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, android-views run 1: alive (pid 6961) threads: iveskia.example x1,RNSkia Present x1,RNSkia Render 1 x3,RNSkia Render 2 x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, android-views run 2: alive (pid 7074) threads: iveskia.example x1,RNSkia Present x1,RNSkia Render 1 x3,RNSkia Render 2 x1,RNSkia Worker x1, crashes: none
+main d4a36ca4a, android-views run 3: alive (pid 7186) threads: iveskia.example x1,RNSkia Present x1,RNSkia Render 1 x3,RNSkia Render 2 x1,RNSkia Worker x1, crashes: none
