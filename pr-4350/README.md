@@ -1,8 +1,8 @@
-# Display-link ticks after a recycle
+# Display-link requests after a recycle or a trip, and what a frame spends on them
 
-Evidence only, not part of the PR.
+Evidence only, not part of the PR. Each folder holds the probe a run used and every reading it took: `add-tick-counter.py <worktree>` adds the probe to `SkiaView.mm`, which writes one line a second to the app's Documents; `probe-entry.js` is the bundle's entry, one canvas animating on every UI frame, mounted, taken out of its superview by a scroll view that clips its subviews and brought back, then unmounted and mounted again into the view Fabric recycled; `bun summarize-ticks.ts <side folder>...` summarizes a side's rounds per phase. Release builds, rounds alternating between the sides.
 
-- `add-tick-counter.py <worktree>`: adds a once-a-second tick counter to `SkiaView.mm`'s `onFrame`, as #4273 measured, which also logs the link's `preferredFrameRateRange.maximum` and writes its lines to the app's Documents.
-- `probe-entry.js`: the bundle's entry. One canvas animates on every UI frame; it is mounted, taken out of its superview by a scroll view that clips its subviews and brought back, then unmounted and mounted again into the view Fabric recycled.
-- `runs/main` and `runs/fix`: three rounds each on an iPad Pro 12.9" (4th generation, 120 Hz), Release builds, alternating.
-- `bun summarize-ticks.ts runs/main runs/fix`: each phase's ticks per second and preferred maximum.
+- `9b5f5ca/`: the PR's head. The probe logs the link's ticks and `preferredFrameRateRange.maximum`, the time `scheduleFrame` spends on the display link on a frame whose link exists, and what making a link costs. `runs/ipad/` on an iPad Pro 12.9" (4th generation, iPadOS 27, 120 Hz): `main` (`feee40a`), `fix` (`9b5f5ca`; its first round's file was lost to a failed copy, so it has rounds 2 to 4) and `on4324-fix` (`9b5f5ca` merged onto #4324's head `627fdc0`, whose views draw again after the trip). `runs/iphone/` on an iPhone 12 Pro Max (iOS 27, 60 Hz): `main` and `fix`. `runs/window-less/` on the iPad, built with `--window-less-link`, which schedules a frame at the end of `willMoveToSuperview:` so that each link is made before its view has a window: `fix`, and `mutant`, the same with `--drop-did-move-to-window`.
+- `review-snippet/`: `requestFullFrameRate` returning while `_displayLink.preferredFrameRateRange.maximum != 0`, called from `scheduleFrame` on every frame, as suggested in review; the probe times that call alone. `runs/<device>/main` and `runs/<device>/snippet` on both devices.
+- `4324/`: #4324's head `627fdc0` alone, the trip's control, on the iPad.
+- `8defe9d/`: the PR's first commit against `main` on the iPad, with the counter as it was then.

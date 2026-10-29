@@ -1,0 +1,35 @@
+2411495.958 window moved view=0x10cde9400 link=0 window=1 ns=333.3
+2411496.001 link made view=0x10cde9400 ns=34500.0
+2411497.006 ticks view=0x10cde9400 87 in 1.001 s preferredMax=120 scheduled=87 scheduleNs=560.3 scheduleMedianNs=583.3 scheduleTrimmedNs=489.5 screenMax=120
+2411498.007 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=699.3 scheduleMedianNs=666.7 scheduleTrimmedNs=625.8 screenMax=120
+2411499.007 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=730.2 scheduleMedianNs=666.7 scheduleTrimmedNs=646.2 screenMax=120
+2411500.008 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=708.3 scheduleMedianNs=666.7 scheduleTrimmedNs=636.6 screenMax=120
+2411501.009 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=786.1 scheduleMedianNs=750.0 scheduleTrimmedNs=713.0 screenMax=120
+2411501.470 stop view=0x10cde9400
+2411501.473 window moved view=0x10cde9400 link=0 window=0 ns=541.7
+2411502.484 window moved view=0x10cde9400 link=0 window=1 ns=708.3
+2411502.493 link made view=0x10cde9400 ns=59333.3
+2411503.495 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=922.9 scheduleMedianNs=916.7 scheduleTrimmedNs=875.0 screenMax=120
+2411504.494 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=734.0 scheduleMedianNs=666.7 scheduleTrimmedNs=659.0 screenMax=120
+2411505.495 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=769.8 scheduleMedianNs=666.7 scheduleTrimmedNs=659.3 screenMax=120
+2411506.495 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=765.6 scheduleMedianNs=666.7 scheduleTrimmedNs=662.8 screenMax=120
+2411507.482 stop view=0x10cde9400
+2411507.486 window moved view=0x10cde9400 link=0 window=0 ns=458.3
+2411507.487 stop view=0x10cde9400
+2411508.485 window moved view=0x10cde9400 link=0 window=1 ns=333.3
+2411508.497 link made view=0x10cde9400 ns=51958.3
+2411509.507 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=961.5 scheduleMedianNs=958.3 scheduleTrimmedNs=937.9 screenMax=120
+2411510.506 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=717.0 scheduleMedianNs=666.7 scheduleTrimmedNs=651.6 screenMax=120
+2411511.506 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=795.8 scheduleMedianNs=666.7 scheduleTrimmedNs=647.4 screenMax=120
+2411512.507 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1074.3 scheduleMedianNs=625.0 scheduleTrimmedNs=854.9 screenMax=120
+2411513.509 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1055.2 scheduleMedianNs=666.7 scheduleTrimmedNs=880.4 screenMax=120
+2411514.509 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1030.2 scheduleMedianNs=625.0 scheduleTrimmedNs=853.8 screenMax=120
+2411515.509 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1003.8 scheduleMedianNs=625.0 scheduleTrimmedNs=793.2 screenMax=120
+2411516.509 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=853.5 scheduleMedianNs=625.0 scheduleTrimmedNs=723.4 screenMax=120
+2411517.512 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=979.2 scheduleMedianNs=625.0 scheduleTrimmedNs=777.8 screenMax=120
+2411518.510 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1024.7 scheduleMedianNs=666.7 scheduleTrimmedNs=823.3 screenMax=120
+2411519.511 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1069.4 scheduleMedianNs=666.7 scheduleTrimmedNs=851.5 screenMax=120
+2411520.512 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=2011.1 scheduleMedianNs=750.0 scheduleTrimmedNs=927.9 screenMax=120
+2411521.514 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1339.6 scheduleMedianNs=750.0 scheduleTrimmedNs=1016.2 screenMax=120
+2411522.514 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1101.7 scheduleMedianNs=708.3 scheduleTrimmedNs=859.2 screenMax=120
+2411523.515 ticks view=0x10cde9400 120 in 1.001 s preferredMax=120 scheduled=120 scheduleNs=1100.3 scheduleMedianNs=708.3 scheduleTrimmedNs=914.7 screenMax=120

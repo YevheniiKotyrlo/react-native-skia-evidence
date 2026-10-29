@@ -1,0 +1,23 @@
+2408495.038 ticks view=0x148231400 87 in 1.001 s preferredMax=120 requests=87 requestNs=517.2 requestMedianNs=625.0 requestTrimmedNs=491.0 screenMax=120
+2408496.039 ticks view=0x148231400 120 in 1.001 s preferredMax=120 requests=120 requestNs=687.2 requestMedianNs=666.7 requestTrimmedNs=673.6 screenMax=120
+2408497.039 ticks view=0x148231400 120 in 1.001 s preferredMax=120 requests=120 requestNs=732.3 requestMedianNs=708.3 requestTrimmedNs=697.5 screenMax=120
+2408498.040 ticks view=0x148231400 120 in 1.001 s preferredMax=120 requests=120 requestNs=640.6 requestMedianNs=625.0 requestTrimmedNs=613.4 screenMax=120
+2408499.040 ticks view=0x148231400 120 in 1.001 s preferredMax=120 requests=120 requestNs=554.9 requestMedianNs=583.3 requestTrimmedNs=543.2 screenMax=120
+2408499.502 stop view=0x148231400
+2408505.514 stop view=0x148231400
+2408505.517 stop view=0x148231400
+2408507.528 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=663.9 requestMedianNs=625.0 requestTrimmedNs=615.0 screenMax=120
+2408508.529 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=691.0 requestMedianNs=625.0 requestTrimmedNs=633.1 screenMax=120
+2408509.530 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=707.6 requestMedianNs=625.0 requestTrimmedNs=635.4 screenMax=120
+2408510.531 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=672.6 requestMedianNs=625.0 requestTrimmedNs=621.1 screenMax=120
+2408511.531 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=691.3 requestMedianNs=666.7 requestTrimmedNs=639.3 screenMax=120
+2408512.532 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=746.5 requestMedianNs=666.7 requestTrimmedNs=681.7 screenMax=120
+2408513.532 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=712.2 requestMedianNs=666.7 requestTrimmedNs=653.2 screenMax=120
+2408514.533 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=899.7 requestMedianNs=666.7 requestTrimmedNs=648.1 screenMax=120
+2408515.533 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=700.7 requestMedianNs=666.7 requestTrimmedNs=645.4 screenMax=120
+2408516.534 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=702.8 requestMedianNs=666.7 requestTrimmedNs=635.0 screenMax=120
+2408517.535 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=740.6 requestMedianNs=666.7 requestTrimmedNs=677.9 screenMax=120
+2408518.535 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=1049.7 requestMedianNs=666.7 requestTrimmedNs=657.0 screenMax=120
+2408519.536 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=713.2 requestMedianNs=708.3 requestTrimmedNs=659.0 screenMax=120
+2408520.537 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=760.4 requestMedianNs=708.3 requestTrimmedNs=701.4 screenMax=120
+2408521.537 ticks view=0x148231400 120 in 1.001 s preferredMax=0 requests=120 requestNs=725.0 requestMedianNs=625.0 requestTrimmedNs=611.1 screenMax=120

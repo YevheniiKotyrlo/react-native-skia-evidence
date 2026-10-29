@@ -1,0 +1,25 @@
+1463633.493 link made view=0x15823c000 ns=37000.0
+1463634.504 ticks view=0x15823c000 46 in 1.001 s preferredMax=0 scheduled=46 scheduleNs=1150.4 scheduleMedianNs=1291.7 scheduleTrimmedNs=1027.8 screenMax=60
+1463635.505 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1079.9 scheduleMedianNs=1041.7 scheduleTrimmedNs=1010.0 screenMax=60
+1463636.506 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1097.2 scheduleMedianNs=1041.7 scheduleTrimmedNs=1028.5 screenMax=60
+1463637.508 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=954.9 scheduleMedianNs=958.3 scheduleTrimmedNs=882.7 screenMax=60
+1463638.509 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1009.7 scheduleMedianNs=875.0 scheduleTrimmedNs=875.8 screenMax=60
+1463638.982 stop view=0x15823c000
+1463640.000 link made view=0x15823c000 ns=52916.7
+1463645.007 stop view=0x15823c000
+1463645.010 stop view=0x15823c000
+1463646.020 link made view=0x15823c000 ns=38625.0
+1463647.036 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1293.1 scheduleMedianNs=1166.7 scheduleTrimmedNs=1154.3 screenMax=60
+1463648.037 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1926.4 scheduleMedianNs=1833.3 scheduleTrimmedNs=1764.7 screenMax=60
+1463649.039 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=2050.0 scheduleMedianNs=1875.0 scheduleTrimmedNs=1862.7 screenMax=60
+1463650.040 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1948.6 scheduleMedianNs=1750.0 scheduleTrimmedNs=1743.8 screenMax=60
+1463651.041 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1963.9 scheduleMedianNs=1875.0 scheduleTrimmedNs=1759.3 screenMax=60
+1463652.042 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1622.9 scheduleMedianNs=1416.7 scheduleTrimmedNs=1407.4 screenMax=60
+1463653.044 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1894.4 scheduleMedianNs=1750.0 scheduleTrimmedNs=1688.3 screenMax=60
+1463654.044 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1867.4 scheduleMedianNs=1791.7 scheduleTrimmedNs=1694.4 screenMax=60
+1463655.046 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=2908.3 scheduleMedianNs=1875.0 scheduleTrimmedNs=1766.2 screenMax=60
+1463656.047 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=2604.2 scheduleMedianNs=1833.3 scheduleTrimmedNs=1740.7 screenMax=60
+1463657.048 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=2086.8 scheduleMedianNs=2000.0 scheduleTrimmedNs=1896.6 screenMax=60
+1463658.050 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=2470.1 scheduleMedianNs=1875.0 scheduleTrimmedNs=1780.9 screenMax=60
+1463659.051 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=2395.8 scheduleMedianNs=1833.3 scheduleTrimmedNs=1861.1 screenMax=60
+1463660.053 ticks view=0x15823c000 60 in 1.001 s preferredMax=0 scheduled=60 scheduleNs=1992.4 scheduleMedianNs=1875.0 scheduleTrimmedNs=1792.4 screenMax=60
