@@ -1,0 +1,97 @@
+diff --git a/packages/skia/cpp/api/JsiSkApi.h b/packages/skia/cpp/api/JsiSkApi.h
+index 75b8c7bf4..58f26ef4b 100644
+--- a/packages/skia/cpp/api/JsiSkApi.h
++++ b/packages/skia/cpp/api/JsiSkApi.h
+@@ -12,6 +12,11 @@
+ 
+ #include "rnskia/RNDawnContext.h"
+ 
++#include <chrono>
++#include <thread>
++
++#include "dawn/native/DawnNative.h"
++
+ #include "JsiSkAnimatedImage.h"
+ #include "JsiSkAnimatedImageFactory.h"
+ #include "JsiSkColor.h"
+@@ -197,6 +202,54 @@ public:
+                                      : jsi::Value(runtime, string(gpu.error)));
+     result.setProperty(runtime, "lost",
+                        getLostPromise(runtime, gpu.generation));
++    // W1's probe (not upstream): Dawn's account of the device's memory,
++    // after it gives back what it caches when `reduce` is true.
++    result.setProperty(
++        runtime, "__memory",
++        jsi::Function::createFromHostFunction(
++            runtime, jsi::PropNameID::forAscii(runtime, "__memory"), 1,
++            [](jsi::Runtime &runtime, const jsi::Value &,
++               const jsi::Value *arguments, size_t count) -> jsi::Value {
++              auto *context = DawnContext::tryGetInstance();
++              if (context == nullptr) {
++                return jsi::Value::null();
++              }
++              auto device = context->getWGPUDevice();
++              int rounds = 0;
++              if (count > 0 && arguments[0].isBool() &&
++                  arguments[0].getBool()) {
++                while (rounds < 40 &&
++                       dawn::native::ReduceMemoryUsage(device.Get())) {
++                  rounds++;
++                  std::this_thread::sleep_for(std::chrono::milliseconds(25));
++                  dawn::native::DeviceTick(device.Get());
++                }
++              }
++              const auto usage =
++                  dawn::native::ComputeEstimatedMemoryUsageInfo(device.Get());
++              const auto allocator =
++                  dawn::native::GetAllocatorMemoryInfo(device.Get());
++              jsi::Object info(runtime);
++              info.setProperty(runtime, "rounds", rounds);
++              const auto recorder = DawnContext::threadRecorderBytes();
++              info.setProperty(runtime, "recorderBudgeted",
++                               static_cast<double>(recorder.first));
++              info.setProperty(runtime, "recorderPurgeable",
++                               static_cast<double>(recorder.second));
++              info.setProperty(runtime, "total",
++                               static_cast<double>(usage.totalUsage));
++              info.setProperty(runtime, "textures",
++                               static_cast<double>(usage.texturesUsage));
++              info.setProperty(runtime, "buffers",
++                               static_cast<double>(usage.buffersUsage));
++              info.setProperty(
++                  runtime, "allocatorUsed",
++                  static_cast<double>(allocator.totalUsedMemory));
++              info.setProperty(
++                  runtime, "allocatorAllocated",
++                  static_cast<double>(allocator.totalAllocatedMemory));
++              return info;
++            }));
+     return result;
+   }
+ 
+diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
+index 5e54ba14d..978aa2f02 100644
+--- a/packages/skia/cpp/rnskia/RNDawnContext.h
++++ b/packages/skia/cpp/rnskia/RNDawnContext.h
+@@ -402,6 +402,21 @@ public:
+     return {recorder, slot.generation};
+   }
+ 
++  // Contribution 539's probe (not upstream): what the calling thread's
++  // recorders hold, once they took back what came back to them.
++  static std::pair<size_t, size_t> threadRecorderBytes() {
++    size_t budgeted = 0;
++    size_t purgeable = 0;
++    for (auto *slot : {&threadSlot(), &uploadSlot()}) {
++      if (slot->recorder != nullptr) {
++        slot->recorder->performDeferredCleanup(std::chrono::hours(24));
++        budgeted += slot->recorder->currentBudgetedBytes();
++        purgeable += slot->recorder->currentPurgeableBytes();
++      }
++    }
++    return {budgeted, purgeable};
++  }
++
+   /**
+    Frees the GPU memory the recorders of the calling thread hold without
+    using it, on that thread (a recorder belongs to the thread it records

@@ -1,0 +1,4 @@
+Mi MIX 3
+10
+Xiaomi/perseus/perseus:10/QKQ1.190828.002/V12.0.2.0.QEEMIXM:user/release-keys
+Thermal Status: -2147483648

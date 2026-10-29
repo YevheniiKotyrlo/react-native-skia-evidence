@@ -1,0 +1,75 @@
+TRIM memory step=baseline thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8472640 dawnUsed=4170368 textures=0
+TRIM mark=baseline
+TRIM mark=js-alive
+TRIM memory step=js-disposed-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=345364672 dawnUsed=341062400 textures=0
+TRIM mark=js-disposed-5s
+TRIM mark=js-disposed-40s
+TRIM memory step=js-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4225856 textures=0
+TRIM mark=js-reduced
+TRIM mark=ui-alive
+TRIM mark=ui-disposed-5s
+TRIM memory step=ui-disposed-5s thread=ui rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=345383168 dawnUsed=341080896 textures=0
+TRIM memory step=ui-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4225856 textures=0
+TRIM mark=ui-reduced
+TRIM mark=worker-alive
+TRIM mark=worker-disposed-5s
+TRIM memory step=worker-disposed-5s thread=worker rounds=0 recorderBudgeted=335544320 recorderPurgeable=335544320 dawnAllocated=345383168 dawnUsed=341080896 textures=335544320
+TRIM memory step=worker-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=345383168 dawnUsed=341080896 textures=335544320
+TRIM mark=worker-reduced
+TRIM mark=worker-next-use-5s
+TRIM memory step=worker-next-use-5s thread=worker rounds=0 recorderBudgeted=4 recorderPurgeable=0 dawnAllocated=345383168 dawnUsed=341089088 textures=4
+TRIM memory step=worker-next-use-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=worker-next-use-reduced
+TRIM mark=js-repeat-1
+TRIM mark=js-repeat-2
+TRIM mark=js-repeat-3
+TRIM mark=js-repeat-4
+TRIM mark=js-repeat-5
+TRIM mark=js-repeat-6
+TRIM mark=js-repeat-7
+TRIM mark=js-repeat-8
+TRIM mark=js-repeat-9
+TRIM mark=js-repeat-10
+TRIM memory step=js-repeat-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=js-repeat-reduced
+TRIM submit-cost rounds=21 calls=200 medianMicroseconds=454.0 lowMicroseconds=428.5 highMicroseconds=517.1
+TRIM memory step=js-drawing-disposed-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4254528 textures=16388
+TRIM mark=js-drawing-disposed-5s
+TRIM memory step=js-drawing-stopped-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4254528 textures=4
+TRIM mark=js-drawing-stopped-5s
+TRIM memory step=js-drawing-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=js-drawing-reduced
+TRIM memory step=js-disposed-on-ui-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=345383168 dawnUsed=341089088 textures=4
+TRIM mark=js-disposed-on-ui-5s
+TRIM memory step=js-disposed-on-ui-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=js-disposed-on-ui-reduced
+TRIM memory step=js-shared-kept-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=345383168 dawnUsed=341089088 textures=335544324
+TRIM mark=js-shared-kept-5s
+TRIM memory step=js-shared-disposed-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=345383168 dawnUsed=341089088 textures=4
+TRIM mark=js-shared-disposed-5s
+TRIM memory step=js-shared-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=js-shared-reduced
+TRIM memory step=js-shared-on-ui-disposed-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=345383168 dawnUsed=341089088 textures=4
+TRIM mark=js-shared-on-ui-disposed-5s
+TRIM memory step=js-shared-on-ui-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=js-shared-on-ui-reduced
+TRIM memory step=js-snapshots-disposed-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=682238208 dawnUsed=677944128 textures=4
+TRIM mark=js-snapshots-disposed-5s
+TRIM memory step=js-snapshots-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=js-snapshots-reduced
+TRIM memory step=js-shaders-kept-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=682238208 dawnUsed=677944128 textures=335544324
+TRIM mark=js-shaders-kept-5s
+TRIM memory step=js-shaders-disposed-15s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=345383168 dawnUsed=341089088 textures=4
+TRIM mark=js-shaders-disposed-15s
+TRIM memory step=js-shaders-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=js-shaders-reduced
+TRIM memory step=js-view-snapshots-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=24477952 dawnUsed=20183872 textures=4
+TRIM mark=js-view-snapshots-5s
+TRIM memory step=js-view-snapshots-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=8528128 dawnUsed=4234048 textures=4
+TRIM mark=js-view-snapshots-reduced
+TRIM garbage 2000000
+TRIM memory step=js-collected-5s thread=js rounds=0 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=648487168 dawnUsed=644193088 textures=167772164
+TRIM mark=js-collected-5s
+TRIM memory step=js-collected-reduced thread=js rounds=1 recorderBudgeted=0 recorderPurgeable=0 dawnAllocated=193732864 dawnUsed=189438784 textures=167772164
+TRIM mark=js-collected-reduced
+TRIM mark=done
