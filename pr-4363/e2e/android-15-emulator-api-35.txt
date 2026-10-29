@@ -1,0 +1,36 @@
+## main 8e30d2eed
+
+Test Suites: 7 failed, 61 passed, 68 total
+Tests:       9 failed, 6 skipped, 416 passed, 431 total
+Time:        602.827 s, estimated 672 s
+
+Failing:
+
+- Advanced Image Filters › Empty - Silhouette Effect
+- Canvas resize on a device › shows a frame recorded for the size it grew to
+- Canvas resize on a device › shows a frame recorded for the size it shrank to
+- SkiaGraphiteView › fills its box with the frame it records once mounted
+- SkiaGraphiteView › records that frame at its layout size under a scale transform
+- isOnMainThread › is true on the UI thread and false on the JS thread
+- Canvas onLayout on a device › receives the layout the canvas is laid out at
+- Canvases drawing one CPU image on a device › every canvas shows the image
+- Shared value reads on a device › draws the current values in a snapshot and survives an invalid value
+
+## this PR 13601932c, in main's suite order
+
+Test Suites: 7 failed, 61 passed, 68 total
+Tests:       9 failed, 6 skipped, 416 passed, 431 total
+Time:        642.778 s
+
+Failing:
+
+- Advanced Image Filters › Empty - Silhouette Effect
+- Canvas resize on a device › shows a frame recorded for the size it grew to
+- Canvas resize on a device › shows a frame recorded for the size it shrank to
+- SkiaGraphiteView › fills its box with the frame it records once mounted
+- SkiaGraphiteView › records that frame at its layout size under a scale transform
+- isOnMainThread › is true on the UI thread and false on the JS thread
+- Canvas onLayout on a device › receives the layout the canvas is laid out at
+- Canvases drawing one CPU image on a device › every canvas shows the image
+- Shared value reads on a device › draws the current values in a snapshot and survives an invalid value
+

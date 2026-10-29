@@ -14,5 +14,6 @@ Builds, steps and device readings behind my pull requests to [wcandillon/react-n
 | [#4350](https://github.com/wcandillon/react-native-skia/pull/4350): a display link made after a recycle or a trip asking for the full rate | [pr-4350](pr-4350/README.md) |
 | [#4356](https://github.com/wcandillon/react-native-skia/pull/4356): a draw in flight kept until it returns when another runtime disposes or finishes its canvas | [pr-4356](pr-4356/README.md) |
 | [#4362](https://github.com/wcandillon/react-native-skia/pull/4362): the recorders of the threads outside the render pool, trimmed | [pr-4362](pr-4362/README.md) |
+| [#4363](https://github.com/wcandillon/react-native-skia/pull/4363): the GPU device made on a thread that never exits | [pr-4363](pr-4363/README.md) |
 
 [`tools/measure-surfaceflinger.sh`](tools/measure-surfaceflinger.sh) records 10 s of SurfaceFlinger's per-layer stats for an app's `SurfaceView` and reads its frame-rate vote. [`images/`](images) holds the screenshots the PR comments show, named after the pull request, or after the branch of a change I have not opened yet.

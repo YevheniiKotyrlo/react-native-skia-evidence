@@ -1,0 +1,23 @@
+## jest
+
+    android device connected
+    PASS src/renderer/__tests__/e2e/Gpu.spec.tsx (8.87 s)
+      GPU info
+        √ reports the GPU Skia renders with (9 ms)
+        √ replaces a lost GPU device (2617 ms)
+        √ uploads the CPU images again on the new device (5512 ms)
+    Test Suites: 1 passed, 1 total
+    Tests:       3 passed, 3 total
+    Snapshots:   0 total
+    Time:        8.91 s
+    Ran all test suites matching src/renderer/__tests__/e2e/Gpu.spec.tsx.
+
+## The app's lines about its GPU device (pid, tid)
+
+    10-29 00:15:49.200  6305  6365 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: NVIDIA GeForce RTX 3090 Ti, Description: Vulkan driver version 617.42.0.0
+    10-29 00:15:51.396  6305  6338 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+    10-29 00:15:52.396  6305  6365 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: NVIDIA GeForce RTX 3090 Ti, Description: Vulkan driver version 617.42.0.0
+    10-29 00:15:52.437  6305  6365 I RNSkia  : React Native Skia replaced its lost GPU device.
+    10-29 00:15:55.629  6305  6338 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+    10-29 00:15:57.631  6305  6365 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: NVIDIA GeForce RTX 3090 Ti, Description: Vulkan driver version 617.42.0.0
+    10-29 00:15:57.681  6305  6365 I RNSkia  : React Native Skia replaced its lost GPU device.

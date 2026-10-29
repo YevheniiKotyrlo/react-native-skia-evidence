@@ -1,0 +1,34 @@
+diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
+index 15ba540..4ebdef1 100644
+--- a/packages/skia/cpp/rnskia/RNDawnContext.h
++++ b/packages/skia/cpp/rnskia/RNDawnContext.h
+@@ -1010,19 +1010,17 @@ private:
+               ? std::chrono::seconds(0)
+               : std::chrono::seconds(1 << std::min(_failedRecoveries - 1, 5));
+     }
+-    const auto due = std::chrono::steady_clock::now() + delay;
+-    {
+-      std::lock_guard<std::mutex> lock(_gpuMutex);
+-      // One recovery is scheduled at a time: one for an older generation would
+-      // find its device replaced, and of two for the same generation the
+-      // sooner one runs, scheduling the next itself if it does not take.
+-      if (!_scheduledRecovery.has_value() ||
+-          lost->id > _scheduledRecovery->lost->id ||
+-          (lost == _scheduledRecovery->lost && due < _scheduledRecovery->due)) {
+-        _scheduledRecovery = ScheduledRecovery{lost, due};
++    std::thread([this, lost, delay]() {
++#if defined(__APPLE__)
++      pthread_setname_np("RNSkia GPU Recovery");
++#elif defined(__ANDROID__)
++      pthread_setname_np(pthread_self(), "RNSkia GPU Recovery");
++#endif
++      if (delay.count() > 0) {
++        std::this_thread::sleep_for(delay);
+       }
+-    }
+-    _gpuCondition.notify_one();
++      recover(lost);
++    }).detach();
+   }
+ 
+   /**

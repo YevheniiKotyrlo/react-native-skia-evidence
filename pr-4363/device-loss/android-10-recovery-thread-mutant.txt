@@ -1,0 +1,80 @@
+## jest
+
+    android device connected
+    FAIL src/renderer/__tests__/e2e/Gpu.spec.tsx (60.742 s)
+      GPU info
+        √ reports the GPU Skia renders with (6 ms)
+        × replaces a lost GPU device (30005 ms)
+        × uploads the CPU images again on the new device (30018 ms)
+      ● GPU info › replaces a lost GPU device
+        eval timed out after 30000ms without a response from the device
+          540 |         client.off("message", onMessage);
+          541 |         reject(
+        > 542 |           new Error(
+              |           ^
+          543 |             `eval timed out after ${EVAL_TIMEOUT_MS}ms without a response from the device`
+          544 |           )
+          545 |         );
+          at Timeout._onTimeout (src/renderer/__tests__/setup.tsx:542:11)
+      ● GPU info › uploads the CPU images again on the new device
+        eval timed out after 30000ms without a response from the device
+          540 |         client.off("message", onMessage);
+          541 |         reject(
+        > 542 |           new Error(
+              |           ^
+          543 |             `eval timed out after ${EVAL_TIMEOUT_MS}ms without a response from the device`
+          544 |           )
+          545 |         );
+          at Timeout._onTimeout (src/renderer/__tests__/setup.tsx:542:11)
+    Test Suites: 1 failed, 1 total
+    Tests:       2 failed, 1 passed, 3 total
+    Snapshots:   0 total
+    Time:        60.787 s
+    Ran all test suites matching src/renderer/__tests__/e2e/Gpu.spec.tsx.
+
+## The app's lines about its GPU device (pid, tid)
+
+    10-29 00:43:51.644  7542  7577 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: NVIDIA GeForce RTX 3090 Ti, Description: Vulkan driver version 617.42.0.0
+    10-29 00:43:53.331  7542  7572 I RNSkia  : React Native Skia lost its GPU device. Reason: forceLossForTesting invoked from JS
+    10-29 00:43:54.332  7542  7613 I RNSkia  : Selected Dawn adapter - Backend: Vulkan, Device: NVIDIA GeForce RTX 3090 Ti, Description: Vulkan driver version 617.42.0.0
+    10-29 00:43:54.384  7542  7613 I RNSkia  : React Native Skia replaced its lost GPU device.
+    10-29 00:43:54.386  7542  7596 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 7596 (RNSkia Render 1), pid 7542 (iveskia.example)
+
+## Tombstone
+
+    *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+    Build fingerprint: 'google/sdk_gphone_x86_64/generic_x86_64:10/QSR1.211112.011/13135432:userdebug/dev-keys'
+    Revision: '0'
+    ABI: 'x86_64'
+    Timestamp: 2026-10-29 00:43:54+0200
+    pid: 7542, tid: 7596, name: RNSkia Render 1  >>> com.reactnativeskia.example <<<
+    uid: 10146
+    signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------
+        rax 0000000000000000  rbx 0000000000001d76  rcx 00007850c34613f8  rdx 0000000000000006
+        r8  ffffffffffffffff  r9  0000000000000000  r10 0000784fd74d1c40  r11 0000000000000246
+        r12 0000784fd4f5c040  r13 0000784fe6988980  r14 0000784fd74d1cc8  r15 0000000000001dac
+        rdi 0000000000001d76  rsi 0000000000001dac
+        rbp 0000000000000018  rsp 0000784fd74d1c38  rip 00007850c34613f8
+    
+    backtrace:
+          #00 pc 00000000000943f8  /apex/com.android.runtime/lib64/bionic/libc.so (syscall+24) (BuildId: b5c6019a3b4ea61b5e9a2f56319b584e)
+          #01 pc 0000000000097146  /apex/com.android.runtime/lib64/bionic/libc.so (abort+182) (BuildId: b5c6019a3b4ea61b5e9a2f56319b584e)
+          #02 pc 000000000000b844  /vendor/lib64/libOpenglSystemCommon.so (QemuPipeStream::writeFully(void const*, unsigned long)+148) (BuildId: 9e1f1713753fc3439af85bf4faea017d)
+          #03 pc 000000000000bce1  /vendor/lib64/libOpenglSystemCommon.so (IOStream::flush()+33) (BuildId: 9e1f1713753fc3439af85bf4faea017d)
+          #04 pc 00000000000bc1eb  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VulkanStreamGuest::flush()+59) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #05 pc 00000000000f00a4  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VkEncoder::flush()+20) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #06 pc 00000000000ce07e  /vendor/lib64/libvulkan_enc.so (goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer(VkCommandBuffer_T*, goldfish_vk::VkEncoder*)+414) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #07 pc 000000000001c9e3  /vendor/lib64/hw/vulkan.ranchu.so (goldfish_vk::entry_vkCmdFillBuffer(VkCommandBuffer_T*, VkBuffer_T*, unsigned long, unsigned long, unsigned int)+99) (BuildId: 016566978fc5617027d12fb569e295ae)
+          #08 pc 00000000007ef1dc  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Buffer::ClearBuffer(dawn::native::vulkan::CommandRecordingContext*, unsigned int, unsigned long, unsigned long)+156) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #09 pc 00000000007eeb2b  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Buffer::Initialize(bool)+2379) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #10 pc 00000000007edd3e  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Buffer::Create(dawn::native::vulkan::Device*, dawn::native::UnpackedPtr<dawn::native::BufferDescriptor> const&)+254) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #11 pc 0000000000803b8d  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Device::CreateBufferImpl(dawn::native::UnpackedPtr<dawn::native::BufferDescriptor> const&)+29) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #12 pc 000000000071ab26  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::DeviceBase::APICreateBuffer(dawn::native::BufferDescriptor const*)+1254) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #13 pc 0000000000b507a9  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 836a76daa6224a399c80a4908f6f21175856ce4a)
+          #14 pc 0000000000b5a5de  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 836a76daa6224a399c80a4908f6f21175856ce4a)
+          #15 pc 0000000000b0f28a  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 836a76daa6224a399c80a4908f6f21175856ce4a)
+          #16 pc 0000000000b0f191  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 836a76daa6224a399c80a4908f6f21175856ce4a)
+          #17 pc 0000000000ac7bba  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 836a76daa6224a399c80a4908f6f21175856ce4a)
+          #18 pc 0000000000ac8f89  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 836a76daa6224a399c80a4908f6f21175856ce4a)
+          #19 pc 0000000000adedee  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 836a76daa6224a399c80a4908f6f21175856ce4a)
+          #20 pc 0000000000b2f206  /data/app/com.reactnativeskia.example-ENyMJ4Tx3ImUf3uhaehBIg==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 836a76daa6224a399c80a4908f6f21175856ce4a)

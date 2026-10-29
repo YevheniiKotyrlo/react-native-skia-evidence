@@ -1,0 +1,237 @@
+device emulator-28120: Android 10, API 29, Android SDK built for x86_64, userdebug
+this PR 13601932c, home run 1: alive (pid 16278) threads: iveskia.example x1,RNSkia GPU x5,RNSkia Worker x1, crashes: none
+this PR 13601932c, home run 2: alive (pid 16380) threads: iveskia.example x1,RNSkia GPU x5,RNSkia Worker x1, crashes: none
+this PR 13601932c, home run 3: alive (pid 16471) threads: iveskia.example x1,RNSkia GPU x5,RNSkia Worker x1, crashes: com.google.android.googlequicksearchbox:search (pid 2918, thread RenderThread ); 10-29 00:19:42.399 16496 16496 F DEBUG   :       #00 pc 00000ef9  [vdso] (__kernel_vsyscall+9)<10-29 00:19:42.399 16496 16496 F DEBUG   :       #01 pc 00091e08  /apex/com.android.runtime/lib/bionic/libc.so (syscall+40) (BuildId: 54849e6c21269d1ab6a93389919a4ed3)<10-29 00:19:42.399 16496 16496 F DEBU
+this PR 13601932c, android-views run 1: alive (pid 16697) threads: iveskia.example x1,RNSkia GPU x5,RNSkia Present x1,RNSkia Render 1 x3,RNSkia Render 2 x1,RNSkia Worker x1, crashes: none
+this PR 13601932c, android-views run 2: alive (pid 16783) threads: iveskia.example x1,RNSkia GPU x5,RNSkia Present x1,RNSkia Render 1 x1,RNSkia Render 2 x3,RNSkia Worker x1, crashes: none
+this PR 13601932c, android-views run 3: alive (pid 16907) threads: iveskia.example x1,RNSkia GPU x5,RNSkia Present x1,RNSkia Render 1 x3,RNSkia Render 2 x1,RNSkia Worker x1, crashes: none
+
+device emulator-28056: Android 10, API 29, Android SDK built for x86_64, userdebug
+main 8e30d2eed, home run 1: DEAD crashes: com.reactnativeskia.example (pid 14311, thread iveskia.example ); goldfish_vk::VulkanStreamGuest::Impl::write<goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE<goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer<goldfish_vk::entry_vkCmdPipelineBarrier<
+main 8e30d2eed, home run 2: DEAD crashes: com.reactnativeskia.example (pid 14476, thread iveskia.example ); 10-28 21:53:54.180 14534 14534 F DEBUG   :       #00 pc 0000000000000218  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk<goldfish_vk::VulkanStreamGuest::Impl::write<10-28 21:53:54.180 14534 14534 F DEBUG   :       #02 pc 00000000007f9867  [stack]<goldfish_vk::VkEncoder::vkCo
+main 8e30d2eed, home run 3: DEAD crashes: com.reactnativeskia.example (pid 14598, thread iveskia.example ); goldfish_vk::VulkanStreamGuest::Impl::write<goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE<goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer<goldfish_vk::entry_vkCmdPipelineBarrier<
+main 8e30d2eed, android-views run 1: DEAD crashes: com.reactnativeskia.example (pid 15433, thread iveskia.example ); goldfish_vk::VulkanStreamGuest::Impl::write<goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE<goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer<goldfish_vk::entry_vkCmdPipelineBarrier<
+main 8e30d2eed, android-views run 2: DEAD crashes: com.reactnativeskia.example (pid 15677, thread RNSkia Render 1 ); goldfish_vk::VulkanStreamGuest::Impl::write<goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE<goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer<goldfish_vk::entry_vkCmdFillBuffer<
+main 8e30d2eed, android-views run 3: DEAD crashes: com.reactnativeskia.example (pid 15781, thread iveskia.example ); goldfish_vk::VulkanStreamGuest::Impl::write<goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE<goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer<goldfish_vk::entry_vkCmdPipelineBarrier<
+
+main 8e30d2eed, android-views-run1:
+
+    *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+    Build fingerprint: 'google/sdk_gphone_x86_64/generic_x86_64:10/QSR1.211112.011/13135432:userdebug/dev-keys'
+    Revision: '0'
+    ABI: 'x86_64'
+    Timestamp: 2026-10-28 21:55:32+0200
+    pid: 15433, tid: 15433, name: iveskia.example  >>> com.reactnativeskia.example <<<
+    uid: 10146
+    signal 11 (SIGSEGV), code 128 (SI_KERNEL), fault addr 0x0
+        rax 70612f617461642f  rbx 0000000000000004  rcx 0000000000000001  rdx 0000000000000004
+        r8  0000000000000000  r9  0000000000000000  r10 0000715950ff9dd0  r11 0000000000000001
+        r12 00007ffe4cb2b86c  r13 000071594fd7e008  r14 00007ffe4cb2b858  r15 000071594fd7dfc0
+        rdi 0000715950ff8520  rsi 0000000000000004
+        rbp 000071595092e0b0  rsp 00007ffe4cb2b810  rip 000071595087c464
+    
+    backtrace:
+          #00 pc 00000000000bc464  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VulkanStreamGuest::Impl::write(void const*, unsigned long)+20) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #01 pc 0000000000130329  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE(VkCommandBuffer_T*, unsigned int, unsigned int)+329) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #02 pc 00000000000ce076  /vendor/lib64/libvulkan_enc.so (goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer(VkCommandBuffer_T*, goldfish_vk::VkEncoder*)+406) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #03 pc 000000000001cf95  /vendor/lib64/hw/vulkan.ranchu.so (goldfish_vk::entry_vkCmdPipelineBarrier(VkCommandBuffer_T*, unsigned int, unsigned int, unsigned int, unsigned int, VkMemoryBarrier const*, unsigned int, VkBufferMemoryBarrier const*, unsigned int, VkImageMemoryBarrier const*)+101) (BuildId: 016566978fc5617027d12fb569e295ae)
+          #04 pc 0000000000851e61  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Texture::TransitionUsageNow(dawn::native::vulkan::CommandRecordingContext*, wgpu::TextureUsage, wgpu::ShaderStage, dawn::native::SubresourceRange const&)+289) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #05 pc 00000000007f424c  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::CommandBuffer::RecordCommands(dawn::native::vulkan::CommandRecordingContext*)+5612) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #06 pc 000000000081eb1f  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native6vulkan5Queue10SubmitImplENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS7_Lm18446744073709551615EEE+95) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #07 pc 000000000076e8bb  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native9QueueBase14SubmitInternalENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS6_Lm18446744073709551615EEE+219) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #08 pc 000000000076e6fd  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native9QueueBase9APISubmitENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS6_Lm18446744073709551615EEE+77) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #09 pc 000000000067a2be  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::NativeQueueSubmit(WGPUQueueImpl*, unsigned long, WGPUCommandBufferImpl* const*)+78) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #10 pc 0000000000b4b11e  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #11 pc 0000000000b0131e  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #12 pc 0000000000abf342  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #13 pc 0000000000506994  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::DawnContext::submitRecording(skgpu::graphite::Recorder*, skgpu::graphite::SyncToCpu)+644) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #14 pc 0000000000512625  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::DawnContext::upload(sk_sp<SkImage> const&, bool)+149) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #15 pc 000000000061b46f  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::JsiSkImage::makeTextureImage(facebook::jsi::Runtime&, facebook::jsi::Value const&, facebook::jsi::Value const*, unsigned long)+319) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #16 pc 000000000061f3a4  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #17 pc 00000000000d22a4  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libworklets.so (offset 0x366c000) (BuildId: 6a522bdd20af540d697760093a8ca7c4259aca3c)
+          #18 pc 00000000000d22a4  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libworklets.so (offset 0x366c000) (BuildId: 6a522bdd20af540d697760093a8ca7c4259aca3c)
+          #19 pc 00000000000afabe  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libhermesvm.so (offset 0x73c000) (BuildId: 5fd94e09fc5734aefac5b42779ec24b5f23d60ce)
+          #20 pc 00000000000af743  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libhermesvm.so (offset 0x73c000) (BuildId: 5fd94e09fc5734aefac5b42779ec24b5f23d60ce)
+main 8e30d2eed, android-views-run2:
+
+    *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+    Build fingerprint: 'google/sdk_gphone_x86_64/generic_x86_64:10/QSR1.211112.011/13135432:userdebug/dev-keys'
+    Revision: '0'
+    ABI: 'x86_64'
+    Timestamp: 2026-10-28 21:55:48+0200
+    pid: 15677, tid: 15732, name: RNSkia Render 1  >>> com.reactnativeskia.example <<<
+    uid: 10146
+    signal 11 (SIGSEGV), code 128 (SI_KERNEL), fault addr 0x0
+        rax 70612f617461642f  rbx 0000000000000004  rcx 0000000000000001  rdx 0000000000000004
+        r8  0000000000000000  r9  9ddfea08eb382d69  r10 0000000000000001  r11 0000000000000246
+        r12 0000715940781d3c  r13 000071599e2b6cc8  r14 0000715940781d28  r15 000071599e2b6c80
+        rdi 000071599e26e220  rsi 0000000000000004
+        rbp 000071595107a0b0  rsp 0000715940781ce0  rip 0000715950fc8464
+    
+    backtrace:
+          #00 pc 00000000000bc464  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VulkanStreamGuest::Impl::write(void const*, unsigned long)+20) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #01 pc 0000000000130329  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE(VkCommandBuffer_T*, unsigned int, unsigned int)+329) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #02 pc 00000000000ce076  /vendor/lib64/libvulkan_enc.so (goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer(VkCommandBuffer_T*, goldfish_vk::VkEncoder*)+406) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #03 pc 000000000001c9e3  /vendor/lib64/hw/vulkan.ranchu.so (goldfish_vk::entry_vkCmdFillBuffer(VkCommandBuffer_T*, VkBuffer_T*, unsigned long, unsigned long, unsigned int)+99) (BuildId: 016566978fc5617027d12fb569e295ae)
+          #04 pc 00000000007ef1dc  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Buffer::ClearBuffer(dawn::native::vulkan::CommandRecordingContext*, unsigned int, unsigned long, unsigned long)+156) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #05 pc 00000000007eeb2b  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Buffer::Initialize(bool)+2379) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #06 pc 00000000007edd3e  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Buffer::Create(dawn::native::vulkan::Device*, dawn::native::UnpackedPtr<dawn::native::BufferDescriptor> const&)+254) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #07 pc 0000000000803b8d  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Device::CreateBufferImpl(dawn::native::UnpackedPtr<dawn::native::BufferDescriptor> const&)+29) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #08 pc 000000000071ab26  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::DeviceBase::APICreateBuffer(dawn::native::BufferDescriptor const*)+1254) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #09 pc 0000000000b4f2c9  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #10 pc 0000000000b590fe  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #11 pc 0000000000b0ddaa  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #12 pc 0000000000b0dcb1  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #13 pc 0000000000ac66da  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #14 pc 0000000000ac7aa9  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #15 pc 0000000000add90e  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #16 pc 0000000000b2dd26  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #17 pc 0000000000b30324  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #18 pc 0000000000ae2df9  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #19 pc 0000000000ad8b0b  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #20 pc 0000000000ace8f3  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+main 8e30d2eed, android-views-run3:
+
+    *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+    Build fingerprint: 'google/sdk_gphone_x86_64/generic_x86_64:10/QSR1.211112.011/13135432:userdebug/dev-keys'
+    Revision: '0'
+    ABI: 'x86_64'
+    Timestamp: 2026-10-28 21:56:04+0200
+    pid: 15781, tid: 15781, name: iveskia.example  >>> com.reactnativeskia.example <<<
+    uid: 10146
+    signal 11 (SIGSEGV), code 128 (SI_KERNEL), fault addr 0x0
+        rax 70612f617461642f  rbx 0000000000000004  rcx 0000000000000001  rdx 0000000000000004
+        r8  0000000000000000  r9  0000000000000000  r10 000071594d9a4280  r11 0000000000000001
+        r12 00007ffe4cb2b86c  r13 000071594f432408  r14 00007ffe4cb2b858  r15 000071594f4323c0
+        rdi 0000715950f718e0  rsi 0000000000000004
+        rbp 00007159508b40b0  rsp 00007ffe4cb2b810  rip 0000715950802464
+    
+    backtrace:
+          #00 pc 00000000000bc464  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VulkanStreamGuest::Impl::write(void const*, unsigned long)+20) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #01 pc 0000000000130329  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE(VkCommandBuffer_T*, unsigned int, unsigned int)+329) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #02 pc 00000000000ce076  /vendor/lib64/libvulkan_enc.so (goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer(VkCommandBuffer_T*, goldfish_vk::VkEncoder*)+406) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #03 pc 000000000001cf95  /vendor/lib64/hw/vulkan.ranchu.so (goldfish_vk::entry_vkCmdPipelineBarrier(VkCommandBuffer_T*, unsigned int, unsigned int, unsigned int, unsigned int, VkMemoryBarrier const*, unsigned int, VkBufferMemoryBarrier const*, unsigned int, VkImageMemoryBarrier const*)+101) (BuildId: 016566978fc5617027d12fb569e295ae)
+          #04 pc 0000000000851e61  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Texture::TransitionUsageNow(dawn::native::vulkan::CommandRecordingContext*, wgpu::TextureUsage, wgpu::ShaderStage, dawn::native::SubresourceRange const&)+289) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #05 pc 00000000007f424c  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::CommandBuffer::RecordCommands(dawn::native::vulkan::CommandRecordingContext*)+5612) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #06 pc 000000000081eb1f  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native6vulkan5Queue10SubmitImplENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS7_Lm18446744073709551615EEE+95) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #07 pc 000000000076e8bb  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native9QueueBase14SubmitInternalENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS6_Lm18446744073709551615EEE+219) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #08 pc 000000000076e6fd  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native9QueueBase9APISubmitENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS6_Lm18446744073709551615EEE+77) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #09 pc 000000000067a2be  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::NativeQueueSubmit(WGPUQueueImpl*, unsigned long, WGPUCommandBufferImpl* const*)+78) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #10 pc 0000000000b4b11e  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #11 pc 0000000000b0131e  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #12 pc 0000000000abf342  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #13 pc 0000000000506994  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::DawnContext::submitRecording(skgpu::graphite::Recorder*, skgpu::graphite::SyncToCpu)+644) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #14 pc 0000000000512625  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::DawnContext::upload(sk_sp<SkImage> const&, bool)+149) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #15 pc 000000000061b46f  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::JsiSkImage::makeTextureImage(facebook::jsi::Runtime&, facebook::jsi::Value const&, facebook::jsi::Value const*, unsigned long)+319) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #16 pc 000000000061f3a4  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #17 pc 00000000000d22a4  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libworklets.so (offset 0x366c000) (BuildId: 6a522bdd20af540d697760093a8ca7c4259aca3c)
+          #18 pc 00000000000d22a4  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libworklets.so (offset 0x366c000) (BuildId: 6a522bdd20af540d697760093a8ca7c4259aca3c)
+          #19 pc 00000000000afabe  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libhermesvm.so (offset 0x73c000) (BuildId: 5fd94e09fc5734aefac5b42779ec24b5f23d60ce)
+          #20 pc 00000000000af743  /data/app/com.reactnativeskia.example-dJoO49-NaF9ZoEz7IQHt2w==/base.apk!libhermesvm.so (offset 0x73c000) (BuildId: 5fd94e09fc5734aefac5b42779ec24b5f23d60ce)
+main 8e30d2eed, home-run1:
+
+    *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+    Build fingerprint: 'google/sdk_gphone_x86_64/generic_x86_64:10/QSR1.211112.011/13135432:userdebug/dev-keys'
+    Revision: '0'
+    ABI: 'x86_64'
+    Timestamp: 2026-10-28 21:53:26+0200
+    pid: 14311, tid: 14311, name: iveskia.example  >>> com.reactnativeskia.example <<<
+    uid: 10146
+    signal 11 (SIGSEGV), code 128 (SI_KERNEL), fault addr 0x0
+        rax 70612f617461642f  rbx 0000000000000004  rcx 0000000000000001  rdx 0000000000000004
+        r8  0000000000000000  r9  0000000000000000  r10 0000715943593540  r11 0000000000000001
+        r12 00007ffe4cb2b86c  r13 000071599dc86648  r14 00007ffe4cb2b858  r15 000071599dc86600
+        rdi 0000715950f607a0  rsi 0000000000000004
+        rbp 00007159508710b0  rsp 00007ffe4cb2b810  rip 00007159507bf464
+    
+    backtrace:
+          #00 pc 00000000000bc464  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VulkanStreamGuest::Impl::write(void const*, unsigned long)+20) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #01 pc 0000000000130329  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE(VkCommandBuffer_T*, unsigned int, unsigned int)+329) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #02 pc 00000000000ce076  /vendor/lib64/libvulkan_enc.so (goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer(VkCommandBuffer_T*, goldfish_vk::VkEncoder*)+406) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #03 pc 000000000001cf95  /vendor/lib64/hw/vulkan.ranchu.so (goldfish_vk::entry_vkCmdPipelineBarrier(VkCommandBuffer_T*, unsigned int, unsigned int, unsigned int, unsigned int, VkMemoryBarrier const*, unsigned int, VkBufferMemoryBarrier const*, unsigned int, VkImageMemoryBarrier const*)+101) (BuildId: 016566978fc5617027d12fb569e295ae)
+          #04 pc 0000000000851e61  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Texture::TransitionUsageNow(dawn::native::vulkan::CommandRecordingContext*, wgpu::TextureUsage, wgpu::ShaderStage, dawn::native::SubresourceRange const&)+289) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #05 pc 00000000007f424c  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::CommandBuffer::RecordCommands(dawn::native::vulkan::CommandRecordingContext*)+5612) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #06 pc 000000000081eb1f  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native6vulkan5Queue10SubmitImplENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS7_Lm18446744073709551615EEE+95) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #07 pc 000000000076e8bb  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native9QueueBase14SubmitInternalENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS6_Lm18446744073709551615EEE+219) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #08 pc 000000000076e6fd  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native9QueueBase9APISubmitENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS6_Lm18446744073709551615EEE+77) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #09 pc 000000000067a2be  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::NativeQueueSubmit(WGPUQueueImpl*, unsigned long, WGPUCommandBufferImpl* const*)+78) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #10 pc 0000000000b4b11e  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #11 pc 0000000000b0131e  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #12 pc 0000000000abf342  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #13 pc 0000000000506994  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::DawnContext::submitRecording(skgpu::graphite::Recorder*, skgpu::graphite::SyncToCpu)+644) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #14 pc 0000000000512625  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::DawnContext::upload(sk_sp<SkImage> const&, bool)+149) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #15 pc 000000000061b46f  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::JsiSkImage::makeTextureImage(facebook::jsi::Runtime&, facebook::jsi::Value const&, facebook::jsi::Value const*, unsigned long)+319) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #16 pc 000000000061f3a4  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #17 pc 00000000000d22a4  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libworklets.so (offset 0x366c000) (BuildId: 6a522bdd20af540d697760093a8ca7c4259aca3c)
+          #18 pc 00000000000d22a4  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libworklets.so (offset 0x366c000) (BuildId: 6a522bdd20af540d697760093a8ca7c4259aca3c)
+          #19 pc 00000000000afabe  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libhermesvm.so (offset 0x73c000) (BuildId: 5fd94e09fc5734aefac5b42779ec24b5f23d60ce)
+          #20 pc 00000000000af743  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libhermesvm.so (offset 0x73c000) (BuildId: 5fd94e09fc5734aefac5b42779ec24b5f23d60ce)
+main 8e30d2eed, home-run2:
+
+    *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+    Build fingerprint: 'google/sdk_gphone_x86_64/generic_x86_64:10/QSR1.211112.011/13135432:userdebug/dev-keys'
+    Revision: '0'
+    ABI: 'x86_64'
+    Timestamp: 2026-10-28 21:53:54+0200
+    pid: 14476, tid: 14476, name: iveskia.example  >>> com.reactnativeskia.example <<<
+    uid: 10146
+    signal 11 (SIGSEGV), code 2 (SEGV_ACCERR), fault addr 0x715941361218
+        rax 00007159413611a0  rbx 0000000000000004  rcx 0000000000000001  rdx 0000000000000004
+        r8  0000000000000000  r9  0000000000000000  r10 000071594e8bd3c0  r11 0000000000000001
+        r12 00007ffe4cb2b86c  r13 000071594bf13b48  r14 00007ffe4cb2b858  r15 000071594bf13b00
+        rdi 000071594aa054f0  rsi 0000000000000004
+        rbp 00007159508f70b0  rsp 00007ffe4cb2b808  rip 0000715941361218
+    
+    backtrace:
+          #00 pc 0000000000000218  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk
+          #01 pc 00000000000bc466  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VulkanStreamGuest::Impl::write(void const*, unsigned long)+22) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #02 pc 00000000007f9867  [stack]
+          #03 pc 0000000000130329  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE(VkCommandBuffer_T*, unsigned int, unsigned int)+329) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #04 pc 00000000020bc34f  [anon:libc_malloc]
+          #05 pc 00000000000ce076  /vendor/lib64/libvulkan_enc.so (goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer(VkCommandBuffer_T*, goldfish_vk::VkEncoder*)+406) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #06 pc 0000000000001000  <unknown>
+          #07 pc 000000000001cf95  /vendor/lib64/hw/vulkan.ranchu.so (goldfish_vk::entry_vkCmdPipelineBarrier(VkCommandBuffer_T*, unsigned int, unsigned int, unsigned int, unsigned int, VkMemoryBarrier const*, unsigned int, VkBufferMemoryBarrier const*, unsigned int, VkImageMemoryBarrier const*)+101) (BuildId: 016566978fc5617027d12fb569e295ae)
+          #08 pc 000000000024363f  [anon:libc_malloc]
+          #09 pc 0000000000851e61  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Texture::TransitionUsageNow(dawn::native::vulkan::CommandRecordingContext*, wgpu::TextureUsage, wgpu::ShaderStage, dawn::native::SubresourceRange const&)+289) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #10 pc 00000000007f9b47  [stack]
+          #11 pc 00000000007f424c  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::CommandBuffer::RecordCommands(dawn::native::vulkan::CommandRecordingContext*)+5612) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #12 pc 00000000007f9d77  [stack]
+          #13 pc 000000000081eb1f  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native6vulkan5Queue10SubmitImplENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS7_Lm18446744073709551615EEE+95) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+main 8e30d2eed, home-run3:
+
+    *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+    Build fingerprint: 'google/sdk_gphone_x86_64/generic_x86_64:10/QSR1.211112.011/13135432:userdebug/dev-keys'
+    Revision: '0'
+    ABI: 'x86_64'
+    Timestamp: 2026-10-28 21:54:10+0200
+    pid: 14598, tid: 14598, name: iveskia.example  >>> com.reactnativeskia.example <<<
+    uid: 10146
+    signal 11 (SIGSEGV), code 128 (SI_KERNEL), fault addr 0x0
+        rax 70612f617461642f  rbx 0000000000000004  rcx 0000000000000001  rdx 0000000000000004
+        r8  0000000000000000  r9  0000000000000000  r10 0000715940b26f50  r11 0000000000000001
+        r12 00007ffe4cb2b86c  r13 000071599e2a59c8  r14 00007ffe4cb2b858  r15 000071599e2a5980
+        rdi 000071599e260220  rsi 0000000000000004
+        rbp 0000715950ef20b0  rsp 00007ffe4cb2b810  rip 0000715950e40464
+    
+    backtrace:
+          #00 pc 00000000000bc464  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VulkanStreamGuest::Impl::write(void const*, unsigned long)+20) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #01 pc 0000000000130329  /vendor/lib64/libvulkan_enc.so (goldfish_vk::VkEncoder::vkCommandBufferHostSyncGOOGLE(VkCommandBuffer_T*, unsigned int, unsigned int)+329) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #02 pc 00000000000ce076  /vendor/lib64/libvulkan_enc.so (goldfish_vk::ResourceTracker::Impl::syncEncodersForCommandBuffer(VkCommandBuffer_T*, goldfish_vk::VkEncoder*)+406) (BuildId: a9cf7e85b4055253475e48d71cd8f7ff)
+          #03 pc 000000000001cf95  /vendor/lib64/hw/vulkan.ranchu.so (goldfish_vk::entry_vkCmdPipelineBarrier(VkCommandBuffer_T*, unsigned int, unsigned int, unsigned int, unsigned int, VkMemoryBarrier const*, unsigned int, VkBufferMemoryBarrier const*, unsigned int, VkImageMemoryBarrier const*)+101) (BuildId: 016566978fc5617027d12fb569e295ae)
+          #04 pc 0000000000851e61  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::Texture::TransitionUsageNow(dawn::native::vulkan::CommandRecordingContext*, wgpu::TextureUsage, wgpu::ShaderStage, dawn::native::SubresourceRange const&)+289) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #05 pc 00000000007f424c  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::vulkan::CommandBuffer::RecordCommands(dawn::native::vulkan::CommandRecordingContext*)+5612) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #06 pc 000000000081eb1f  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native6vulkan5Queue10SubmitImplENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS7_Lm18446744073709551615EEE+95) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #07 pc 000000000076e8bb  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native9QueueBase14SubmitInternalENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS6_Lm18446744073709551615EEE+219) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #08 pc 000000000076e6fd  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (_ZN4dawn6native9QueueBase9APISubmitENS_6detail8SpanBaseIKPNS0_17CommandBufferBaseEmPS6_Lm18446744073709551615EEE+77) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #09 pc 000000000067a2be  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libwebgpu_dawn.so (offset 0x2620000) (dawn::native::NativeQueueSubmit(WGPUQueueImpl*, unsigned long, WGPUCommandBufferImpl* const*)+78) (BuildId: 3ae7b7b83e4d18dacab8514c759327a209777c31)
+          #10 pc 0000000000b4b11e  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #11 pc 0000000000b0131e  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #12 pc 0000000000abf342  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #13 pc 0000000000506994  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::DawnContext::submitRecording(skgpu::graphite::Recorder*, skgpu::graphite::SyncToCpu)+644) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #14 pc 0000000000512625  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::DawnContext::upload(sk_sp<SkImage> const&, bool)+149) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #15 pc 000000000061b46f  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (RNSkia::JsiSkImage::makeTextureImage(facebook::jsi::Runtime&, facebook::jsi::Value const&, facebook::jsi::Value const*, unsigned long)+319) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #16 pc 000000000061f3a4  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!librnskia.so (offset 0x18e8000) (BuildId: 6a41a68af61da1e60d4ecc44b17903b734c27637)
+          #17 pc 00000000000d22a4  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libworklets.so (offset 0x366c000) (BuildId: 6a522bdd20af540d697760093a8ca7c4259aca3c)
+          #18 pc 00000000000d22a4  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libworklets.so (offset 0x366c000) (BuildId: 6a522bdd20af540d697760093a8ca7c4259aca3c)
+          #19 pc 00000000000afabe  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libhermesvm.so (offset 0x73c000) (BuildId: 5fd94e09fc5734aefac5b42779ec24b5f23d60ce)
+          #20 pc 00000000000af743  /data/app/com.reactnativeskia.example-6K9B-GKwTOnSBpoU1v2MXQ==/base.apk!libhermesvm.so (offset 0x73c000) (BuildId: 5fd94e09fc5734aefac5b42779ec24b5f23d60ce)

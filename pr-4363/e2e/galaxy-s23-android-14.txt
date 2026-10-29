@@ -1,0 +1,20 @@
+## main 8e30d2eed
+
+Test Suites: 1 failed, 67 passed, 68 total
+Tests:       1 failed, 6 skipped, 424 passed, 431 total
+Time:        726.941 s
+
+Failing:
+
+- Advanced Image Filters › Empty - Silhouette Effect
+
+## this PR 13601932c
+
+Test Suites: 1 failed, 67 passed, 68 total
+Tests:       1 failed, 6 skipped, 424 passed, 431 total
+Time:        640.759 s, estimated 740 s
+
+Failing:
+
+- Advanced Image Filters › Empty - Silhouette Effect
+
