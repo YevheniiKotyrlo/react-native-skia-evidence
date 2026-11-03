@@ -2,8 +2,8 @@
 // one or more runs a side: for each step, the base's and the head's readings the probe took at the step itself, what
 // the thread's recorders hold and what Dawn has allocated, and for the step after Home, which the probe does not
 // read, the process's GPU memory over the baseline from the runner's dump (dumpsys gpu --gpumem where the phone
-// reports it, GL mtrack otherwise), which on a slow phone can land after the step it is named for. Each value is the
-// median of the side's runs, with the lowest and the highest run where they differ.
+// reports it, GL mtrack, labelled so, where it does not), which on a slow phone can land after the step it is named
+// for. Each value is the median of the side's runs, with the lowest and the highest run where they differ.
 //   bun compare-runs.ts <base run folder>... -- <head run folder>...
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -71,10 +71,13 @@ const cell = (rows: readonly (StepRow | undefined)[]): string => {
     return '—';
   }
   if (read.every((row) => row.recorders === '—')) {
-    const memory = read.map((row) =>
-      row.gpuMemoryOverBaseline !== '—' ? row.gpuMemoryOverBaseline : row.glMtrackOverBaseline,
-    );
-    return `GPU memory ${spread(memory, true)} MB`;
+    if (read.every((row) => row.gpuMemoryOverBaseline !== '—')) {
+      return `GPU memory ${spread(read.map((row) => row.gpuMemoryOverBaseline), true)} MB`;
+    }
+    if (read.every((row) => row.gpuMemoryOverBaseline === '—')) {
+      return `GL mtrack ${spread(read.map((row) => row.glMtrackOverBaseline), true)} MB`;
+    }
+    throw new Error('some runs read GPU memory and others only GL mtrack');
   }
   const recorders = spread(
     read.map((row) => row.recorders.replace(/^\w+: /, '')),

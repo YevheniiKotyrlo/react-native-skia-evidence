@@ -29,4 +29,4 @@ cp "$here/RecorderTrimProbe.tsx" "$example/src/RecorderTrimProbe.tsx"
     --bundle-output dist/main.android.jsbundle --assets-dest dist/res)
 (cd "$example/android" && ./gradlew assembleRelease -PreactNativeArchitectures=arm64-v8a)
 cp "$example/android/app/build/outputs/apk/release/app-release.apk" \
-  "$here/recorder-trim-probe-$(git -C "$checkout" rev-parse --short HEAD).apk"
+  "$here/recorder-trim-probe-$(git -C "$checkout" rev-parse --short=9 HEAD).apk"

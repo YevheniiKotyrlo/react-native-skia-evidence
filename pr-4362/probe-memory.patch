@@ -1,8 +1,8 @@
 diff --git a/packages/skia/cpp/api/JsiSkApi.h b/packages/skia/cpp/api/JsiSkApi.h
-index 75b8c7bf4..58f26ef4b 100644
+index 2854626..ef17a8c 100644
 --- a/packages/skia/cpp/api/JsiSkApi.h
 +++ b/packages/skia/cpp/api/JsiSkApi.h
-@@ -12,6 +12,11 @@
+@@ -15,6 +15,11 @@
  
  #include "rnskia/RNDawnContext.h"
  
@@ -14,7 +14,7 @@ index 75b8c7bf4..58f26ef4b 100644
  #include "JsiSkAnimatedImage.h"
  #include "JsiSkAnimatedImageFactory.h"
  #include "JsiSkColor.h"
-@@ -197,6 +202,54 @@ public:
+@@ -200,6 +205,54 @@ public:
                                       : jsi::Value(runtime, string(gpu.error)));
      result.setProperty(runtime, "lost",
                         getLostPromise(runtime, gpu.generation));
@@ -66,14 +66,14 @@ index 75b8c7bf4..58f26ef4b 100644
 +                  static_cast<double>(allocator.totalAllocatedMemory));
 +              return info;
 +            }));
+     result.setProperty(runtime, "foreground", DawnContext::isForeground());
      return result;
    }
- 
 diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
-index 5e54ba14d..978aa2f02 100644
+index 011ea32..95cafd5 100644
 --- a/packages/skia/cpp/rnskia/RNDawnContext.h
 +++ b/packages/skia/cpp/rnskia/RNDawnContext.h
-@@ -402,6 +402,21 @@ public:
+@@ -376,6 +376,21 @@ public:
      return {recorder, slot.generation};
    }
  

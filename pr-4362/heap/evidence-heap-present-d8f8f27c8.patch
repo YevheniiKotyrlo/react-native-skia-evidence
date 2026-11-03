@@ -1,0 +1,234 @@
+diff --git a/packages/skia/android/cpp/jni/include/JniPresentThread.h b/packages/skia/android/cpp/jni/include/JniPresentThread.h
+index 8851d4c92..acfb116f4 100644
+--- a/packages/skia/android/cpp/jni/include/JniPresentThread.h
++++ b/packages/skia/android/cpp/jni/include/JniPresentThread.h
+@@ -1,6 +1,7 @@
+ #pragma once
+ 
+ #include <exception>
++#include <memory>
+ #include <string>
+ #include <utility>
+ 
+@@ -24,6 +25,13 @@ public:
+   static auto constexpr kJavaDescriptor =
+       "Lcom/reactnative/skia/PresentThread;";
+ 
++  // Evidence only (the heap-exhaustion probe): the present thread's
++  // dispatcher, for the probe to post to it from a thread of its own.
++  static std::weak_ptr<Dispatcher> &probeDispatcher() {
++    static std::weak_ptr<Dispatcher> dispatcher;
++    return dispatcher;
++  }
++
+   static void registerNatives() {
+     javaClassStatic()->registerNatives(
+         {makeNativeMethod("bindDispatcher", JniPresentThread::bindDispatcher)});
+@@ -54,6 +62,7 @@ private:
+         return false;
+       }
+     });
++    probeDispatcher() = Dispatcher::getDispatcher();
+   }
+ };
+ 
+diff --git a/packages/skia/cpp/rnskia/RNSkManager.cpp b/packages/skia/cpp/rnskia/RNSkManager.cpp
+index d5953a613..9bac2283e 100644
+--- a/packages/skia/cpp/rnskia/RNSkManager.cpp
++++ b/packages/skia/cpp/rnskia/RNSkManager.cpp
+@@ -19,6 +19,21 @@
+ #include "jsi/BoxedNativeObject.h"
+ #include "jsi/ViewProperty.h"
+ 
++#ifdef __ANDROID__
++#include <android/log.h>
++#include <sys/system_properties.h>
++
++#include <atomic>
++#include <chrono>
++#include <string>
++#include <thread>
++#include <vector>
++
++#include <fbjni/fbjni.h>
++
++#include "JniPresentThread.h"
++#endif
++
+ namespace RNSkia {
+ namespace jsi = facebook::jsi;
+ 
+@@ -134,6 +149,173 @@ void RNSkManager::installBindings() {
+       jsi::Object::createFromHostObject(
+           *_jsRuntime, std::make_shared<RNJsi::NativeObjectWorkletHelpers>()));
+ 
++#ifdef __ANDROID__
++  // Evidence only (the heap-exhaustion probe): "prop" reads a system
++  // property; "hold-main" keeps the main thread waiting in native code until
++  // "let-main-go"; "fill" exhausts Java's heap until 16 bytes fail and "free"
++  // lets it go; "wait" sleeps the JS thread in native code; "present-post-join"
++  // posts to the present thread's dispatcher from a thread of its own, as the
++  // trims thread does, and waits for it.
++  auto platformContext = _platformContext;
++  _jsRuntime->global().setProperty(
++      *_jsRuntime, "__skiaProbe",
++      jsi::Function::createFromHostFunction(
++          *_jsRuntime, jsi::PropNameID::forAscii(*_jsRuntime, "__skiaProbe"),
++          2,
++          [platformContext](jsi::Runtime &runtime, const jsi::Value &,
++                            const jsi::Value *arguments,
++                            size_t count) -> jsi::Value {
++            auto operation = arguments[0].asString(runtime).utf8(runtime);
++            if (operation == "prop") {
++              auto name = arguments[1].asString(runtime).utf8(runtime);
++              char value[PROP_VALUE_MAX] = {0};
++              __system_property_get(name.c_str(), value);
++              return jsi::String::createFromUtf8(runtime, value);
++            }
++            static std::atomic<bool> mainThreadHeld{false};
++            static std::atomic<bool> mainThreadLetGo{false};
++            if (operation == "hold-main") {
++              mainThreadHeld = false;
++              mainThreadLetGo = false;
++              platformContext->runOnMainThread([]() {
++                mainThreadHeld = true;
++                while (!mainThreadLetGo) {
++                  std::this_thread::sleep_for(std::chrono::milliseconds(1));
++                }
++              });
++              while (!mainThreadHeld) {
++                std::this_thread::sleep_for(std::chrono::milliseconds(1));
++              }
++              return jsi::String::createFromUtf8(runtime, "");
++            }
++            if (operation == "let-main-go") {
++              mainThreadLetGo = true;
++              return jsi::String::createFromUtf8(runtime, "");
++            }
++            if (operation == "wait") {
++              std::this_thread::sleep_for(std::chrono::milliseconds(
++                  static_cast<int>(arguments[1].asNumber())));
++              return jsi::String::createFromUtf8(runtime, "");
++            }
++            static std::vector<jobject> heapFiller;
++            if (operation == "fill") {
++              JNIEnv *env = facebook::jni::Environment::current();
++              jclass runtimeClass = env->FindClass("java/lang/Runtime");
++              jobject javaRuntime = env->CallStaticObjectMethod(
++                  runtimeClass,
++                  env->GetStaticMethodID(runtimeClass, "getRuntime",
++                                         "()Ljava/lang/Runtime;"));
++              auto figure = [env, runtimeClass, javaRuntime](const char *name) {
++                return env->CallLongMethod(
++                    javaRuntime, env->GetMethodID(runtimeClass, name, "()J"));
++              };
++              jlong left = figure("maxMemory") - figure("totalMemory") +
++                           figure("freeMemory");
++              env->DeleteLocalRef(javaRuntime);
++              env->DeleteLocalRef(runtimeClass);
++              double filled = 0;
++              auto keep = [env, &filled](jsize size) {
++                jbyteArray array = env->NewByteArray(size);
++                if (array == nullptr) {
++                  env->ExceptionClear();
++                  return false;
++                }
++                heapFiller.push_back(env->NewGlobalRef(array));
++                env->DeleteLocalRef(array);
++                filled += size;
++                return true;
++              };
++              if (left > (2 << 20)) {
++                keep(static_cast<jsize>(left - (2 << 20)));
++              }
++              for (jsize size = 1 << 20; size >= 16;) {
++                if (!keep(size)) {
++                  size /= 2;
++                }
++              }
++              return jsi::String::createFromUtf8(
++                  runtime, std::to_string(static_cast<long long>(filled)));
++            }
++            if (operation == "free") {
++              JNIEnv *env = facebook::jni::Environment::current();
++              for (auto reference : heapFiller) {
++                env->DeleteGlobalRef(reference);
++              }
++              heapFiller.clear();
++              return jsi::String::createFromUtf8(runtime, "");
++            }
++            if (operation == "present-post-join" && count > 1) {
++              auto id =
++                  std::to_string(static_cast<int>(arguments[1].asNumber()));
++              std::thread poster([id]() {
++                auto dispatcher = JniPresentThread::probeDispatcher().lock();
++                if (!dispatcher) {
++                  __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                                      "PRESENT_PROBE post %s: no dispatcher",
++                                      id.c_str());
++                  return;
++                }
++                bool posted = dispatcher->run([id]() {
++                  __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                                      "PRESENT_PROBE task %s ran", id.c_str());
++                });
++                __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                                    "PRESENT_PROBE post %s returned %d",
++                                    id.c_str(), posted ? 1 : 0);
++              });
++              poster.join();
++              return jsi::String::createFromUtf8(runtime, "");
++            }
++            // "js-post-join" posts to the JS thread's dispatcher, whose binding
++            // goes through React Native's CallInvoker, from a thread of its own,
++            // as the trims thread does, and waits for it.
++            if (operation == "js-post-join" && count > 1) {
++              auto id =
++                  std::to_string(static_cast<int>(arguments[1].asNumber()));
++              auto jsDispatcher = Dispatcher::getDispatcher();
++              std::thread poster([id, jsDispatcher]() {
++                jsDispatcher->run([id]() {
++                  __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                                      "PRESENT_PROBE js task %s ran",
++                                      id.c_str());
++                });
++                __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                                    "PRESENT_PROBE js post %s returned",
++                                    id.c_str());
++              });
++              poster.join();
++              return jsi::String::createFromUtf8(runtime, "");
++            }
++            // "js-post-later" posts to the JS thread's dispatcher from a thread
++            // of its own once the given time has passed, while the JS thread
++            // idles: the task it posts frees Java's heap, lets the main thread
++            // go and ends the probe.
++            if (operation == "js-post-later" && count > 1) {
++              auto delay = static_cast<int>(arguments[1].asNumber());
++              auto jsDispatcher = Dispatcher::getDispatcher();
++              std::thread([delay, jsDispatcher]() {
++                std::this_thread::sleep_for(std::chrono::milliseconds(delay));
++                jsDispatcher->run([]() {
++                  JNIEnv *env = facebook::jni::Environment::current();
++                  for (auto reference : heapFiller) {
++                    env->DeleteGlobalRef(reference);
++                  }
++                  heapFiller.clear();
++                  mainThreadLetGo = true;
++                  __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                                      "PRESENT_PROBE js task ran, heap freed");
++                  __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                                      "PRESENT_PROBE done");
++                });
++                __android_log_print(ANDROID_LOG_INFO, "RNSkia",
++                                    "PRESENT_PROBE js post returned");
++              }).detach();
++              return jsi::String::createFromUtf8(runtime, "");
++            }
++            return jsi::String::createFromUtf8(runtime, "unknown");
++          }));
++#endif
++
+   // The WebGPU JS API (RNWebGPU, navigator.gpu, constants, createImageBitmap)
+   // is no longer installed here: react-native-webgpu is the single WebGPU API
+   // surface for React Native. Graphite keeps Dawn as an internal
