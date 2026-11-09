@@ -39,7 +39,7 @@ index 75b8c7bf4..50aca4b1e 100644
 +              auto latch = std::make_shared<Latch>();
 +              constexpr int threads = 4;
 +              for (int job = 0; job < threads; job++) {
-+                RNSkThreadPool::getInstance().post([latch, mark]() {
++                RNSkThreadPool::getInstance().post(static_cast<RNSkThreadPool::Lane>(job), [latch, mark]() {
 +                  std::unique_lock<std::mutex> lock(latch->mutex);
 +                  latch->arrived++;
 +                  latch->condition.notify_all();
@@ -80,9 +80,9 @@ index 75b8c7bf4..50aca4b1e 100644
 +                  static_cast<double>(allocator.totalAllocatedMemory));
 +              return info;
 +            }));
+     result.setProperty(runtime, "foreground", DawnContext::isForeground());
      return result;
    }
- 
 diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
 index e7bab52f9..f550f73e7 100644
 --- a/packages/skia/cpp/rnskia/RNDawnContext.h
