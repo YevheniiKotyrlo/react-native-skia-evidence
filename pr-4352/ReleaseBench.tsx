@@ -48,6 +48,10 @@ const WINDOW_CYCLES = 16;
 // over adb at a marker to land inside it.
 const SETTLE_MS = 8000;
 const DUMP_MS = 3000;
+// The runner reads meminfo once it sees the after marker, which can be many
+// seconds late: the probe asks Dawn for its memory back only this long after
+// the marker, so that the after reading is of the arm as it was left.
+const HELD_MS = 40000;
 
 // Set when the bundle is made for a device whose log the host cannot read,
 // such as an iOS device reached over Wi-Fi only: every line is posted there too.
@@ -347,6 +351,8 @@ export const ReleaseBench = () => {
           "dawn",
           `arm=${name} phase=held ${JSON.stringify(gpu.__memory?.(false))}`
         );
+        await sleep(HELD_MS - DUMP_MS);
+        logMarker("reduce", `arm=${name}`);
         logMarker(
           "dawn",
           `arm=${name} phase=reduced ${JSON.stringify(gpu.__memory?.(true))}`

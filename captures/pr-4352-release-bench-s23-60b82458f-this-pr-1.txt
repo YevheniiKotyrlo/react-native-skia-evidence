@@ -1,0 +1,93 @@
+# Galaxy S23 · Android 14, this PR at 60b82458f, run 1
+
+## dumpsys meminfo, EGL mtrack at each marker, and when the reading began (seconds since boot)
+
+0-none-after: EGL mtrack 40288 kB, read from 4492634.936 s
+0-none-before: EGL mtrack 40288 kB, read from 4492563.264 s
+0-none-reduced: EGL mtrack 40288 kB, read from 4492673.768 s
+1-canvas-after: EGL mtrack 40288 kB, read from 4492760.878 s
+1-canvas-before: EGL mtrack 40288 kB, read from 4492690.313 s
+1-canvas-reduced: EGL mtrack 40288 kB, read from 4492800.726 s
+2-canvas-blur-after: EGL mtrack 40288 kB, read from 4492886.321 s
+2-canvas-blur-before: EGL mtrack 40288 kB, read from 4492816.415 s
+2-canvas-blur-reduced: EGL mtrack 40288 kB, read from 4492926.277 s
+3-none-after: EGL mtrack 40288 kB, read from 4493015.594 s
+3-none-before: EGL mtrack 40288 kB, read from 4492943.549 s
+3-none-reduced: EGL mtrack 40288 kB, read from 4493053.971 s
+
+## The bench's log lines and the release rounds (seconds since boot)
+
+4492562.330 BENCH memory-unmounted arm=0-none-before pass=0 jsNow=4492562330.9
+4492575.237 BENCH frames window=0-none-cycles-0 frames=1181 periodMs=8.34 missedFrames=3 maxGapMs=16.7 durationMs=9878 jsNow=4492575237.7
+4492585.116 BENCH frames window=0-none-cycles-1 frames=1178 periodMs=8.34 missedFrames=6 maxGapMs=16.7 durationMs=9877 jsNow=4492585116.8
+4492594.993 BENCH frames window=0-none-cycles-2 frames=1181 periodMs=8.34 missedFrames=3 maxGapMs=16.7 durationMs=9878 jsNow=4492594993.3
+4492604.871 BENCH frames window=0-none-cycles-3 frames=1181 periodMs=8.34 missedFrames=3 maxGapMs=16.7 durationMs=9879 jsNow=4492604871.3
+4492614.750 BENCH frames window=0-none-cycles-4 frames=1180 periodMs=8.34 missedFrames=4 maxGapMs=16.7 durationMs=9878 jsNow=4492614750.4
+4492624.610 BENCH cycles arm=0-none cycles=96 durationMs=59268 jsNow=4492624610.8
+4492624.624 BENCH frames window=0-none-cycles-5 frames=1180 periodMs=8.34 missedFrames=4 maxGapMs=16.7 durationMs=9878 jsNow=4492624624.7
+4492632.728 BENCH memory-unmounted arm=0-none-after pass=0 jsNow=4492632728.4
+4492632.740 BENCH frames window=0-none-settle frames=960 periodMs=8.34 missedFrames=0 maxGapMs=8.3 durationMs=8009 jsNow=4492632740.7
+4492635.731 BENCH dawn arm=0-none phase=held {"rounds":0,"total":72108,"textures":0,"buffers":72108,"allocatorUsed":72192,"allocatorAllocated":8454144,"contextBudgeted":72100,"contextPurgeable":0} jsNow=4492635731.6
+4492672.740 BENCH reduce arm=0-none jsNow=4492672740.2
+4492672.740 BENCH dawn arm=0-none phase=reduced {"rounds":0,"total":72108,"textures":0,"buffers":72108,"allocatorUsed":72192,"allocatorAllocated":8454144,"contextBudgeted":72100,"contextPurgeable":0} jsNow=4492672740.9
+4492672.741 BENCH memory-unmounted arm=0-none-reduced pass=0 jsNow=4492672741.1
+4492688.765 BENCH memory-unmounted arm=1-canvas-before pass=0 jsNow=4492688763.2
+4492701.673 BENCH frames window=1-canvas-cycles-0 frames=1127 periodMs=8.34 missedFrames=56 maxGapMs=33.4 durationMs=9870 jsNow=4492701673.2
+4492711.546 BENCH frames window=1-canvas-cycles-1 frames=1130 periodMs=8.34 missedFrames=54 maxGapMs=33.4 durationMs=9878 jsNow=4492711546.1
+4492721.419 BENCH frames window=1-canvas-cycles-2 frames=1139 periodMs=8.34 missedFrames=45 maxGapMs=33.4 durationMs=9878 jsNow=4492721419.4
+4492731.298 BENCH frames window=1-canvas-cycles-3 frames=1133 periodMs=8.34 missedFrames=51 maxGapMs=33.4 durationMs=9878 jsNow=4492731298.1
+4492741.178 BENCH frames window=1-canvas-cycles-4 frames=1125 periodMs=8.34 missedFrames=59 maxGapMs=33.4 durationMs=9878 jsNow=4492741178.2
+4492751.036 BENCH cycles arm=1-canvas cycles=96 durationMs=59266 jsNow=4492751036.9
+4492751.048 BENCH frames window=1-canvas-cycles-5 frames=1132 periodMs=8.34 missedFrames=52 maxGapMs=33.4 durationMs=9878 jsNow=4492751048.9
+4492751.712 RELEASE_ROUND outcome=1 lockedUs=432 request=11520
+4492751.767 RELEASE_ROUND outcome=0 lockedUs=19 request=11520
+4492752.963 RELEASE_ROUND outcome=1 lockedUs=313 request=11521
+4492752.973 RELEASE_ROUND outcome=busy request=11521
+4492753.973 RELEASE_ROUND outcome=1 lockedUs=397 request=11524
+4492753.988 RELEASE_ROUND outcome=0 lockedUs=13 request=11524
+4492759.155 BENCH memory-unmounted arm=1-canvas-after pass=0 jsNow=4492759155.1
+4492759.168 BENCH frames window=1-canvas-settle frames=960 periodMs=8.34 missedFrames=0 maxGapMs=8.3 durationMs=8009 jsNow=4492759168.6
+4492762.167 BENCH dawn arm=1-canvas phase=held {"rounds":0,"total":129724,"textures":57600,"buffers":72124,"allocatorUsed":178752,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=4492762167.5
+4492762.630 RELEASE_ROUND outcome=1 lockedUs=243 request=11525
+4492762.640 RELEASE_ROUND outcome=0 lockedUs=19 request=11528
+4492799.177 BENCH reduce arm=1-canvas jsNow=4492799177.1
+4492799.177 BENCH dawn arm=1-canvas phase=reduced {"rounds":0,"total":72124,"textures":0,"buffers":72124,"allocatorUsed":109120,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=4492799177.8
+4492799.177 BENCH memory-unmounted arm=1-canvas-reduced pass=0 jsNow=4492799177.8
+4492815.195 BENCH memory-unmounted arm=2-canvas-blur-before pass=0 jsNow=4492815195.0
+4492828.091 BENCH frames window=2-canvas-blur-cycles-0 frames=1123 periodMs=8.34 missedFrames=61 maxGapMs=33.4 durationMs=9878 jsNow=4492828091.7
+4492837.973 BENCH frames window=2-canvas-blur-cycles-1 frames=1127 periodMs=8.34 missedFrames=57 maxGapMs=33.4 durationMs=9878 jsNow=4492837973.0
+4492847.849 BENCH frames window=2-canvas-blur-cycles-2 frames=1129 periodMs=8.34 missedFrames=55 maxGapMs=33.4 durationMs=9879 jsNow=4492847849.0
+4492857.732 BENCH frames window=2-canvas-blur-cycles-3 frames=1136 periodMs=8.34 missedFrames=48 maxGapMs=33.4 durationMs=9878 jsNow=4492857732.9
+4492867.607 BENCH frames window=2-canvas-blur-cycles-4 frames=1126 periodMs=8.34 missedFrames=58 maxGapMs=33.4 durationMs=9878 jsNow=4492867607.3
+4492877.467 BENCH cycles arm=2-canvas-blur cycles=96 durationMs=59269 jsNow=4492877467.3
+4492877.480 BENCH frames window=2-canvas-blur-cycles-5 frames=1126 periodMs=8.34 missedFrames=58 maxGapMs=33.4 durationMs=9878 jsNow=4492877480.9
+4492878.157 RELEASE_ROUND outcome=1 lockedUs=292 request=23048
+4492878.210 RELEASE_ROUND outcome=0 lockedUs=18 request=23048
+4492879.402 RELEASE_ROUND outcome=1 lockedUs=216 request=23049
+4492879.412 RELEASE_ROUND outcome=busy request=23049
+4492880.413 RELEASE_ROUND outcome=1 lockedUs=579 request=23052
+4492880.432 RELEASE_ROUND outcome=0 lockedUs=9 request=23052
+4492885.585 BENCH memory-unmounted arm=2-canvas-blur-after pass=0 jsNow=4492885585.9
+4492885.598 BENCH frames window=2-canvas-blur-settle frames=960 periodMs=8.34 missedFrames=0 maxGapMs=8.3 durationMs=8010 jsNow=4492885598.4
+4492888.598 BENCH dawn arm=2-canvas-blur phase=held {"rounds":0,"total":129724,"textures":57600,"buffers":72124,"allocatorUsed":199232,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=4492888598.0
+4492889.083 RELEASE_ROUND outcome=busy request=23053
+4492890.084 RELEASE_ROUND outcome=1 lockedUs=351 request=23056
+4492890.094 RELEASE_ROUND outcome=0 lockedUs=21 request=23056
+4492925.606 BENCH reduce arm=2-canvas-blur jsNow=4492925606.7
+4492925.607 BENCH dawn arm=2-canvas-blur phase=reduced {"rounds":0,"total":72124,"textures":0,"buffers":72124,"allocatorUsed":129600,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=4492925607.3
+4492925.607 BENCH memory-unmounted arm=2-canvas-blur-reduced pass=0 jsNow=4492925607.3
+4492941.625 BENCH memory-unmounted arm=3-none-before pass=0 jsNow=4492941625.3
+4492954.523 BENCH frames window=3-none-cycles-0 frames=1183 periodMs=8.34 missedFrames=1 maxGapMs=16.7 durationMs=9878 jsNow=4492954523.2
+4492964.397 BENCH frames window=3-none-cycles-1 frames=1182 periodMs=8.34 missedFrames=2 maxGapMs=16.7 durationMs=9878 jsNow=4492964397.8
+4492974.280 BENCH frames window=3-none-cycles-2 frames=1183 periodMs=8.34 missedFrames=1 maxGapMs=16.7 durationMs=9878 jsNow=4492974280.7
+4492984.159 BENCH frames window=3-none-cycles-3 frames=1180 periodMs=8.34 missedFrames=4 maxGapMs=16.7 durationMs=9878 jsNow=4492984159.7
+4492994.033 BENCH frames window=3-none-cycles-4 frames=1183 periodMs=8.34 missedFrames=1 maxGapMs=16.7 durationMs=9878 jsNow=4492994033.4
+4493003.896 BENCH cycles arm=3-none cycles=96 durationMs=59268 jsNow=4493003896.6
+4493003.909 BENCH frames window=3-none-cycles-5 frames=1184 periodMs=8.34 missedFrames=0 maxGapMs=8.3 durationMs=9878 jsNow=4493003909.1
+4493012.014 BENCH memory-unmounted arm=3-none-after pass=0 jsNow=4493012014.1
+4493012.026 BENCH frames window=3-none-settle frames=960 periodMs=8.34 missedFrames=0 maxGapMs=8.3 durationMs=8009 jsNow=4493012026.9
+4493015.018 BENCH dawn arm=3-none phase=held {"rounds":0,"total":72124,"textures":0,"buffers":72124,"allocatorUsed":129600,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=4493015018.1
+4493052.026 BENCH reduce arm=3-none jsNow=4493052026.1
+4493052.026 BENCH dawn arm=3-none phase=reduced {"rounds":0,"total":72124,"textures":0,"buffers":72124,"allocatorUsed":129600,"allocatorAllocated":16842752,"contextBudgeted":72100,"contextPurgeable":65536} jsNow=4493052026.8
+4493052.026 BENCH memory-unmounted arm=3-none-reduced pass=0 jsNow=4493052026.9
+4493060.035 BENCH done cycles=96 jsNow=4493060034.9

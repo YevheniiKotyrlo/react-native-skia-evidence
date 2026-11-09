@@ -1,8 +1,8 @@
 diff --git a/packages/skia/cpp/api/JsiSkApi.h b/packages/skia/cpp/api/JsiSkApi.h
-index 75b8c7bf4..81a006996 100644
+index 15e889235..8c7f6d8d0 100644
 --- a/packages/skia/cpp/api/JsiSkApi.h
 +++ b/packages/skia/cpp/api/JsiSkApi.h
-@@ -12,6 +12,11 @@
+@@ -15,6 +15,11 @@
  
  #include "rnskia/RNDawnContext.h"
  
@@ -14,10 +14,10 @@ index 75b8c7bf4..81a006996 100644
  #include "JsiSkAnimatedImage.h"
  #include "JsiSkAnimatedImageFactory.h"
  #include "JsiSkColor.h"
-@@ -197,6 +202,55 @@ public:
-                                      : jsi::Value(runtime, string(gpu.error)));
+@@ -206,6 +211,55 @@ public:
      result.setProperty(runtime, "lost",
                         getLostPromise(runtime, gpu.generation));
+     result.setProperty(runtime, "foreground", DawnContext::isForeground());
 +    // Evidence probe, not for merging: Dawn's account of the device's
 +    // memory and what the Graphite context caches, after Dawn gives back what
 +    // it keeps for reuse when `reduce` is true.
@@ -71,10 +71,10 @@ index 75b8c7bf4..81a006996 100644
    }
  
 diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
-index e7bab52f9..58925f524 100644
+index 5b9d8a2a8..3e77489f3 100644
 --- a/packages/skia/cpp/rnskia/RNDawnContext.h
 +++ b/packages/skia/cpp/rnskia/RNDawnContext.h
-@@ -562,6 +562,15 @@ public:
+@@ -574,6 +574,15 @@ public:
      return _current.load(std::memory_order_acquire)->backendContext.fDevice;
    }
  
@@ -87,6 +87,6 @@ index e7bab52f9..58925f524 100644
 +            current->context->currentPurgeableBytes()};
 +  }
 +
-   // Create a secondary Dawn device from the same adapter.
-   // Has its own command queue and does NOT enable
-   // ImplicitDeviceSynchronization, so it won't contend with the primary
+   // Create a secondary Dawn device from the same adapter, with its own command
+   // queue: GPU work of the app's own (ML inference, the camera) runs alongside
+   // Skia rendering without waiting for it. It has a device lock of its own
