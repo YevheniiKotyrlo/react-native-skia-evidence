@@ -10,6 +10,7 @@ Builds, steps and device readings behind my pull requests to [wcandillon/react-n
 | [#4308](https://github.com/wcandillon/react-native-skia/pull/4308): the scene nodes a re-render leaves unchanged, kept | [pr-4308](pr-4308/README.md) |
 | [#4324](https://github.com/wcandillon/react-native-skia/pull/4324): a view's native view kept out of its superview | [pr-4324](pr-4324/README.md) |
 | [#4328](https://github.com/wcandillon/react-native-skia/pull/4328): `SkiaImageView` and `<Canvas static>`, presented from one bitmap per image | [pr-4328](pr-4328/README.md) |
+| [#4347](https://github.com/wcandillon/react-native-skia/pull/4347): a render thread's idle task run again once the thread goes idle after a busy run | [pr-4347](pr-4347/README.md) |
 | [#4348](https://github.com/wcandillon/react-native-skia/pull/4348): a recording's queue slot given back once the view is done with it, through GPU device losses | [pr-4348](pr-4348/README.md) |
 | [#4350](https://github.com/wcandillon/react-native-skia/pull/4350): a display link made after a recycle or a trip asking for the full rate, and what a frame spends on it | [pr-4350](pr-4350/README.md) |
 | [#4356](https://github.com/wcandillon/react-native-skia/pull/4356): a draw in flight kept until it returns when another runtime disposes or finishes its canvas | [pr-4356](pr-4356/README.md) |
