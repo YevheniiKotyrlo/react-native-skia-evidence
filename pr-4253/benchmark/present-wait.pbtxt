@@ -1,0 +1,33 @@
+duration_ms: @DURATION_MS@
+flush_period_ms: 1000
+
+buffers {
+  size_kb: 131072
+  fill_policy: DISCARD
+}
+
+data_sources {
+  config {
+    name: "linux.ftrace"
+    ftrace_config {
+      ftrace_events: "sched/sched_switch"
+      ftrace_events: "sched/sched_waking"
+      ftrace_events: "sched/sched_blocked_reason"
+      atrace_categories: "gfx"
+      atrace_categories: "view"
+      atrace_categories: "binder_driver"
+      atrace_apps: "@PACKAGE@"
+      buffer_size_kb: 16384
+      drain_period_ms: 250
+    }
+  }
+}
+
+data_sources {
+  config {
+    name: "linux.process_stats"
+    process_stats_config {
+      scan_all_processes_on_start: true
+    }
+  }
+}

@@ -1,0 +1,64 @@
+diff --git a/apps/example/benchmarks/run.mjs b/apps/example/benchmarks/run.mjs
+index 23c4cc3..2a05fd3 100644
+--- a/apps/example/benchmarks/run.mjs
++++ b/apps/example/benchmarks/run.mjs
+@@ -170,7 +170,9 @@ async function bundle(platform) {
+ // ---- Android ---------------------------------------------------------------
+ 
+ const PACKAGE = "com.reactnativeskia.example";
+-const adb = (...a) => quiet(sh("adb", a));
++// adb shell ends its lines in CRLF on a Windows host, which the stat lines' end
++// anchors do not match.
++const adb = (...a) => quiet(sh("adb", a)).then((out) => out?.replace(/\r\n/g, "\n") ?? out);
+ 
+ async function buildAndroid() {
+   const restore = await bundle("android");
+@@ -215,7 +217,38 @@ const PERFETTO_CONFIG =
+   'data_sources { config { name: "android.surfaceflinger.frame" } }\n' +
+   `duration_ms: ${TRACE_SECONDS * 1000}\n`;
+ 
+-async function presentAndroid() {
++// Android 10's perfetto has no android.surfaceflinger.frame (FrameTracer came
++// with Android 11), so SurfaceFlinger's timestats count each layer's presented
++// frames, over the time they counted with the display on (displayOnTime), which
++// the adb calls around the sleep make longer than TRACE_SECONDS.
++const SURFACE_VIEW_LAYER = /^(?:[\da-f]+ )?SurfaceView\b/;
++async function presentAndroidTimestats() {
++  await adb("shell", "dumpsys SurfaceFlinger --timestats -disable -clear");
++  await adb("shell", "dumpsys SurfaceFlinger --timestats -enable");
++  await sleep(TRACE_SECONDS);
++  await adb("shell", "dumpsys SurfaceFlinger --timestats -disable");
++  const dump = (await adb("shell", "dumpsys SurfaceFlinger --timestats -dump -maxlayers 40")) ?? "";
++  const [global, ...layerBlocks] = dump.split("layerName = ");
++  const seconds = Number(global.match(/^displayOnTime = (\d+) ms$/m)?.[1] ?? NaN) / 1000;
++  const layers = layerBlocks
++    .map((block) => ({
++      name: block.split("\n")[0].trim(),
++      frames: Number(block.match(/totalFrames = (\d+)/)?.[1] ?? NaN),
++    }))
++    .filter((layer) => layer.name.includes(PACKAGE));
++  const surfaceViews = layers.filter((layer) => SURFACE_VIEW_LAYER.test(layer.name));
++  const rows = surfaceViews.length > 0 ? surfaceViews : layers.filter((layer) => !layer.name.includes("SurfaceView"));
++  const frames = rows.reduce((sum, layer) => sum + layer.frames, 0);
++  return {
++    fps: frames / seconds,
++    source: `${surfaceViews.length > 0 ? "SurfaceView" : "window"} (timestats, ${seconds.toFixed(2)} s)`,
++  };
++}
++
++async function presentAndroid(sdk) {
++  if (sdk < 30) {
++    return presentAndroidTimestats();
++  }
+   const onDevice = "/data/misc/perfetto-traces/skia-bench.pftrace";
+   await new Promise((resolve, reject) => {
+     const child = execFile("adb", ["shell", "perfetto", "-c", "-", "--txt", "-o", onDevice], (e) =>
+@@ -332,7 +365,7 @@ async function measureAndroid() {
+               run.thermal = Number(out?.match(/Thermal Status: (\d+)/)?.[1] ?? NaN);
+               await sleep(TRACE_AT_SECONDS - 1);
+               const [present, threads] = await Promise.all([
+-                presentAndroid().catch((e) => (console.log(`[bench] present failed: ${e.message}`), null)),
++                presentAndroid(sdk).catch((e) => (console.log(`[bench] present failed: ${e.message}`), null)),
+                 threadsAndroid(),
+               ]);
+               run.present = present?.fps ?? null;

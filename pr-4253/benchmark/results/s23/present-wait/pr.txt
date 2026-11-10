@@ -1,0 +1,30 @@
+== traces-pr/pattern.pftrace
+   thread RNSkia Present (23604) over 7902 ms: running 2499 ms, D 20 ms, R 174 ms, R+ 6 ms, S 5196 ms
+   QueuePresentKHR: n=947 median=0.68 ms p90=0.82 ms total=643.1 ms
+   queueBuffer: n=947 median=0.62 ms p90=0.76 ms total=589.3 ms
+   AcquireNextImageKHR: n=947 median=0.14 ms p90=0.18 ms total=137.5 ms
+   dequeueBuffer: n=947 median=0.04 ms p90=0.05 ms total=36.6 ms
+   waitForever: n=947 median=0.01 ms p90=0.02 ms total=14.9 ms
+   waitForever inside QueuePresentKHR: n=947 median=0.01 ms p90=0.02 ms total=14.9 ms
+   waitForever inside AcquireNextImageKHR: none
+   longest: animation 2217 ms; queueBuffer 1030 ms; QueuePresentKHR 643 ms; onFrameAvailable - SurfaceView[com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity]@0#5(f:0,a:2) 335 ms; QueueSubmit 225 ms; AcquireNextImageKHR 138 ms; Choreographer#scheduleVsyncLocked 125 ms; dequeueBuffer - SurfaceView[com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity]@0#5(BLAST Consumer)5 102 ms; dequeueBuffer 37 ms; applyGrallocMetadataLocked 30 ms
+== traces-pr/shader.pftrace
+   thread RNSkia Present (23604) over 7910 ms: running 2403 ms, D 6 ms, R 151 ms, R+ 6 ms, S 5339 ms
+   QueuePresentKHR: n=948 median=0.67 ms p90=0.79 ms total=641.7 ms
+   queueBuffer: n=948 median=0.61 ms p90=0.73 ms total=588.3 ms
+   AcquireNextImageKHR: n=948 median=0.14 ms p90=0.18 ms total=141.7 ms
+   dequeueBuffer: n=948 median=0.04 ms p90=0.05 ms total=37.2 ms
+   waitForever: n=948 median=0.01 ms p90=0.02 ms total=19.4 ms
+   waitForever inside QueuePresentKHR: n=948 median=0.01 ms p90=0.02 ms total=19.4 ms
+   waitForever inside AcquireNextImageKHR: none
+   longest: animation 2118 ms; queueBuffer 1033 ms; QueuePresentKHR 642 ms; onFrameAvailable - SurfaceView[com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity]@0#4(f:0,a:2) 340 ms; QueueSubmit 190 ms; AcquireNextImageKHR 142 ms; Choreographer#scheduleVsyncLocked 125 ms; dequeueBuffer - SurfaceView[com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity]@0#4(BLAST Consumer)4 105 ms; dequeueBuffer 37 ms; applyGrallocMetadataLocked 30 ms
+== traces-pr/shapes.pftrace
+   thread RNSkia Present (23604) over 7915 ms: running 2594 ms, D 0 ms, R 50 ms, R+ 1 ms, S 5264 ms
+   QueuePresentKHR: n=464 median=0.29 ms p90=7.30 ms total=914.3 ms
+   queueBuffer: n=464 median=0.27 ms p90=7.26 ms total=903.5 ms
+   AcquireNextImageKHR: n=464 median=0.04 ms p90=0.10 ms total=25.2 ms
+   dequeueBuffer: n=464 median=0.01 ms p90=0.02 ms total=6.7 ms
+   waitForever: n=464 median=0.01 ms p90=0.01 ms total=2.9 ms
+   waitForever inside QueuePresentKHR: n=464 median=0.01 ms p90=0.01 ms total=2.9 ms
+   waitForever inside AcquireNextImageKHR: none
+   longest: animation 2842 ms; queueBuffer 1777 ms; QueuePresentKHR 914 ms; onFrameAvailable - SurfaceView[com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity]@0#1(f:0,a:1) 71 ms; QueueSubmit 50 ms; Choreographer#scheduleVsyncLocked 44 ms; AcquireNextImageKHR 25 ms; dequeueBuffer - SurfaceView[com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity]@0#1(BLAST Consumer)1 18 ms; Choreographer#doFrame 953965603 17 ms; Choreographer#doFrame 953965258 17 ms

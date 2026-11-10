@@ -1,0 +1,10 @@
+== traces-main/shapes.pftrace
+   thread RNSkia Present (19834) over 7890 ms: running 2009 ms, D 2 ms, R 48 ms, R+ 1 ms, S 5821 ms
+   QueuePresentKHR: n=470 median=7.41 ms p90=11.50 ms total=3044.5 ms
+   queueBuffer: n=470 median=7.39 ms p90=11.47 ms total=3033.9 ms
+   AcquireNextImageKHR: n=470 median=0.05 ms p90=0.06 ms total=23.6 ms
+   dequeueBuffer: n=470 median=0.01 ms p90=0.02 ms total=6.2 ms
+   waitForever: n=470 median=3.97 ms p90=11.06 ms total=2116.3 ms
+   waitForever inside QueuePresentKHR: n=470 median=3.97 ms p90=11.06 ms total=2116.3 ms
+   waitForever inside AcquireNextImageKHR: none
+   longest: queueBuffer 6036 ms; animation 4854 ms; QueuePresentKHR 3044 ms; waitForever 2116 ms; onFrameAvailable - SurfaceView[com.reactnativeskia.example/com.microsoft.reacttestapp.component.ComponentActivity]@0#1(f:0,a:1) 66 ms; QueueSubmit 45 ms; Choreographer#scheduleVsyncLocked 26 ms; AcquireNextImageKHR 24 ms; Choreographer#doFrame 953807501 21 ms; Choreographer#doFrame 953803217 20 ms
