@@ -1,0 +1,7 @@
+27.2
+Apple clang version 21.0.0 (clang-2100.4.1.1)
+idle: 0 trim(s) on the present thread 5003 ms after its work (delay 200 ms)
+between: 0 trim(s) on the present thread 5010 ms after a task holding it 600 ms began, 0 inside the task
+left in the present thread's queue: 1; trims elsewhere: 0
+FAIL
+exit 1
