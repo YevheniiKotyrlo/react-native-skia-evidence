@@ -1,11 +1,11 @@
 diff --git a/packages/skia/cpp/rnskia/RNDawnContext.h b/packages/skia/cpp/rnskia/RNDawnContext.h
-index b8cc394a9..a363d342d 100644
+index 7768747d5..1b1108756 100644
 --- a/packages/skia/cpp/rnskia/RNDawnContext.h
 +++ b/packages/skia/cpp/rnskia/RNDawnContext.h
-@@ -1231,9 +1231,23 @@ private:
-           tick();
-           _current.load(std::memory_order_acquire)
-               ->context->checkAsyncWorkCompletion();
+@@ -1333,9 +1333,23 @@ private:
+         // rather than wait for the lock and hold up whoever needs it next.
+         std::unique_lock<std::mutex> contextLock(_mutex, std::try_to_lock);
+         if (contextLock.owns_lock()) {
 +          const auto started = std::chrono::steady_clock::now();
            round = reduceMemoryUsageLocked(*release);
 +          RNSkLogger::logToConsole(

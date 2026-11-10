@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { PixelRatio, StyleSheet, Text, View } from "react-native";
+import { AppState, PixelRatio, StyleSheet, Text, View } from "react-native";
+import type { AppStateStatus } from "react-native";
 import Animated, {
   Easing,
   useAnimatedStyle,
+  useDerivedValue,
   useFrameCallback,
   useSharedValue,
   withRepeat,
@@ -12,7 +14,7 @@ import { scheduleOnRN } from "react-native-worklets";
 import type { CanvasRef } from "react-native-webgpu";
 import { Canvas as GpuCanvas, importDevice } from "react-native-webgpu";
 import type { SkImage } from "react-native-skia";
-import { Blur, Canvas, Image, Skia } from "react-native-skia";
+import { Blur, Canvas, Circle, Image, Skia, useClock } from "react-native-skia";
 
 // Evidence only: mounts and unmounts 120 views per arm,
 // counting the UI thread's missed frames in windows of WINDOW_CYCLES cycles,
@@ -21,7 +23,11 @@ import { Blur, Canvas, Image, Skia } from "react-native-skia";
 // (dawn-memory.patch). Each "BENCH memory-unmounted" line marks where
 // meminfo is read. The canvas-webgpu arm draws a WebGPU triangle on Skia's own
 // device every frame, through the arm and its settle, as the example's
-// WebGPU screens do.
+// WebGPU screens do. On iOS, the arm BENCH_BACKGROUND_ARM names ends with the
+// app sent to the background while a release is owed (round-probe-ios.patch,
+// run-release-bench-wifi.zsh): one canvas keeps drawing until the app leaves,
+// so the release's rounds run under Dawn's background hold, and the rounds,
+// the hold's times and any device loss are posted once the app is back.
 
 type Arm = "none" | "canvas" | "canvas-blur" | "canvas-webgpu";
 
@@ -56,6 +62,7 @@ const HELD_MS = 40000;
 // Set when the bundle is made for a device whose log the host cannot read,
 // such as an iOS device reached over Wi-Fi only: every line is posted there too.
 const REPORT_URL = process.env.BENCH_REPORT_URL;
+const BACKGROUND_ARM = process.env.BENCH_BACKGROUND_ARM;
 let pendingReport: Promise<unknown> = Promise.resolve();
 
 const logMarker = (event: string, detail: string) => {
@@ -70,6 +77,28 @@ const logMarker = (event: string, detail: string) => {
 
 const sleep = (milliseconds: number) =>
   new Promise<void>((resolve) => setTimeout(resolve, milliseconds));
+
+const appStateReached = (wanted: AppStateStatus) =>
+  new Promise<void>((resolve) => {
+    if (AppState.currentState === wanted) {
+      resolve();
+      return;
+    }
+    const subscription = AppState.addEventListener("change", (state) => {
+      if (state === wanted) {
+        subscription.remove();
+        resolve();
+      }
+    });
+  });
+
+interface ProbeGpu {
+  readonly lost?: Promise<unknown>;
+  readonly __memory?: (reduce: boolean) => unknown;
+  readonly __rounds?: () => unknown;
+}
+
+const probeGpu = () => Skia.gpu as unknown as ProbeGpu;
 
 interface FrameReport {
   readonly window: string;
@@ -250,6 +279,18 @@ const WebGpuTriangle = () => {
   return <GpuCanvas ref={ref} style={styles.webgpu} />;
 };
 
+// Draws every frame while mounted, so that the frames keep the GPU in use and
+// a release owed waits until the app leaves.
+const Keeper = () => {
+  const clock = useClock();
+  const cx = useDerivedValue(() => 20 + 10 * Math.sin(clock.value / 200));
+  return (
+    <Canvas style={styles.keeper}>
+      <Circle cx={cx} cy={20} r={10} color="#ff3b30" />
+    </Canvas>
+  );
+};
+
 const bakeImage = (size: number): SkImage => {
   const surface = Skia.Surface.MakeRaster(size, size);
   if (surface === null) {
@@ -309,10 +350,15 @@ export const ReleaseBench = () => {
     index: 0,
     mounted: false,
   });
+  const [keeper, setKeeper] = useState(false);
   const probe = useFrameProbe();
 
   useEffect(() => {
     let cancelled = false;
+    let lost = false;
+    probeGpu().lost?.then(() => {
+      lost = true;
+    });
     const run = async () => {
       for (const [index, arm] of ARMS.entries()) {
         const name = `${index}-${arm}`;
@@ -339,14 +385,27 @@ export const ReleaseBench = () => {
         // The last window's cut reaches the UI thread before the settle starts
         // its own; the release runs in this settle, once the views are gone.
         await sleep(UNMOUNTED_MS);
+        if (BACKGROUND_ARM === String(index)) {
+          setKeeper(true);
+          await sleep(MOUNTED_MS);
+          logMarker("background", `arm=${name} phase=asked`);
+          await appStateReached("background");
+          logMarker("background", `arm=${name} phase=entered`);
+          await appStateReached("active");
+          setKeeper(false);
+          logMarker(
+            "background",
+            `arm=${name} phase=returned lost=${lost} ${JSON.stringify(
+              probeGpu().__rounds?.()
+            )}`
+          );
+        }
         probe.start();
         await sleep(SETTLE_MS);
         probe.dump(`${name}-settle`);
         logMarker("memory-unmounted", `arm=${name}-after pass=0`);
         await sleep(DUMP_MS);
-        const gpu = Skia.gpu as unknown as {
-          __memory?: (reduce: boolean) => unknown;
-        };
+        const gpu = probeGpu();
         logMarker(
           "dawn",
           `arm=${name} phase=held ${JSON.stringify(gpu.__memory?.(false))}`
@@ -360,7 +419,7 @@ export const ReleaseBench = () => {
         logMarker("memory-unmounted", `arm=${name}-reduced pass=0`);
         await sleep(SETTLE_MS);
       }
-      logMarker("done", `cycles=${CYCLES}`);
+      logMarker("done", `cycles=${CYCLES} lost=${lost}`);
       setState("done");
     };
     run();
@@ -383,6 +442,7 @@ export const ReleaseBench = () => {
         <Text style={styles.label}>{`${index}-${arm}`}</Text>
         <Spinner />
         {arm === "canvas-webgpu" ? <WebGpuTriangle /> : null}
+        {keeper ? <Keeper /> : null}
       </View>
       <View style={styles.grid}>
         {mounted
@@ -401,6 +461,7 @@ const styles = StyleSheet.create({
   label: { fontSize: 16, padding: 12 },
   spinner: { width: 24, height: 24, borderRadius: 4, backgroundColor: "#ff3b30" },
   webgpu: { width: 96, height: 96, marginLeft: 12 },
+  keeper: { width: 40, height: 40, marginLeft: 12 },
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",
