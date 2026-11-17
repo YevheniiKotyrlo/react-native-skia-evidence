@@ -3,7 +3,7 @@ new file mode 100644
 index 000000000..98c19b456
 --- /dev/null
 +++ b/apps/example/src/Examples/ImageViews/StaticContentBench.tsx
-@@ -0,0 +1,762 @@
+@@ -0,0 +1,747 @@
 +import React, { useEffect, useRef, useState } from "react";
 +import {
 +  PixelRatio,
@@ -39,7 +39,6 @@ index 000000000..98c19b456
 +  | "none"
 +  | "canvas-texture"
 +  | "canvas-surface"
-+  | "canvas-static"
 +  | "image-view";
 +type Drive = "mount" | "render" | "swap" | "memory" | "cycle";
 +type Content = "shared" | "distinct" | "large";
@@ -62,21 +61,16 @@ index 000000000..98c19b456
 +  [
 +    { drive: "mount", content: "shared", presenter: "none" },
 +    { drive: "mount", content: "shared", presenter: "canvas-texture" },
-+    { drive: "mount", content: "shared", presenter: "canvas-static" },
 +    { drive: "mount", content: "shared", presenter: "image-view" },
 +    { drive: "mount", content: "distinct", presenter: "canvas-texture" },
-+    { drive: "mount", content: "distinct", presenter: "canvas-static" },
 +    { drive: "mount", content: "distinct", presenter: "image-view" },
 +    { drive: "render", content: "shared", presenter: "none" },
 +    { drive: "render", content: "shared", presenter: "canvas-texture" },
-+    { drive: "render", content: "shared", presenter: "canvas-static" },
 +    { drive: "render", content: "shared", presenter: "image-view" },
 +    { drive: "swap", content: "shared", presenter: "canvas-texture" },
-+    { drive: "swap", content: "shared", presenter: "canvas-static" },
 +    { drive: "swap", content: "shared", presenter: "image-view" },
 +    { drive: "mount", content: "large", presenter: "none" },
 +    { drive: "mount", content: "large", presenter: "canvas-texture" },
-+    { drive: "mount", content: "large", presenter: "canvas-static" },
 +    { drive: "mount", content: "large", presenter: "image-view" },
 +    { drive: "mount", content: "shared", presenter: "none" },
 +  ] satisfies readonly Arm[]
@@ -91,10 +85,8 @@ index 000000000..98c19b456
 +  [
 +    { drive: "memory", content: "shared", presenter: "none" },
 +    { drive: "memory", content: "shared", presenter: "canvas-texture" },
-+    { drive: "memory", content: "shared", presenter: "canvas-static" },
 +    { drive: "memory", content: "shared", presenter: "image-view" },
 +    { drive: "memory", content: "distinct", presenter: "canvas-texture" },
-+    { drive: "memory", content: "distinct", presenter: "canvas-static" },
 +    { drive: "memory", content: "distinct", presenter: "image-view" },
 +  ] satisfies readonly Arm[]
 +).filter(isSelected);
@@ -122,7 +114,6 @@ index 000000000..98c19b456
 +const CYCLE_ARMS: readonly Arm[] = (
 +  [
 +    { drive: "cycle", content: "shared", presenter: "none" },
-+    { drive: "cycle", content: "shared", presenter: "canvas-static" },
 +    { drive: "cycle", content: "shared", presenter: "image-view" },
 +    { drive: "cycle", content: "distinct", presenter: "image-view" },
 +  ] satisfies readonly Arm[]
@@ -349,12 +340,6 @@ index 000000000..98c19b456
 +            zOrderOnTop: true,
 +          }}
 +        >
-+          <Image image={image} x={0} y={0} width={width} height={height} />
-+        </Canvas>
-+      );
-+    case "canvas-static":
-+      return (
-+        <Canvas style={style} static>
 +          <Image image={image} x={0} y={0} width={width} height={height} />
 +        </Canvas>
 +      );
